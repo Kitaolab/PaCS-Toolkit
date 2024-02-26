@@ -22,7 +22,7 @@ class GenFeatureCore:
             features,
         )
         LOGGER.info(
-            f"feature of trial{self.trial:03}cycle{cycle:03}replica{replica:03} was saved at {self.output_directory}/" # noqa B950
+            f"feature of trial{self.trial:03}cycle{cycle:03}replica{replica:03} was saved at {self.output_directory}/"  # noqa B950
         )
 
     def prepare(self) -> None:
@@ -43,7 +43,7 @@ class GenFeatureCore:
                     exit(1)
                 cycle = re.findall(r"(\d+)", str(path))[1]
                 replica = re.findall(r"(\d+)", str(path))[2]
-                trj_path = f"./trial{self.trial:03}/cycle{cycle:03}/replica{replica:03}/{self.trj_filename}" # noqa B950
+                trj_path = f"./trial{self.trial:03}/cycle{cycle:03}/replica{replica:03}/{self.trj_filename}"  # noqa B950
 
                 future = executor.submit(calc_feature, trj_path, *args, **kwargs)
                 job_dict_list.append(
