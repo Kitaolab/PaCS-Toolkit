@@ -1,7 +1,7 @@
 # PaCS-ToolKit
 
 PaCS-ToolKit enables the execution of PaCS-MD (Parallel Cascade Selection Molecular Dynamic Simulation), a non-bias-enhanced sampling method, across various environments. Additionally, it offers tools for result analysis and visualization. 
-While PaCS-MD offers a wide range of applications with existing evaluation types, our toolkit allows for the integration of additional types as needed. 
+While PaCS-MD offers a wide range of applications with existing evaluation types, our toolkit also allows for the integration of additional types as needed. 
 
 We believe our package will benefit your research.
 
