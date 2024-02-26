@@ -1,0 +1,1021 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Input file - PaCS-Toolkit User Guide</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">PaCS-Toolkit User Guide</a></li><li class="chapter-item expanded "><a href="../quickstart.html"><strong aria-hidden="true">1.</strong> Quick Start</a></li><li class="chapter-item expanded "><a href="../install.html"><strong aria-hidden="true">2.</strong> Install</a></li><li class="chapter-item expanded "><a href="../mdrun.html"><strong aria-hidden="true">3.</strong> mdrun</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../mdrun/overview.html"><strong aria-hidden="true">3.1.</strong> Overview</a></li><li class="chapter-item expanded "><a href="../mdrun/basic.html"><strong aria-hidden="true">3.2.</strong> Basic</a></li><li class="chapter-item expanded "><a href="../mdrun/simulator.html"><strong aria-hidden="true">3.3.</strong> Simulator</a></li><li class="chapter-item expanded "><a href="../mdrun/analyzer.html"><strong aria-hidden="true">3.4.</strong> Analyzer</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../mdrun/analyzer/rmsd.html"><strong aria-hidden="true">3.4.1.</strong> rmsd</a></li><li class="chapter-item expanded "><a href="../mdrun/analyzer/target.html"><strong aria-hidden="true">3.4.2.</strong> target</a></li><li class="chapter-item expanded "><a href="../mdrun/analyzer/dissociation.html"><strong aria-hidden="true">3.4.3.</strong> dissociation</a></li><li class="chapter-item expanded "><a href="../mdrun/analyzer/association.html"><strong aria-hidden="true">3.4.4.</strong> association</a></li><li class="chapter-item expanded "><a href="../mdrun/analyzer/a_d.html"><strong aria-hidden="true">3.4.5.</strong> a_d</a></li><li class="chapter-item expanded "><a href="../mdrun/analyzer/ee.html"><strong aria-hidden="true">3.4.6.</strong> ee</a></li><li class="chapter-item expanded "><a href="../mdrun/analyzer/template.html"><strong aria-hidden="true">3.4.7.</strong> template</a></li></ol></li><li class="chapter-item expanded "><a href="../mdrun/inputfile.html" class="active"><strong aria-hidden="true">3.5.</strong> Input file</a></li><li class="chapter-item expanded "><a href="../mdrun/reference.html"><strong aria-hidden="true">3.6.</strong> Reference</a></li></ol></li><li class="chapter-item expanded "><a href="../rmmol.html"><strong aria-hidden="true">4.</strong> rmmol</a></li><li class="chapter-item expanded "><a href="../rmfile.html"><strong aria-hidden="true">5.</strong> rmfile</a></li><li class="chapter-item expanded "><a href="../fit.html"><strong aria-hidden="true">6.</strong> fit</a></li><li class="chapter-item expanded "><a href="../genrepresent.html"><strong aria-hidden="true">7.</strong> genrepresent</a></li><li class="chapter-item expanded "><a href="../gencom.html"><strong aria-hidden="true">8.</strong> gencom</a></li><li class="chapter-item expanded "><a href="../genfeature.html"><strong aria-hidden="true">9.</strong> genfeature</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../genfeature/comdist.html"><strong aria-hidden="true">9.1.</strong> comdist</a></li><li class="chapter-item expanded "><a href="../genfeature/comvec.html"><strong aria-hidden="true">9.2.</strong> comvec</a></li><li class="chapter-item expanded "><a href="../genfeature/pca.html"><strong aria-hidden="true">9.3.</strong> pca</a></li><li class="chapter-item expanded "><a href="../genfeature/tica.html"><strong aria-hidden="true">9.4.</strong> tica</a></li><li class="chapter-item expanded "><a href="../genfeature/rmsd.html"><strong aria-hidden="true">9.5.</strong> rmsd</a></li><li class="chapter-item expanded "><a href="../genfeature/xyz.html"><strong aria-hidden="true">9.6.</strong> xyz</a></li></ol></li><li class="chapter-item expanded "><a href="../FAQ.html"><strong aria-hidden="true">10.</strong> FAQ</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">PaCS-Toolkit User Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="input-file"><a class="header" href="#input-file">Input file</a></h1>
+<ul>
+<li>PaCS-MD requires an input file. Here are the variables in the input file</li>
+<li>input file must be in <a href="https://toml.io/en/">toml format</a>.</li>
+</ul>
+<p><em>Contents</em></p>
+<ul>
+<li><a href="#input-file">Input file</a>
+<ul>
+<li><a href="#sample-input-file">sample input file</a></li>
+<li><a href="#basic-option">basic option</a></li>
+<li><a href="#simulator-option">simulator option</a>
+<ul>
+<li><a href="#gromacs">Gromacs</a></li>
+<li><a href="#amber">Amber</a></li>
+<li><a href="#namd">NAMD</a></li>
+</ul>
+</li>
+<li><a href="#analyzer-option">analyzer option</a>
+<ul>
+<li><a href="#target">Target</a></li>
+<li><a href="#rmsd">RMSD</a></li>
+<li><a href="#association">Association</a></li>
+<li><a href="#dissociation">Dissociation</a></li>
+<li><a href="#edgeexpansion">EdgeExpansion</a></li>
+<li><a href="#a_d">A_D</a></li>
+<li><a href="#template">Template</a></li>
+</ul>
+</li>
+<li><a href="#hidden-option-no-need-to-specify">hidden option (No need to specify)</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="sample-input-file"><a class="header" href="#sample-input-file">sample input file</a></h2>
+<ul>
+<li>please check <a href="https://github.com/Kitaolab/PaCS-Toolkit/tree/main/jobscripts">here</a></li>
+</ul>
+<h2 id="basic-option"><a class="header" href="#basic-option">basic option</a></h2>
+<details><summary> click here </summary>
+<ul>
+<li><strong>max_cycle: int, default=1</strong>
+<ul>
+<li>Maximum number of cycles to run. (ex. 1, ..., 123, ..., 999)</li>
+</ul>
+</li>
+<li><strong>n_replica: int, default=1</strong>
+<ul>
+<li>Number of replica. (ex. 1, ..., 123, ..., 999)</li>
+</ul>
+</li>
+<li><strong>n_parallel: int, default=1</strong>
+<ul>
+<li>Number of replica calculated at a time</li>
+</ul>
+</li>
+<li><strong>centering: bool, default=True</strong>
+<ul>
+<li>Whether to bring the molecule selected by centering_selection to the center of the simulation cell when creating the initial structure for the next cycle</li>
+</ul>
+</li>
+<li><strong>centering_selection: str, default="protein" or "Protein" or "@CA,C,O,N,H"</strong>
+<ul>
+<li>Molecules to be moved to the center</li>
+<li>default value will be changed to match <code>analyzer</code>
+<ul>
+<li>if <code>analyzer</code> == "mdtraj", default="protein"</li>
+<li>if <code>analyzer</code> == "gromacs", default="Protein"</li>
+<li>if <code>analyzer</code> == "cpptraj", default="@CA,C,O,N,H"</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>working_dir: str, default="./."</strong>
+<ul>
+<li>Directory where pacsmd will run</li>
+</ul>
+</li>
+<li><strong>rmmol: bool, default=false</strong>
+<ul>
+<li>Whether rmmol is executed after each cycle</li>
+</ul>
+</li>
+<li><strong>keep_selection: str, (required if <code>rmmol=true</code>)</strong>
+<ul>
+<li>Molecular name or index group to be left in the trajectory when rmmol</li>
+</ul>
+</li>
+<li><strong>rmfile: bool, default=false</strong>
+<ul>
+<li>Whether rmfile is executed after trial</li>
+</ul>
+</li>
+</ul>
+</details>
+<pre><code class="language-toml">max_cycle = 2                     # Maximum number of cycles to run. (ex. 1, ..., 123, ..., 999)
+n_replica = 3                     # Number of replica. (ex. 1, ..., 123, ..., 999)
+n_parallel = 3                    # Number of replica calculated at a time
+centering = true                  # Whether to move the molecule to the center
+centering_selection = "protein"   # Name of molecule to move in the center
+working_dir = "/work/"            # Directory where pacsmd will run
+rmmol = true                      # Whether rmmol is executed after each cycle
+keep_selection = "not water"      # Molecular name or index group to be kept in the trajectory when rmmol
+rmfile = true                     # Whether rmfile is executed after trial
+</code></pre>
+<h2 id="simulator-option"><a class="header" href="#simulator-option">simulator option</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>analyzer \ simulator</th><th>gromacs</th><th>amber</th><th>namd</th></tr></thead><tbody>
+<tr><td>mdtraj</td><td>o</td><td>o</td><td>o</td></tr>
+<tr><td>gromacs</td><td>o</td><td>x</td><td>x</td></tr>
+<tr><td>cpptraj</td><td>x</td><td>o</td><td>x</td></tr>
+</tbody></table>
+</div>
+<h3 id="gromacs"><a class="header" href="#gromacs">Gromacs</a></h3>
+<details><summary> click here </summary>
+<ul>
+<li><strong>simulator: str, required</strong>
+<ul>
+<li>Software used inside PaCS-MD</li>
+</ul>
+</li>
+<li><strong>cmd_mpi: str, default=""</strong>
+<ul>
+<li>Commands for MPI such as mpirun, blank is OK</li>
+</ul>
+</li>
+<li><strong>cmd_serial: str, required</strong>
+<ul>
+<li>Commands to run the simulator serially</li>
+</ul>
+</li>
+<li><strong>cmd_parallel: str, default=cmd_serial</strong>
+<ul>
+<li>Commands to run the simulator parallelly</li>
+</ul>
+</li>
+<li><strong>structure: str, required</strong>
+<ul>
+<li>Structural file such as gro, pdb, rst7, etc.</li>
+</ul>
+</li>
+<li><strong>topology: str, required</strong>
+<ul>
+<li>Topology file such as top, parm7, psf, etc.</li>
+</ul>
+</li>
+<li><strong>mdconf: str, required</strong>
+<ul>
+<li>Parameter file such as mdp, mdin, namd, etc.</li>
+</ul>
+</li>
+<li><strong>index_file: str, (required if Gromacs)</strong>
+<ul>
+<li>Gromacs index file</li>
+</ul>
+</li>
+<li><strong>trajectory_extension: str, required</strong>
+<ul>
+<li>Trajectory file extension. ("." is necessary)</li>
+</ul>
+</li>
+</ul>
+</details>
+<pre><code class="language-toml">simulator = "gromacs"                   # Software used inside PaCS-MD
+cmd_mpi = "mpirun -np 4"                # Commands for MPI such as mpirun, blank is OK
+cmd_serial = "gmx_mpi mdrun -ntomp 6"   # Commands to run the simulator serially
+cmd_parllel = "gmx_mpi mdrun -ntomp 6"  # Commands to run the simulator parallelly
+structure = "/work/input.gro"           # Structural file such as gro, pdb, rst7, etc.
+topology = "/work/topol.top"            # Topology file such as top, parm7, psf, etc.
+mdconf = "/work/parameter.mdp"          # Parameter file such as mdp, mdin, namd, etc.
+index_file = "/work/index.ndx"          # Gromacs index file
+trajectory_extension = ".xtc"           # Trajectory file extension. ("." is necessary)
+</code></pre>
+<h3 id="amber"><a class="header" href="#amber">Amber</a></h3>
+<details><summary> click here </summary>
+<ul>
+<li><strong>simulator: str, required</strong>
+<ul>
+<li>Software used inside PaCS-MD</li>
+</ul>
+</li>
+<li><strong>cmd_mpi: str, default=""</strong>
+<ul>
+<li>Commands for MPI such as mpirun, blank is OK</li>
+</ul>
+</li>
+<li><strong>cmd_serial: str, required</strong>
+<ul>
+<li>Commands to run the simulator serially</li>
+</ul>
+</li>
+<li><strong>cmd_parallel: str, default=cmd_serial</strong>
+<ul>
+<li>Commands to run the simulator parallelly</li>
+</ul>
+</li>
+<li><strong>structure: str, required</strong>
+<ul>
+<li>Structural file such as gro, pdb, rst7, etc.</li>
+</ul>
+</li>
+<li><strong>topology: str, required</strong>
+<ul>
+<li>Topology file such as top, parm7, psf, etc.</li>
+</ul>
+</li>
+<li><strong>mdconf: str, required</strong>
+<ul>
+<li>Parameter file such as mdp, mdin, namd, etc.</li>
+</ul>
+</li>
+<li><strong>trajectory_extension: str, required</strong>
+<ul>
+<li>Trajectory file extension. ("." is necessary)</li>
+</ul>
+</li>
+</ul>
+</details>
+<pre><code class="language-toml">simulator = "amber"                     # Software used inside PaCS-MD
+cmd_mpi = ""                            # Commands for MPI such as mpirun, blank is OK
+cmd_serial = "pmemd.cuda"               # Commands to run the simulator serially
+cmd_parllel = "pmemd.cuda"              # Commands to run the simulator parallelly
+structure = "/work/structure.rst7"      # Structural file such as gro, pdb, rst7, etc.
+topology = "/work/topology.parm7"       # Topology file such as top, parm7, psf, etc.
+mdconf = "/work/parameter.mdin"         # Parameter file such as mdp, mdin, namd, etc.
+trajectory_extension = ".nc"            # Trajectory file extension. ("." is necessary)
+</code></pre>
+<h3 id="namd"><a class="header" href="#namd">NAMD</a></h3>
+<details><summary> click here </summary>
+<ul>
+<li><strong>simulator: str, required</strong>
+<ul>
+<li>Software used inside PaCS-MD</li>
+</ul>
+</li>
+<li><strong>cmd_mpi: str, default=""</strong>
+<ul>
+<li>Commands for MPI such as mpirun, blank is OK</li>
+</ul>
+</li>
+<li><strong>cmd_serial: str, required</strong>
+<ul>
+<li>Commands to run the simulator serially</li>
+</ul>
+</li>
+<li><strong>cmd_parallel: str, default=cmd_serial</strong>
+<ul>
+<li>Commands to run the simulator parallelly</li>
+</ul>
+</li>
+<li><strong>structure: str, required</strong>
+<ul>
+<li>Structural file such as gro, pdb, rst7, etc.</li>
+</ul>
+</li>
+<li><strong>topology: str, required</strong>
+<ul>
+<li>Topology file such as top, parm7, psf, etc.</li>
+</ul>
+</li>
+<li><strong>mdconf: str, required</strong>
+<ul>
+<li>Parameter file such as mdp, mdin, namd, etc.</li>
+</ul>
+</li>
+<li><strong>trajectory_extension: str, required</strong>
+<ul>
+<li>Trajectory file extension. ("." is necessary)</li>
+</ul>
+</li>
+</ul>
+</details>
+<pre><code class="language-toml">simulator = "namd"                      # Software used inside PaCS-MD
+cmd_mpi = "mpirun -np 4"                # Commands for MPI such as mpirun, blank is OK
+cmd_serial = "namd2 +p6"                # Commands to run the simulator serially
+cmd_parllel = "namd2 +p6"               # Commands to run the simulator parallelly
+structure = "/work/input.pdb"           # Structural file such as gro, pdb, rst7, etc.
+topology = "/work/ionized.psf"          # Topology file such as top, parm7, psf, etc.
+mdconf = "/work/production.namd"        # Parameter file such as mdp, mdin, namd, etc.
+trajectory_extension = ".dcd"           # Trajectory file extension. ("." is necessary)
+</code></pre>
+<h2 id="analyzer-option"><a class="header" href="#analyzer-option">analyzer option</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>analyzer \ type</th><th>dissociation</th><th>association</th><th>rmsd</th><th>target</th><th>ee</th><th>a_d</th><th>template</th></tr></thead><tbody>
+<tr><td>mdtraj</td><td>o</td><td>o</td><td>o</td><td>o</td><td>o</td><td>o</td><td>-</td></tr>
+<tr><td>gromacs</td><td>o</td><td>o</td><td>o</td><td>o</td><td>x</td><td>o</td><td>-</td></tr>
+<tr><td>cpptraj</td><td>o</td><td>o</td><td>o</td><td>o</td><td>x</td><td>o</td><td>-</td></tr>
+</tbody></table>
+</div>
+<h3 id="target"><a class="header" href="#target">Target</a></h3>
+<details><summary> click here </summary>
+<ul>
+<li><strong>type: str, required</strong>
+<ul>
+<li>evaluation type, "target".</li>
+</ul>
+</li>
+<li><strong>threshold: float, required</strong>
+<ul>
+<li>PaCS-MD terminates the calculation when the evaluation value falls below this threshold (in units of nm).</li>
+</ul>
+</li>
+<li><strong>skip_frame: int, default=1</strong>
+<ul>
+<li>Number of frames to skip when ranking CVs.</li>
+<li>If you set <code>skip_frame=2</code>, PaCS-MD will use every other frame.</li>
+</ul>
+</li>
+<li><strong>analyzer: str, default="mdtraj"</strong>
+<ul>
+<li>Trajectory tool used to calculate the evaluation value.</li>
+<li>"mdtraj", "gromacs" and "cpptraj" are supported.</li>
+</ul>
+</li>
+<li><strong>reference: str, required</strong>
+<ul>
+<li>Structure file path for the reference structure of RMSD calculation.</li>
+</ul>
+</li>
+<li><strong>selection1: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories (least squares fit)</li>
+<li>Depending on the <code>analyzer</code>, there are different ways to specify <code>selection</code>.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection. e.g. "resid 5 to 100 and name CA"</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), the <code>selection</code> should follow Gromacs index group in <code>index.ndx</code>. (Gromacs supported only)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>selection2: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories (RMSD calculation)</li>
+<li>Depending on the <code>analyzer</code>, there are different ways to specify <code>selection</code>.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection. e.g. "resid 5 to 100 and name CA"</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), the <code>selection</code> should follow Gromacs index group in <code>index.ndx</code>. (Gromacs supported only)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>selection3: str, default=<code>selection1</code></strong>
+<ul>
+<li>Selection string or name of index group for specified group in <code>reference</code> (least squares fit)</li>
+<li>If your <code>reference</code> structure has different topology from your trajectories, you can utilize this option. (e.g. <code>reference</code> has different configuration about mutation, missing residues or modified residues from your the trajectories.) Otherwise, you don't need to specify this option.</li>
+<li>This option is valid when <code>analyzer="mdtraj"</code> or <code>analyzer="cpptraj"</code>.</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), this option is ignored and the same selection indices are automatically used for your trajectories and the <code>reference</code>.</li>
+</ul>
+</li>
+<li><strong>selection4: str, default=<code>selection2</code></strong>
+<ul>
+<li>Selection string or name of index group for specified group in <code>reference</code> (RMSD calculation)</li>
+<li>If your <code>reference</code> structure has different topology from your trajectories, you can utilize this option. (e.g. <code>reference</code> has different configuration about mutation, missing residues or modified residues from your the trajectories.) Otherwise, you don't need to specify this option.</li>
+<li>This option is valid when <code>analyzer="mdtraj"</code> or <code>analyzer="cpptraj"</code>.</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), this option is ignored and the same selection indices are automatically used for your trajectories and the <code>reference</code>.</li>
+</ul>
+</li>
+</ul>
+</details>
+<pre><code class="language-toml">type = "target"                 # Evaluation type
+threshold = 0.01                # CV threshold used to decide whether to terminate the calculation (in units of nm)
+skip_frame = 1                  # How many frames to skip when ranking CVs
+
+# if analyzer == "mdtraj"
+analyzer = "mdtraj"             # Trajectory tool used to calculate the evaluation type
+reference = "/work/ref.pdb"     # Structure for comparison
+selection1 = "backbone"         # Selection string for specified group in trajectroies (least squares fit)
+selection2 = "backbone"         # Selection string for specified group in trajectories (RMSD calculation)
+selection3 = "backbone and (not resid 1 to 10)"         # Selection string for specified group in reference (least squares fit)
+selection4 = "backbone and (not resid 1 to 10)"         # Selection string for specified group in reference (RMSD calculation)
+
+# else if analyzer == "gromacs"
+# analyzer = "gromacs"          # Trajectory tool used to calculate the evaluation type
+# selection1 = "Backbone"       # Name of index group for specified group in trajectories (least squares fit)
+# selection2 = "Backbone"       # Name of index group for specified group in trajectories (RMSD calculation)
+
+# else if analyzer == "cpptraj"
+# analyzer = "cpptraj"          # Trajectory tool used to calculate the evaluation type
+# selection1 = "@CA,N,O,C"      # Selection string for specified group in trajectroies (least squares fit)
+# selection2 = "@CA,N,O,C"      # Selection string for specified group in trajectories (RMSD calculation)
+</code></pre>
+<h3 id="rmsd"><a class="header" href="#rmsd">RMSD</a></h3>
+<details><summary> click here </summary>
+<ul>
+<li><strong>type: str, required</strong>
+<ul>
+<li>evaluation type, "rmsd"</li>
+</ul>
+</li>
+<li><strong>threshold: float, required</strong>
+<ul>
+<li>PaCS-MD terminates the calculation when the evaluation value exceeds this threshold (in units of nm).</li>
+</ul>
+</li>
+<li><strong>skip_frame: int, default=1</strong>
+<ul>
+<li>Number of frames to skip when ranking CVs.</li>
+<li>If you set <code>skip_frame=2</code>, PaCS-MD will use every other frame.</li>
+</ul>
+</li>
+<li><strong>analyzer: str, default="mdtraj"</strong>
+<ul>
+<li>Trajectory tool used to calculate the evaluation value.</li>
+<li>"mdtraj", "gromacs" and "cpptraj" are supported.</li>
+</ul>
+</li>
+<li><strong>reference: str, required</strong>
+<ul>
+<li>Structure file path for the reference structure of RMSD calculation.</li>
+</ul>
+</li>
+<li><strong>selection1: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories (least squares fit)</li>
+<li>Depending on the <code>analyzer</code>, there are different ways to specify <code>selection</code>.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection. e.g. "resid 5 to 100 and name CA"</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), the <code>selection</code> should follow Gromacs index group in <code>index.ndx</code>. (Gromacs supported only)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>selection2: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories (RMSD calculation)</li>
+<li>Depending on the <code>analyzer</code>, there are different ways to specify <code>selection</code>.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection. e.g. "resid 5 to 100 and name CA"</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), the <code>selection</code> should follow Gromacs index group in <code>index.ndx</code>. (Gromacs supported only)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>selection3: str, default=<code>selection1</code></strong>
+<ul>
+<li>Selection string or name of index group for specified group in <code>reference</code> (least squares fit)</li>
+<li>If your <code>reference</code> structure has different topology from your trajectories, you can utilize this option. (e.g. <code>reference</code> has different configuration about mutation, missing residues or modified residues from your the trajectories.) Otherwise, you don't need to specify this option.</li>
+<li>This option is valid when <code>analyzer="mdtraj"</code> or <code>analyzer="cpptraj"</code>.</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), this option is ignored and the same selection indices are automatically used for your trajectories and the <code>reference</code>.</li>
+</ul>
+</li>
+<li><strong>selection4: str, default=<code>selection2</code></strong>
+<ul>
+<li>Selection string or name of index group for specified group in <code>reference</code> (RMSD calculation)</li>
+<li>If your <code>reference</code> structure has different topology from your trajectories, you can utilize this option. (e.g. <code>reference</code> has different configuration about mutation, missing residues or modified residues from your the trajectories.) Otherwise, you don't need to specify this option.</li>
+<li>This option is valid when <code>analyzer="mdtraj"</code> or <code>analyzer="cpptraj"</code>.</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), this option is ignored and the same selection indices are automatically used for your trajectories and the <code>reference</code>.</li>
+</ul>
+</li>
+</ul>
+</details>
+<pre><code class="language-toml">type = "rmsd"                   # Evaluation type
+threshold = 2                   # CV threshold used to decide whether to terminate the calculation (in units of nm)
+skip_frame = 1                  # How many frames to skip when ranking CVs
+
+# if analyzer == "mdtraj"
+analyzer = "mdtraj"             # Trajectory tool used to calculate the evaluation type
+reference = "/work/ref.pdb"     # Structure for comparison
+selection1 = "backbone"         # Selection string for specified group in trajectories (least squares fit)
+selection2 = "backbone"         # Selection string for specified group in trajectories (RMSD calculation)
+selection3 = "backbone and (not resid 1 to 10)"         # Selection string for specified group in reference (least squares fit)
+selection4 = "backbone and (not resid 1 to 10)"         # Selection string for specified group in reference (RMSD calculation)
+
+# else if analyzer == "gromacs"
+# analyzer = "gromacs"          # Trajectory tool used to calculate the evaluation type
+# selection1 = "Backbone"       # Name of index group for specified group in trajectories (least squares fit)
+# selection2 = "Backbone"       # Name of index group for specified group in trajectories (RMSD calculation)
+
+# else if analyzer == "cpptraj"
+# analyzer = "gromacs"          # Trajectory tool used to calculate the evaluation type
+# selection1 = "@CA,N,O,C"      # Selection string for specified group in trajectories (least squares fit)
+# selection2 = "@CA,N,O,C"      # Selection string for specified group in trajectories (RMSD calculation)
+</code></pre>
+<h3 id="association"><a class="header" href="#association">Association</a></h3>
+<details><summary> click here </summary>
+<ul>
+<li><strong>type: str, required</strong>
+<ul>
+<li>evaluation type, "association".</li>
+</ul>
+</li>
+<li><strong>threshold: float, required</strong>
+<ul>
+<li>PaCS-MD terminates the calculation when the evaluation value falls below this threshold (in units of nm).</li>
+</ul>
+</li>
+<li><strong>skip_frame: int, default=1</strong>
+<ul>
+<li>Number of frames to skip when ranking CVs.</li>
+<li>If you set <code>skip_frame=2</code>, PaCS-MD will use every other frame.</li>
+</ul>
+</li>
+<li><strong>analyzer: str, default="mdtraj"</strong>
+<ul>
+<li>Trajectory tool used to calculate the evaluation value.</li>
+<li>"mdtraj", "gromacs" and "cpptraj" are supported.</li>
+</ul>
+</li>
+<li><strong>selection1: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories</li>
+<li>Depending on the <code>analyzer</code>, there are different ways to specify <code>selection</code>.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection. e.g. "resid 5 to 100 and name CA"</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), the <code>selection</code> should follow Gromacs index group in <code>index.ndx</code>. (Gromacs supported only)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>selection2: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories</li>
+<li>Depending on the <code>analyzer</code>, there are different ways to specify <code>selection</code>.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection. e.g. "resid 5 to 100 and name CA"</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), the <code>selection</code> should follow Gromacs index group in <code>index.ndx</code>. (Gromacs supported only)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</details>
+<pre><code class="language-toml">type = "association"            # Evaluation type
+threshold = 0.3                 # CV threshold used to decide whether to terminate the calculation (in units of nm)
+skip_frame = 1                  # How many frames to skip when ranking CVs
+
+# if analyzer == "mdtraj"
+analyzer = "mdtraj"             # Trajectory tool used to calculate the evaluation type
+selection1 = "resid 1 to 5"     # Selection string for specified group in trajectories
+selection2 = "resid 6 to 10"    # Selection string for specified group in trajectories
+
+# else if analyzer == "gromacs"
+# analyzer = "gromacs"          # Trajectory tool used to calculate the evaluation type
+# selection1 = "resid_1_to_5"   # Name of index group for specified group in trajectories
+# selection2 = "resid_6_to_10"  # Name of index group for specified group in trajectories
+
+# else if analyzer == "cpptraj"
+# analyzer = "cpptraj"          # Trajectory tool used to calculate the evaluation type
+# selection1 = ":1-5"           # Name of index group for specified group in trajectories
+# selection2 = ":6-10"          # Name of index group for specified group in trajectories
+</code></pre>
+<h3 id="dissociation"><a class="header" href="#dissociation">Dissociation</a></h3>
+<details><summary> click here </summary>
+<ul>
+<li><strong>type: str, required</strong>
+<ul>
+<li>evaluation type, "dissociation".</li>
+</ul>
+</li>
+<li><strong>threshold: float, required</strong>
+<ul>
+<li>PaCS-MD terminates the calculation when the evaluation value exceeds this threshold.</li>
+</ul>
+</li>
+<li><strong>skip_frame: int, default=1</strong>
+<ul>
+<li>Number of frames to skip when ranking CVs</li>
+<li>If you set <code>skip_frame=2</code>, PaCS-MD will use every other frame.</li>
+</ul>
+</li>
+<li><strong>analyzer: str, default="mdtraj"</strong>
+<ul>
+<li>Trajectory tool used to calculate the evaluation value.</li>
+<li>"mdtraj", "gromacs" and "cpptraj" are supported.</li>
+</ul>
+</li>
+<li><strong>selection1: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories</li>
+<li>Depending on the <code>analyzer</code>, there are different ways to specify <code>selection</code>.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection. e.g. "resid 5 to 100 and name CA"</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), the <code>selection</code> should follow Gromacs index group in <code>index.ndx</code>. (Gromacs supported only)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>selection2: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories</li>
+<li>Depending on the <code>analyzer</code>, there are different ways to specify <code>selection</code>.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection. e.g. "resid 5 to 100 and name CA"</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), the <code>selection</code> should follow Gromacs index group in <code>index.ndx</code>. (Gromacs supported only)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</details>
+<pre><code class="language-toml">type = "dissociation"           # Evaluation type
+threshold = 10                  # CV threshold used to decide whether to terminate the calculation (in units of nm)
+skip_frame = 1                  # How many frames to skip when ranking CVs
+
+# if analyzer == "mdtraj"
+analyzer = "mdtraj"             # Trajectory tool used to calculate the evaluation type
+selection1 = "resid 1 to 5"     # Selection string for specified group in trajectories
+selection2 = "resid 6 to 10"    # Selection string for specified group in trajectories
+
+# else if analyzer == "gromacs"
+# analyzer = "gromacs"      # Trajectory tool used to calculate the evaluation type
+# selection1 = "resid_1_to_5"   # Name of index group for specified group in trajectories
+# selection2 = "resid_6_to_10"  # Name of index group for specified group in trajectories
+
+# else if analyzer == "cpptraj"
+# analyzer = "cpptraj"          # Trajectory tool used to calculate the evaluation type
+# selection1 = ":1-5"           # Name of index group for specified group in trajectories
+# selection2 = ":6-10"          # Name of index group for specified group in trajectories
+</code></pre>
+<h3 id="edgeexpansion"><a class="header" href="#edgeexpansion">EdgeExpansion</a></h3>
+<details><summary> click here </summary>
+<ul>
+<li><strong>type: str, required</strong>
+<ul>
+<li>Evaluation type, "ee".</li>
+</ul>
+</li>
+<li><strong>skip_frame: int, default=1</strong>
+<ul>
+<li>Number of frames to skip when ranking CVs.</li>
+<li>If you set <code>skip_frame=2</code>, PaCS-MD will use every other frame.</li>
+</ul>
+</li>
+<li><strong>analyzer: str, default="mdtraj"</strong>
+<ul>
+<li>Trajectory tool used to calculate the evaluation value.</li>
+<li>only "mdtraj" is supported.</li>
+</ul>
+</li>
+<li><strong>reference: str, required</strong>
+<ul>
+<li>Trajectory file used to compute the covariance matrix in Principal Component Analysis (PCA).</li>
+<li>If this value is not set, the covariance matrix is computed based on the trajectory of cycle 0.</li>
+</ul>
+</li>
+<li><strong>selection1: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories (least squares fit)
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>selection2: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories (PCA calculation)</li>
+<li>No correction by atomic weights or number of atoms is made when calculating the covariance matrix or projecting.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>selection3: str, default=<code>selection1</code></strong>
+<ul>
+<li>Selection string or name of index group for specified group in <code>reference</code> (least squares fit)</li>
+<li>If your <code>reference</code> structure has different topology from your trajectories, you can utilize this option. (e.g. <code>reference</code> has different configuration about mutation, missing residues or modified residues from your the trajectories)</li>
+<li>Otherwise, you don't need to specify this option.</li>
+</ul>
+</li>
+<li><strong>selection4: str, default=<code>selection2</code></strong>
+<ul>
+<li>Selection string or name of index group for specified group in <code>reference</code>  (PCA calculation)</li>
+<li>If your <code>reference</code> structure has different topology from your trajectories, you can utilize this option. (e.g. <code>reference</code> has different configuration about mutation, missing residues or modified residues from your the trajectories)</li>
+<li>Otherwise, you don't need to specify this option.</li>
+</ul>
+</li>
+</ul>
+</details>
+<pre><code class="language-toml">type = "ee"                     # Evaluation type
+skip_frame = 1                  # How many frames to skip when ranking CVs
+
+# if analyzer == "mdtraj"
+analyzer = "mdtraj"             # Trajectory tool used to calculate the evaluation type
+selection1 = "backbone"         # Selection string for specified group in trajectories (least squares fit)
+selection2 = "backbone"         # Selection string for specified group in trajectories (RMSD calculation)
+selection3 = "backbone"         # Selection string for specified group in reference (least squares fit)
+selection4 = "backbone"         # Selection string for specified group in reference (RMSD calculation)
+</code></pre>
+<h3 id="a_d"><a class="header" href="#a_d">A_D</a></h3>
+<details><summary> click here </summary>
+<ul>
+<li><strong>type: str, required</strong>
+<ul>
+<li>evaluation type, "a_d".</li>
+</ul>
+</li>
+<li><strong>skip_frame: int, default=1</strong>
+<ul>
+<li>Number of frames to skip when ranking CVs.</li>
+<li>If you set <code>skip_frame=2</code>, PaCS-MD will use every other frame.</li>
+</ul>
+</li>
+<li><strong>analyzer: str, default="mdtraj"</strong>
+<ul>
+<li>Trajectory tool used to calculate the evaluation value.</li>
+<li>"mdtraj", "gromacs" and "cpptraj" are supported.</li>
+</ul>
+</li>
+<li><strong>selection1: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories</li>
+<li>Depending on the <code>analyzer</code>, there are different ways to specify <code>selection</code>.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection. e.g. "resid 5 to 100 and name CA"</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), the <code>selection</code> should follow Gromacs index group in <code>index.ndx</code>. (Gromacs is only supported)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>selection2: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories</li>
+<li>Depending on the <code>analyzer</code>, there are different ways to specify <code>selection</code>.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection. e.g. "resid 5 to 100 and name CA"</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), the <code>selection</code> should follow Gromacs index group in <code>index.ndx</code>. (Gromacs is only supported)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>d_threshold: float, required</strong>
+<ul>
+<li>Threshold for switching from dissociation to association mode. If the maximum value of cv calculated while in dissociation mode exceeds this value, it switches to associtaion mode.</li>
+</ul>
+</li>
+<li><strong>frame_sel: int, required</strong>
+<ul>
+<li>One of the conditions used to switch from association to dissociation.</li>
+<li>If the highest ranking frame in association mode is less than this value, it is judged that there has been no change from the previous cycle (i.e., it has come as close as it can).　Also, at this time, we consider it to be within bound.</li>
+</ul>
+</li>
+<li><strong>bound_threshold: int, required</strong>
+<ul>
+<li>One of the conditions used to switch from association to dissociation.</li>
+<li>When the number of bound cycles exceeds this value, the mode is switched from association to disassociation and the number of bound cycles is initialized to 0. When the number of bound cycles exceeds this value, the mode is switched from association to disassociation and the number of bound cycles is initialized to 0.</li>
+</ul>
+</li>
+</ul>
+</details>
+<pre><code class="language-toml">type = "a_d"                    # Evaluation type
+skip_frame = 1                  # How many frames to skip when ranking CVs
+
+# if analyzer == "mdtraj"
+analyzer = "mdtraj"             # Trajectory tool used to calculate the evaluation type
+selection1 = "resid 1"          # Selection string for specified group in trajectories
+selection2 = "resid 9"          # Selection string for specified group in trajectories
+d_threshold = 3.0               # threshold for dissociation to association
+frame_sel = 5                   # number of frames to be used for judging whether the system has converged
+bound_threshold = 3             # threshold for association to dissociation
+</code></pre>
+<h3 id="template"><a class="header" href="#template">Template</a></h3>
+<details><summary> click here </summary>
+<ul>
+<li><strong>type: str, required</strong>
+<ul>
+<li>Evaluation type</li>
+</ul>
+</li>
+<li><strong>skip_frame: int, default=1</strong>
+<ul>
+<li>Number of frames to skip when ranking CVs</li>
+</ul>
+</li>
+<li><strong>threshold: float, required</strong>
+<ul>
+<li>CV threshold for determining to terminate a trial</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Template type is a type that can be defined by the user. It is possible to include user-specific variables in input.toml, and these variables can be used in template type in which they are defined. For more information, click <a href="reference/template.html">here</a>.</p>
+</blockquote>
+</details>
+<pre><code class="language-toml">type = "template"
+threshold = "???"
+
+# user defined variable
+user-defined-variable1 = 123
+user-defined-variable2 = "hoge"
+...
+</code></pre>
+<h2 id="hidden-option-no-need-to-specify"><a class="header" href="#hidden-option-no-need-to-specify">hidden option (No need to specify)</a></h2>
+<details><summary> click here </summary>
+- **cmd_gmx: str**
+  - Gromacs command (ex. gmx, gmx_mpi)
+  - will be created from `cmd_serial`
+- **top_mdtraj: str**
+  - topology file for mdtraj
+  - will be created from `input.toml`
+- **structure_extension: str**
+  - Structure file extension
+  - will be created from `structure`
+</details>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../mdrun/analyzer/template.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../mdrun/reference.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../mdrun/analyzer/template.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../mdrun/reference.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
+
+
+    </div>
+    </body>
+</html>

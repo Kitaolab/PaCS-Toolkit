@@ -1,0 +1,248 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Reference - PaCS-Toolkit User Guide</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">PaCS-Toolkit User Guide</a></li><li class="chapter-item expanded "><a href="../quickstart.html"><strong aria-hidden="true">1.</strong> Quick Start</a></li><li class="chapter-item expanded "><a href="../install.html"><strong aria-hidden="true">2.</strong> Install</a></li><li class="chapter-item expanded "><a href="../mdrun.html"><strong aria-hidden="true">3.</strong> mdrun</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../mdrun/overview.html"><strong aria-hidden="true">3.1.</strong> Overview</a></li><li class="chapter-item expanded "><a href="../mdrun/basic.html"><strong aria-hidden="true">3.2.</strong> Basic</a></li><li class="chapter-item expanded "><a href="../mdrun/simulator.html"><strong aria-hidden="true">3.3.</strong> Simulator</a></li><li class="chapter-item expanded "><a href="../mdrun/analyzer.html"><strong aria-hidden="true">3.4.</strong> Analyzer</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../mdrun/analyzer/rmsd.html"><strong aria-hidden="true">3.4.1.</strong> rmsd</a></li><li class="chapter-item expanded "><a href="../mdrun/analyzer/target.html"><strong aria-hidden="true">3.4.2.</strong> target</a></li><li class="chapter-item expanded "><a href="../mdrun/analyzer/dissociation.html"><strong aria-hidden="true">3.4.3.</strong> dissociation</a></li><li class="chapter-item expanded "><a href="../mdrun/analyzer/association.html"><strong aria-hidden="true">3.4.4.</strong> association</a></li><li class="chapter-item expanded "><a href="../mdrun/analyzer/a_d.html"><strong aria-hidden="true">3.4.5.</strong> a_d</a></li><li class="chapter-item expanded "><a href="../mdrun/analyzer/ee.html"><strong aria-hidden="true">3.4.6.</strong> ee</a></li><li class="chapter-item expanded "><a href="../mdrun/analyzer/template.html"><strong aria-hidden="true">3.4.7.</strong> template</a></li></ol></li><li class="chapter-item expanded "><a href="../mdrun/inputfile.html"><strong aria-hidden="true">3.5.</strong> Input file</a></li><li class="chapter-item expanded "><a href="../mdrun/reference.html" class="active"><strong aria-hidden="true">3.6.</strong> Reference</a></li></ol></li><li class="chapter-item expanded "><a href="../rmmol.html"><strong aria-hidden="true">4.</strong> rmmol</a></li><li class="chapter-item expanded "><a href="../rmfile.html"><strong aria-hidden="true">5.</strong> rmfile</a></li><li class="chapter-item expanded "><a href="../fit.html"><strong aria-hidden="true">6.</strong> fit</a></li><li class="chapter-item expanded "><a href="../genrepresent.html"><strong aria-hidden="true">7.</strong> genrepresent</a></li><li class="chapter-item expanded "><a href="../gencom.html"><strong aria-hidden="true">8.</strong> gencom</a></li><li class="chapter-item expanded "><a href="../genfeature.html"><strong aria-hidden="true">9.</strong> genfeature</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../genfeature/comdist.html"><strong aria-hidden="true">9.1.</strong> comdist</a></li><li class="chapter-item expanded "><a href="../genfeature/comvec.html"><strong aria-hidden="true">9.2.</strong> comvec</a></li><li class="chapter-item expanded "><a href="../genfeature/pca.html"><strong aria-hidden="true">9.3.</strong> pca</a></li><li class="chapter-item expanded "><a href="../genfeature/tica.html"><strong aria-hidden="true">9.4.</strong> tica</a></li><li class="chapter-item expanded "><a href="../genfeature/rmsd.html"><strong aria-hidden="true">9.5.</strong> rmsd</a></li><li class="chapter-item expanded "><a href="../genfeature/xyz.html"><strong aria-hidden="true">9.6.</strong> xyz</a></li></ol></li><li class="chapter-item expanded "><a href="../FAQ.html"><strong aria-hidden="true">10.</strong> FAQ</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">PaCS-Toolkit User Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="reference"><a class="header" href="#reference">Reference</a></h1>
+<pre><code>[1] Harada, R., &amp; Kitao, A. (2013). Parallel cascade selection molecular dynamics (PaCS-MD) to generate conformational transition pathway. In The Journal of Chemical Physics (Vol. 139, Issue 3). AIP Publishing. https://doi.org/10.1063/1.4813023
+
+[2] Tran, D. P., Takemura, K., Kuwata, K., &amp; Kitao, A. (2017). Protein–Ligand Dissociation Simulated by Parallel Cascade Selection Molecular Dynamics. In Journal of Chemical Theory and Computation (Vol. 14, Issue 1, pp. 404–417). American Chemical Society (ACS). https://doi.org/10.1021/acs.jctc.7b00504
+
+[3] Tran, D. P., &amp; Kitao, A. (2019). Dissociation Process of a MDM2/p53 Complex Investigated by Parallel Cascade Selection Molecular Dynamics and the Markov State Model. In The Journal of Physical Chemistry B (Vol. 123, Issue 11, pp. 2469–2478). American Chemical Society (ACS). https://doi.org/10.1021/acs.jpcb.8b10309
+
+[4] Takaba, K., Tran, D. P., &amp; Kitao, A. (2020). Edge expansion parallel cascade selection molecular dynamics simulation for investigating large-amplitude collective motions of proteins. In The Journal of Chemical Physics (Vol. 152, Issue 22). AIP Publishing. https://doi.org/10.1063/5.0004654
+
+[5] Hata, H., Nishihara, Y., Nishiyama, M., Sowa, Y., Kawagishi, I., &amp; Kitao, A. (2020). High pressure inhibits signaling protein binding to the flagellar motor and bacterial chemotaxis through enhanced hydration. In Scientific Reports (Vol. 10, Issue 1). Springer Science and Business Media LLC. https://doi.org/10.1038/s41598-020-59172-3
+
+[6] Tran, D. P., &amp; Kitao, A. (2020). Kinetic Selection and Relaxation of the Intrinsically Disordered Region of a Protein upon Binding. In Journal of Chemical Theory and Computation (Vol. 16, Issue 4, pp. 2835–2845). American Chemical Society (ACS). https://doi.org/10.1021/acs.jctc.9b01203
+
+[7] Hata, H., Phuoc Tran, D., Marzouk Sobeh, M., &amp; Kitao, A. (2021). Binding free energy of protein/ligand complexes calculated using dissociation Parallel Cascade Selection Molecular Dynamics and Markov state model. In Biophysics and Physicobiology (Vol. 18, Issue 0, pp. 305–316). Biophysical Society of Japan. https://doi.org/10.2142/biophysico.bppb-v18.037
+
+[8] Sobeh, M. M., &amp; Kitao, A. (2022). Dissociation Pathways of the p53 DNA Binding Domain from DNA and Critical Roles of Key Residues Elucidated by dPaCS-MD/MSM. In Journal of Chemical Information and Modeling (Vol. 62, Issue 5, pp. 1294–1307). American Chemical Society (ACS). https://doi.org/10.1021/acs.jcim.1c01508
+
+[9] Tran, D. P., Taira, Y., Ogawa, T., Misu, R., Miyazawa, Y., &amp; Kitao, A. (2022). Inhibition of the hexamerization of SARS-CoV-2 endoribonuclease and modeling of RNA structures bound to the hexamer. In Scientific Reports (Vol. 12, Issue 1). Springer Science and Business Media LLC. https://doi.org/10.1038/s41598-022-07792-2
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../mdrun/inputfile.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../rmmol.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../mdrun/inputfile.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../rmmol.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,3380 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>PaCS-Toolkit User Guide</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">PaCS-Toolkit User Guide</a></li><li class="chapter-item expanded "><a href="quickstart.html"><strong aria-hidden="true">1.</strong> Quick Start</a></li><li class="chapter-item expanded "><a href="install.html"><strong aria-hidden="true">2.</strong> Install</a></li><li class="chapter-item expanded "><a href="mdrun.html"><strong aria-hidden="true">3.</strong> mdrun</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="mdrun/overview.html"><strong aria-hidden="true">3.1.</strong> Overview</a></li><li class="chapter-item expanded "><a href="mdrun/basic.html"><strong aria-hidden="true">3.2.</strong> Basic</a></li><li class="chapter-item expanded "><a href="mdrun/simulator.html"><strong aria-hidden="true">3.3.</strong> Simulator</a></li><li class="chapter-item expanded "><a href="mdrun/analyzer.html"><strong aria-hidden="true">3.4.</strong> Analyzer</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="mdrun/analyzer/rmsd.html"><strong aria-hidden="true">3.4.1.</strong> rmsd</a></li><li class="chapter-item expanded "><a href="mdrun/analyzer/target.html"><strong aria-hidden="true">3.4.2.</strong> target</a></li><li class="chapter-item expanded "><a href="mdrun/analyzer/dissociation.html"><strong aria-hidden="true">3.4.3.</strong> dissociation</a></li><li class="chapter-item expanded "><a href="mdrun/analyzer/association.html"><strong aria-hidden="true">3.4.4.</strong> association</a></li><li class="chapter-item expanded "><a href="mdrun/analyzer/a_d.html"><strong aria-hidden="true">3.4.5.</strong> a_d</a></li><li class="chapter-item expanded "><a href="mdrun/analyzer/ee.html"><strong aria-hidden="true">3.4.6.</strong> ee</a></li><li class="chapter-item expanded "><a href="mdrun/analyzer/template.html"><strong aria-hidden="true">3.4.7.</strong> template</a></li></ol></li><li class="chapter-item expanded "><a href="mdrun/inputfile.html"><strong aria-hidden="true">3.5.</strong> Input file</a></li><li class="chapter-item expanded "><a href="mdrun/reference.html"><strong aria-hidden="true">3.6.</strong> Reference</a></li></ol></li><li class="chapter-item expanded "><a href="rmmol.html"><strong aria-hidden="true">4.</strong> rmmol</a></li><li class="chapter-item expanded "><a href="rmfile.html"><strong aria-hidden="true">5.</strong> rmfile</a></li><li class="chapter-item expanded "><a href="fit.html"><strong aria-hidden="true">6.</strong> fit</a></li><li class="chapter-item expanded "><a href="genrepresent.html"><strong aria-hidden="true">7.</strong> genrepresent</a></li><li class="chapter-item expanded "><a href="gencom.html"><strong aria-hidden="true">8.</strong> gencom</a></li><li class="chapter-item expanded "><a href="genfeature.html"><strong aria-hidden="true">9.</strong> genfeature</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="genfeature/comdist.html"><strong aria-hidden="true">9.1.</strong> comdist</a></li><li class="chapter-item expanded "><a href="genfeature/comvec.html"><strong aria-hidden="true">9.2.</strong> comvec</a></li><li class="chapter-item expanded "><a href="genfeature/pca.html"><strong aria-hidden="true">9.3.</strong> pca</a></li><li class="chapter-item expanded "><a href="genfeature/tica.html"><strong aria-hidden="true">9.4.</strong> tica</a></li><li class="chapter-item expanded "><a href="genfeature/rmsd.html"><strong aria-hidden="true">9.5.</strong> rmsd</a></li><li class="chapter-item expanded "><a href="genfeature/xyz.html"><strong aria-hidden="true">9.6.</strong> xyz</a></li></ol></li><li class="chapter-item expanded "><a href="FAQ.html"><strong aria-hidden="true">10.</strong> FAQ</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">PaCS-Toolkit User Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="pacs-toolkit-user-guide"><a class="header" href="#pacs-toolkit-user-guide">PaCS-Toolkit User Guide</a></h1>
+<p>Welcome to PaCS-Toolkit User Guide. Here, we provide instructions on how to use PaCS-Toolkit. If you encounter any issues and cannot be solved here, please feel free to submit a <a href="https://github.com/Kitaolab/PaCS-Toolkit/issues">Github Issue</a>. We hope PaCS-MD will be helpful for your research.</p>
+<p><em>Content</em></p>
+<ul>
+<li><a href="index.html#what-is-pacs-md-">What is PaCS-MD ?</a></li>
+<li><a href="index.html#citation">Citation</a></li>
+<li><a href="index.html#access">Access</a></li>
+</ul>
+<h2 id="what-is-pacs-md-"><a class="header" href="#what-is-pacs-md-">What is PaCS-MD ?</a></h2>
+<p>PaCS-MD is an enhancement sampling method that exhaustedly samples the conformational space of given systems. PaCS-MD comprises multiple short MD simulations being cascaded by the selection of the starting structures for the next simulation cycles based on given evaluation criteria. By repeating this process, a large conformational space can be sampled without any mechanistic driven bias.</p>
+<pre class="mermaid">%%{ init: { 'flowchart': { 'curve': 'stepAfter'}, 'theme':'neutral', 'themeVariables': {'fontSize':'20px'} } }%%
+flowchart TD;
+
+cycle0[&quot;Preliminary MD simulations&quot;];
+ranking0[&quot;Structural Ranking&quot;];
+cycle0 --&gt; ranking0;
+ranking0 --&gt; input_structures;
+
+subgraph cycle[&quot;cycle&quot;];
+  ranking1[&quot;Structural Ranking&quot;];
+  judge{{&quot;Fulfill requirements?&quot;}};
+  export1[&quot;Export top N snapshots to next cycle&quot;];
+  input_structures --&gt; trajectories --&gt; ranking1 --&gt; judge;
+  judge -- No --&gt; export1 --&gt; input_structures;
+end
+
+subgraph trajectories[&quot;Short MD simulations&quot;];
+  direction TB;
+  traj1(trj1);
+  traj2(trj2);
+  etc_trj(...);
+  traj(trj N);
+end
+
+subgraph input_structures[&quot; &quot;];
+  direction TB;
+  rank1(rank1);
+  rank2(rank2);
+  etc_sim(...);
+  rank(rank N);
+end
+
+End(((&quot;finish&quot;)));
+judge -- Yes --&gt; End;
+
+</pre>
+<h2 id="citation"><a class="header" href="#citation">Citation</a></h2>
+<pre><code></code></pre>
+<h2 id="access"><a class="header" href="#access">Access</a></h2>
+<ul>
+<li>Author
+<ul>
+<li><a href="http://www.kitao.bio.titech.ac.jp/">KitaoLab</a></li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-txt"># Head
+- Kitao
+
+# Team leader
+- Ikizawa
+
+# Coding team including documentation
+- Ikizawa (lead)
+- Hori
+- Kono
+
+# Testing team
+- Tegar (lead)
+- Bai
+- Kimizono
+- Lu
+</code></pre>
+<ul>
+<li>Source code
+<ul>
+<li><a href="https://github.com/Kitaolab/PaCS-Toolkit">Github</a></li>
+</ul>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="quick-start"><a class="header" href="#quick-start">Quick Start</a></h1>
+<ul>
+<li>on this page, we will introduce a quick guide on running <strong>dissociation PaCS-MD using gromacs</strong>.</li>
+<li>If you want to try other PaCS-MD, please refer to <a href="reference/analyzer.html">Analyzer</a>.</li>
+</ul>
+<p><em>Content</em></p>
+<ul>
+<li><a href="quickstart.html#quick-start">Quick Start</a>
+<ul>
+<li><a href="quickstart.html#step1-installing-by-pip-or-conda">Step1: Installing by pip or conda</a></li>
+<li><a href="quickstart.html#step2-preparing-initial-files">Step2: Preparing initial files</a></li>
+<li><a href="quickstart.html#step3-preparing-input-file-for-pacs-md">Step3: Preparing input file for PaCS-MD</a></li>
+<li><a href="quickstart.html#step4-running-pacs-md">Step4: Running PaCS-MD</a>
+<ul>
+<li><a href="quickstart.html#supplement-runing-other-trial">Supplement: Runing other trial</a></li>
+</ul>
+</li>
+<li><a href="quickstart.html#step5-making-new-fitted-trajectories-from-pacsmd-results">Step5: Making new fitted trajectories from pacsmd results</a></li>
+<li><a href="quickstart.html#step6-extracting-collective-variables-from-fitted-trajectories">Step6: Extracting collective-variables from fitted trajectories</a></li>
+<li><a href="quickstart.html#step7-building-msm-and-predicting-free-energy">Step7: Building MSM and predicting free energy</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="step1-installing-by-pip-or-conda"><a class="header" href="#step1-installing-by-pip-or-conda">Step1: Installing by pip or conda</a></h2>
+<ol>
+<li>Running git clone for getting source code</li>
+</ol>
+<pre><code class="language-shell">git clone https://github.com/Kitaolab/PaCS-Toolkit.git
+</code></pre>
+<ol start="2">
+<li>Installing with your favorite method</li>
+</ol>
+<pre><code class="language-shell"># Install by pip
+pip install -e ".[mdtraj]"
+
+# Or install by conda and pip
+conda create -n pacsmd "python&gt;=3.7" -y
+conda activate pacsmd
+pip install -e ".[mdtraj]"
+</code></pre>
+<ul>
+<li>The above methods are better, but sometimes they are not suitable for a special situation.</li>
+<li>For more information about installation, Please refer to <a href="install.html">Install page</a>.</li>
+</ul>
+<h2 id="step2-preparing-initial-files"><a class="header" href="#step2-preparing-initial-files">Step2: Preparing initial files</a></h2>
+<ul>
+<li>On this page, we will use <strong>gromacs</strong> as simulator.</li>
+<li>In gromacs, <strong>gro, top, mdp and ndx</strong> files are necessary. Please get these files ready.</li>
+<li>Sample jobscripts and input files are <a href="https://github.com/Kitaolab/PaCS-Toolkit/tree/main/jobscripts">here</a></li>
+</ul>
+<!-- - If you want to run quickly, please use [test dataset](). -->
+<h2 id="step3-preparing-input-file-for-pacs-md"><a class="header" href="#step3-preparing-input-file-for-pacs-md">Step3: Preparing input file for PaCS-MD</a></h2>
+<ul>
+<li>PaCS-MD requires <strong>a toml format input file.</strong> Please make input.toml
+<ul>
+<li>Please adjust the above settings as needed.</li>
+<li>For more information about this file, please refer to <a href="reference/inputfile.html">input file</a>.</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-shell">vim input.toml
+</code></pre>
+<details><summary> input.toml </summary>
+<pre><code class="language-toml"># Input file for PaCS-MD
+## basic
+# pacsmd settings
+## basic
+max_cycle = 2                           # Maximum number of cycles to run. (ex. 1, ..., 123, ..., 999)
+n_replica = 3                           # Number of replica. (ex. 1, ..., 123, ..., 999)
+n_parallel = 3                          # Number of replica which are calculated at a time
+skip_frame = 1                          # Frequency of frames used for ranking among trajectories
+centering = true                        # Whether to move the molecule to the center
+centering_selection = "protein"         # Name of molecule to move in the center
+working_dir = "./."                     # Directory where pacsmd will run
+
+## simulator
+simulator = "gromacs"                   # Software used inside PaCS-MD
+cmd_mpi = "mpirun -np 4"                # Commands for MPI such as mpirun, blank is OK
+cmd_serial = "gmx_mpi mdrun -ntomp 6"   # Commands to run the simulator serially
+cmd_parllel = "gmx_mpi mdrun -ntomp 6"  # Commands to run the simulator parallelly
+structure = "input.gro"                 # Structural file such as gro, pdb, rst7, etc.
+topology = "topol.top"                  # Topology file such as top, parm7, psf, etc.
+mdconf = "parameter.mdp"                # Parameter file such as mdp, mdin, namd, etc.
+index_file = ".index.ndx"               # Gromacs index file
+trajectory_extension = ".xtc"           # Trajectory file extension. ("." is necessary)
+
+## analyzer
+type = "dissociation"                   # Evaluation type
+threshold = 100                         # CV threshold for determining to terminate a trial
+skip_frame = 1                          #  How many frames to skip when ranking CVs
+analyzer = "mdtraj"                     # Trajectory tool used to calculate the evaluation type
+selection1 = "resid 1 to 5"             # Selection string for specified group in trajectories
+selection2 = "resid 6 to 10"            # Selection string for specified group in trajectories
+
+## postprocess
+genrepresent = true                     #  Whether genrepresent is executed after trial
+rmmol = true                            #  Whether rmmol is executed after each cycle
+keep_selection = "not water"            #  Molecular name or index group to be left in the trajectory when rmmol
+rmfile = true                           #  Whether rmfile is executed after trial
+</code></pre>
+</details>
+<h2 id="step4-running-pacs-md"><a class="header" href="#step4-running-pacs-md">Step4: Running PaCS-MD</a></h2>
+<ul>
+<li>Finally, we are ready to perform PaCS-MD</li>
+<li>Specifying the trial id in argument <strong>t</strong> and the input file in argument <strong>f</strong>.</li>
+</ul>
+<pre><code class="language-shell">pacs mdrun -t 1 -f input.toml
+</code></pre>
+<details><summary> CAUTION </summary>
+In this case, the total core will be 24.
+<p>So, 8 cores will be used in each 3 replica at once. (24 / 3 = 8 cores)</p>
+</details>
+<ul>
+<li>
+<p>If you want to continue the simulation from the middle of a cycle or trial, simply run pacsmd again. Completed cycles will be skipped, and the simulation will resume from the the point of interruption.</p>
+</li>
+<li>
+<p>You will get the results</p>
+</li>
+</ul>
+<pre><code class="language-shell">$ ls
+trial001/
+</code></pre>
+<h3 id="supplement-runing-other-trial"><a class="header" href="#supplement-runing-other-trial">Supplement: Runing other trial</a></h3>
+<ul>
+<li>Usually, a single trial is not sufficient for sampling, so multiple trials are required.</li>
+<li>We can run trial2 PaCS-MD</li>
+</ul>
+<pre><code class="language-shell">pacs mdrun -t 2 -f input.toml
+</code></pre>
+<ul>
+<li>Output will be the following</li>
+</ul>
+<pre><code class="language-shell">$ ls
+trial002/
+</code></pre>
+<h2 id="step5-making-new-fitted-trajectories-from-pacsmd-results"><a class="header" href="#step5-making-new-fitted-trajectories-from-pacsmd-results">Step5: Making new fitted trajectories from pacsmd results</a></h2>
+<ul>
+<li>Before performing visual_pathway or MSM(especially 3D-MSM and volume correction and etc.) and etc, you need to make fitted trajectories from pacsmd results</li>
+<li>For fitting, we prepare <code>pacsmd fitting mdtraj</code> command. But you can use existing software such as <code>gmx trjconv</code> or <code>cpptraj</code> as usual.</li>
+<li>See <a href="./reference_manual/function.html">function</a> for more information.</li>
+</ul>
+<pre><code class="language-shell">$ pacs fit mdtraj -s rmmol_top.pdb -r ref.gro -ts protein -rs protein -tf prd_rmmol.xtc -t 1 -p 1
+</code></pre>
+<h2 id="step6-extracting-collective-variables-from-fitted-trajectories"><a class="header" href="#step6-extracting-collective-variables-from-fitted-trajectories">Step6: Extracting collective-variables from fitted trajectories</a></h2>
+<ul>
+<li>After making fitted trajectories, you need to extract CV to build MSM, where CV denotes collective variables such as "distance" and "inter COM vector" and "PCA" and etc.</li>
+<li>For extracting CVs, we got <code>pacsmd cv</code> command. But this command provides you only frequently used CV such as comd-distance, com-vector, pca, tica and rmsd.</li>
+<li>So if you want to use other specific CVs, you need to write a code by yourself.</li>
+</ul>
+<pre><code class="language-shell">$ pacs genfeature mdtraj comdist -s input.gro -s1 "resname Lig" -s2 "protein" -tf prd.xtc -t 1 -p 1
+$ ls
+comdist-CV/
+</code></pre>
+<h2 id="step7-building-msm-and-predicting-free-energy"><a class="header" href="#step7-building-msm-and-predicting-free-energy">Step7: Building MSM and predicting free energy</a></h2>
+<ul>
+<li>After extracting CVs, you would like to obtain free energy landscape related to extracted CVs.</li>
+<li>To calculate free energy, we provide MSM notebooks. The notebooks outline the process for computing free energy landscape.</li>
+<li>But these are just sample notebooks, so you need to check carefully when you use these notebook.</li>
+</ul>
+<pre><code class="language-shell">$ code pacsmd/MSM/distance.ipynb
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="install"><a class="header" href="#install">Install</a></h1>
+<p><em>Content</em></p>
+<ul>
+<li><a href="install.html#install">Install</a>
+<ul>
+<li><a href="install.html#requirements">Requirements</a></li>
+<li><a href="install.html#1-install-by-pip">1. Install by pip</a>
+<ul>
+<li><a href="install.html#11-install-by-conda-and-pip">1.1 Install by conda and pip</a></li>
+<li><a href="install.html#12-install-by-pip">1.2. Install by pip</a></li>
+</ul>
+</li>
+<li><a href="install.html#2-get-source-code-from-github">2. Get source code from github</a>
+<ul>
+<li><a href="install.html#21-install-by-conda-and-pip-locally">2.1. Install by conda and pip locally</a></li>
+<li><a href="install.html#22-install-by-pip-locally">2.2. Install by pip locally</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="requirements"><a class="header" href="#requirements">Requirements</a></h2>
+<ul>
+<li><a href="https://www.python.org/">Python</a> &gt;= 3.7</li>
+<li>PaCS-ToolKit currently supports 3 simulator
+<ul>
+<li><a href="https://www.gromacs.org/">Gromacs</a></li>
+<li><a href="https://ambermd.org/index.php">Amber</a></li>
+<li><a href="https://www.ks.uiuc.edu/Research/namd/">Namd</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="1-install-by-pip"><a class="header" href="#1-install-by-pip">1. Install by pip</a></h2>
+<h3 id="11-install-by-conda-and-pip"><a class="header" href="#11-install-by-conda-and-pip">1.1 Install by conda and pip</a></h3>
+<pre><code class="language-shell">conda create -n pacsmd "python&gt;=3.7" -y
+conda activate pacsmd
+</code></pre>
+<ul>
+<li>if using whole pacstk function</li>
+</ul>
+<pre><code class="language-shell">pip install "git+https://github.com/Kitaolab/PaCS-Toolkit.git[all]"
+pip install pyemma
+</code></pre>
+<ul>
+<li>elif using "pacs mdrun" and analyzer == "mdtraj"</li>
+</ul>
+<pre><code class="language-shell">pip install "git+https://github.com/Kitaolab/PaCS-Toolkit.git[mdtraj]"
+</code></pre>
+<ul>
+<li>elif using "pacs mdrun" and analyzer == "gromacs"</li>
+</ul>
+<pre><code class="language-shell">pip install "git+https://github.com/Kitaolab/PaCS-Toolkit.git"
+</code></pre>
+<ul>
+<li>elif performing MSM</li>
+</ul>
+<pre><code class="language-shell">pip install "git+https://github.com/Kitaolab/PaCS-Toolkit.git[msm]"
+pip install pyemma
+</code></pre>
+<h3 id="12-install-by-pip"><a class="header" href="#12-install-by-pip">1.2. Install by pip</a></h3>
+<ul>
+<li>if using whole pacstk function</li>
+</ul>
+<pre><code class="language-shell">pip install "git+https://github.com/Kitaolab/PaCS-Toolkit.git[all]"
+</code></pre>
+<ul>
+<li>elif using "pacs mdrun" and analyzer == "mdtraj"</li>
+</ul>
+<pre><code class="language-shell">pip install "git+https://github.com/Kitaolab/PaCS-Toolkit.git[mdtraj]"
+</code></pre>
+<ul>
+<li>elif using "pacs mdrun" and analyzer == "gromacs"</li>
+</ul>
+<pre><code class="language-shell">pip install "git+https://github.com/Kitaolab/PaCS-Toolkit.git"
+</code></pre>
+<ul>
+<li>elif performing MSM</li>
+</ul>
+<pre><code class="language-shell">pip install "git+https://github.com/Kitaolab/PaCS-Toolkit.git[msm]"
+pip install pyemma
+</code></pre>
+<h2 id="2-get-source-code-from-github"><a class="header" href="#2-get-source-code-from-github">2. Get source code from github</a></h2>
+<ul>
+<li>git clone</li>
+</ul>
+<pre><code>git clone https://github.com/Kitaolab/PaCS-Toolkit.git
+cd pacsmd
+</code></pre>
+<ul>
+<li>get latest release</li>
+</ul>
+<pre><code>verion="x.x.x"
+wget https://github.com/Kitaolab/PaCS-Toolkit/archive/refs/tags/${version}.tar.gz
+tar -xvzf ${version}.tar.gz
+cd pacsmd-${version}
+</code></pre>
+<h3 id="21-install-by-conda-and-pip-locally"><a class="header" href="#21-install-by-conda-and-pip-locally">2.1. Install by conda and pip locally</a></h3>
+<pre><code class="language-shell">conda create -n pacsmd "python&gt;=3.7" -y
+conda activate pacsmd
+</code></pre>
+<ul>
+<li>if using whole pacstk function
+<ul>
+<li>pyemma does not recommend pip-install</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-shell">pip install -e ".[all]"
+conda install -c conda-forge pyemma
+</code></pre>
+<ul>
+<li>elif using "pacs mdrun" and analyzer == "mdtraj"</li>
+</ul>
+<pre><code class="language-shell">pip install -e ".[mdtraj]"
+</code></pre>
+<ul>
+<li>elif using "pacs mdrun" and analyzer == "gromacs"</li>
+</ul>
+<pre><code class="language-shell">pip install -e "."
+</code></pre>
+<ul>
+<li>elif using "pacs mdrun" and analyzer == "cpptraj"</li>
+</ul>
+<pre><code class="language-shell">pip install -e "."
+</code></pre>
+<ul>
+<li>elif performing MSM
+<ul>
+<li>pyemma does not recommend pip-install</li>
+</ul>
+</li>
+</ul>
+<pre><code>pip install -e ".[msm]"
+conda install -c conda-forge pyemma
+</code></pre>
+<h3 id="22-install-by-pip-locally"><a class="header" href="#22-install-by-pip-locally">2.2. Install by pip locally</a></h3>
+<ul>
+<li>if using whole pacstk function
+<ul>
+<li>pyemma does not work, conda is recommend</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-shell">pip install -e ".[all]"
+pip install pyemma
+</code></pre>
+<ul>
+<li>elif using "pacs mdrun" and analyzer == "mdtraj"</li>
+</ul>
+<pre><code class="language-shell">pip install -e ".[mdtraj]"
+</code></pre>
+<ul>
+<li>elif using "pacs mdrun" and analyzer == "gromacs"</li>
+</ul>
+<pre><code class="language-shell">pip install -e "."
+</code></pre>
+<ul>
+<li>elif using "pacs mdrun" and analyzer == "cpptraj"</li>
+</ul>
+<pre><code class="language-shell">pip install -e "."
+</code></pre>
+<ul>
+<li>elif performing MSM
+<ul>
+<li>sometimes pyemma does not work, conda is recommend</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-shell">pip install -e ".[msm]"
+pip install pyemma
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mdrun"><a class="header" href="#mdrun">mdrun</a></h1>
+<ul>
+<li>This command is used to execute PaCS-MD.</li>
+<li>Unlike other commands in pacskit, many variables are set within pacsmd's input file.</li>
+<li>It is assumed that PaCS-MD will first be executed by this command and then analyzed using other commands.</li>
+<li>See <a href="mdrun/inputfile.html">Input file</a> for details on input files.</li>
+</ul>
+<h3 id="example"><a class="header" href="#example">Example</a></h3>
+<pre><code class="language-shell">pacs mdrun -t 1 -f input.toml
+</code></pre>
+<h3 id="arguments"><a class="header" href="#arguments">Arguments</a></h3>
+<pre><code class="language-plaintext">usage: pacs mdrun [-h] [-t] [-f]
+</code></pre>
+<ul>
+<li><code>-t, --trial</code> (int):
+<ul>
+<li>trial number without 0-fill when pacsmd was conducted (e.g. <code>-t 1</code>)</li>
+</ul>
+</li>
+<li><code>-f, --file</code> (str):
+<ul>
+<li>input file path for PaCS-MD (e.g. <code>-f input.toml</code>)</li>
+</ul>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="overview"><a class="header" href="#overview">Overview</a></h1>
+<h3 id="generated-files"><a class="header" href="#generated-files">generated files</a></h3>
+<ul>
+<li>mdrun reads the file specified by -f and performs MD calculations according to its contents.</li>
+<li>After the command is executed, the following directory structure is created.</li>
+</ul>
+<div style="border: 1px solid black; padding: 10px;">
+Directory structure of pacsmd:
+<ul>
+<li>tiral001 /
+<ul>
+<li>cycle000 /
+<ul>
+<li>replica001 /
+<ul>
+<li>trajectory file</li>
+</ul>
+</li>
+<li>summary /
+<ul>
+<li>cv.log</li>
+<li>cv_ranked.log</li>
+<li>progress.log</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>cycle001 /
+<ul>
+<li>replica001 /</li>
+<li>replica002 /
+...</li>
+<li>replica <code>n_replica</code> /</li>
+<li>summary /</li>
+</ul>
+</li>
+<li>cycle002 /
+...</li>
+<li>cycle <code>max_cycle</code> /</li>
+</ul>
+</li>
+</ul>
+</div>
+<ul>
+<li>The directory structure is created as shown above, and the following files are created.
+<ul>
+<li><code>trajectory file</code>
+<ul>
+<li>The trajectory file is a file that contains the coordinates of the atoms in the system at each time step.</li>
+<li>file name without extension is <code>prd</code> and the extension is determined by the input file.</li>
+</ul>
+</li>
+<li><code>cv.log</code>
+<ul>
+<li>The cv.log file contains the calculated collective variable (CV) values for each frame in the trajectory file.</li>
+<li>first column: replica number (1-indexed)</li>
+<li>second column: frame number (1-indexed)</li>
+<li>third column: CV value</li>
+</ul>
+</li>
+<li><code>cv_ranked.log</code>
+<ul>
+<li>The cv_ranked.log file contains the sorted CV values.</li>
+</ul>
+</li>
+<li><code>progress.log</code>
+<ul>
+<li>The progress.log file contains the progress of the simulation in each cycle.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="overall-diagram"><a class="header" href="#overall-diagram">Overall diagram</a></h3>
+<ul>
+<li>PaCS-MD runs multiple short simulations, from which it selects a snapshot that meets its objectives and serves as the initial structure for the next cycle. Therefore, the diagram is as follows.</li>
+</ul>
+<pre class="mermaid">sequenceDiagram
+
+participant cycle as cycle
+participant simulator as simulator
+participant analyzer as analyzer
+loop 0, max_cycle
+    Note over cycle: prepare initial structures
+    par run short MD simulations
+    cycle -&gt;&gt;+ simulator: run short MD simulations
+    simulator -&gt;&gt;- cycle: trajectory files
+    end
+    par calculate CV 
+    cycle -&gt;&gt;+ analyzer: calculate CV
+    Note over analyzer: calculate CV based on the input file.
+    Note over analyzer: sort the snapshots based on the CV.
+    analyzer -&gt;&gt;- cycle: cv.log, cv_ranked.log
+    end
+    break the top CV reaches threshold
+    analyzer --&gt;&gt; cycle: finish PaCS-MD
+    end
+    Note over cycle: export top N snapshots to next cycle.
+end
+</pre>
+<ul>
+<li>
+<p>Below is an overview of each component. If necessary, see <a href="mdrun/reference.html">Reference</a> for more information on each component.</p>
+</li>
+<li>
+<p>simulator</p>
+<ul>
+<li>The simulator performs one short MD on the starting structure in cycle 0.</li>
+<li>In the other cycles, it executes n_replica short MDs, starting from the top-ranking structure of each cycle.</li>
+<li>Currently, only GROMACS, AMBER and NAMD are supported.</li>
+<li>See <a href="mdrun/simulator.html">Simulator</a> for more information</li>
+</ul>
+</li>
+<li>
+<p>analyzer</p>
+<ul>
+<li>The analyzer calculates the collective variable (CV) based on the type specified in the input file.</li>
+<li>The analyzer sorts the structures in each trajectory based on the CV.</li>
+<li>User-defined types are also available.</li>
+<li>See <a href="mdrun/analyzer.html">Analyzer</a> for more information</li>
+</ul>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="basic"><a class="header" href="#basic">Basic</a></h1>
+<p>There are common settings for any PaCS-MD run. These include the maximum number of cycles to run, how many MD simulations to run in each cycle, and so on. These settings are described in the input file under the <code>#basic</code> keyword.</p>
+<p>Following are the details of each keyword to be set. For simplicity, we chose "replica" as the MD simulation to be executed in each cycle.</p>
+<h4 id="keywords"><a class="header" href="#keywords">keywords</a></h4>
+<ul>
+<li>
+<p><strong>max_cycle: int, default=1</strong></p>
+<ul>
+<li>Maximum number of cycles to run. (e.g. 100)</li>
+<li>Minimum value is 1.</li>
+<li>Maximum value is 999.</li>
+</ul>
+</li>
+<li>
+<p><strong>n_replica: int, default=1</strong></p>
+<ul>
+<li>Number of replicas to be excuted in one cycle. (e.g. 50)</li>
+<li>Minimum value is 1.</li>
+<li>Maximum value is 999.</li>
+</ul>
+</li>
+<li>
+<p><strong>n_parallel: int, default=1</strong></p>
+<ul>
+<li>Number of replicas to be simulated and analyzed in parallel at a time. (e.g. 10)</li>
+<li>It is recommended that <code>n_parallel</code> set to be a divisor of <code>n_replica</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>centering: bool, default=True</strong></p>
+<ul>
+<li>This flag controls whether the initial structure of the next cycle is moved to the center of the box at the end of each cycle.</li>
+<li>if <code>centering</code> is true, the initial structure of the next cycle is moved to the center of the box.</li>
+<li>if <code>centering</code> is false, the initial structure of the next cycle will not be moved to the center of the box.</li>
+<li>For longer MD, the proteins may move away from the center of the box and the features may behave non-intuitively. Therefore, it is recommended to set <code>centering</code> to true.</li>
+</ul>
+</li>
+<li>
+<p><strong>centering_selection: str, default="protein" or "Protein" or "@CA,C,O,N,H"</strong></p>
+<ul>
+<li>If <code>centering</code> is true, the group specified by this keyword moves to the center of the box.</li>
+<li>If <code>centering</code> is false, there is no need to specify this keyword.</li>
+<li>default value will be changed to match <code>analyzer</code>.
+<ul>
+<li>if <code>analyzer</code> == "mdtraj", default="protein"</li>
+<li>if <code>analyzer</code> == "gromacs", default="Protein"</li>
+<li>if <code>analyzer</code> == "cpptraj", default="@CA,C,O,N,H"</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>working_dir: str, default="./."</strong></p>
+<ul>
+<li>Directory where pacsmd will run.</li>
+</ul>
+</li>
+<li>
+<p><strong>rmmol: bool, default=false</strong></p>
+<ul>
+<li>This flag controls whether the unnecessary molecules will be removed from the trajectory after each cycle.</li>
+<li>if <code>rmmol</code> is true, atoms not specified in the <code>keep_selection</code> are removed from the trajectory file.</li>
+<li>The operation of removing atoms is irreversible.</li>
+</ul>
+</li>
+<li>
+<p><strong>keep_selection: str, (required if <code>rmmol=true</code>)</strong></p>
+<ul>
+<li>if <code>rmmol</code> is true, atoms specified in the <code>keep_selection</code> are kept in the trajectory file. (e.g. "protein")</li>
+</ul>
+</li>
+<li>
+<p><strong>rmfile: bool, default=false</strong></p>
+<ul>
+<li>This flag controls whether the unnecessary files are removed from the working directory after trial.</li>
+<li>Backup files and other files are deleted.</li>
+</ul>
+</li>
+</ul>
+<h4 id="example-1"><a class="header" href="#example-1">Example</a></h4>
+<p>An example of a basic option in an input file is shown below. This can also be found on <a href="mdrun/inputfile.html#basic">this page</a>.</p>
+<pre><code class="language-plaintext">max_cycle = 20                     
+n_replica = 8                    
+n_parallel = 4                    
+centering = true                 
+centering_selection = "protein"   
+working_dir = "/work/"            
+rmmol = true                      
+keep_selection = "not water"      
+rmfile = true                    
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="simulator"><a class="header" href="#simulator">Simulator</a></h1>
+<ul>
+<li>In PaCS-MD, simulations corresponding to the <code>simulator</code> are executed. Gromacs, Amber, and NAMD are supported.</li>
+<li>In each cycle, <code>n_replica</code> simulations are executed. <code>n_parallel</code> simulations are will run in parallel. If <code>n_replica</code> is not a multiple of <code>n_parallel</code>, or in cycle 0, the remainder of the simulations will run in series.</li>
+<li>If you want to run multiple replica simulations in parallel using MPI, set <code>cmd_mpi</code>. If <code>cmd_mpi</code> is not set, parallel execution will be performed using the multiprocessing module of python.</li>
+</ul>
+<p><em>Content</em></p>
+<ul>
+<li><a href="mdrun/simulator.html#when-are-cmd_serial--cmd_parallel-used-">When are <code>cmd_serial</code> &amp; <code>cmd_parallel</code> used ?</a></li>
+<li><a href="mdrun/simulator.html#gromacs">Gromacs</a>
+<ul>
+<li><a href="mdrun/simulator.html#keywords">keywords</a></li>
+</ul>
+</li>
+<li><a href="mdrun/simulator.html#amber">Amber</a>
+<ul>
+<li><a href="mdrun/simulator.html#keywords-1">keywords</a></li>
+</ul>
+</li>
+<li><a href="mdrun/simulator.html#namd">NAMD</a>
+<ul>
+<li><a href="mdrun/simulator.html#keywords-2">keywords</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="when-are-cmd_serial--cmd_parallel-used-"><a class="header" href="#when-are-cmd_serial--cmd_parallel-used-">When are <code>cmd_serial</code> &amp; <code>cmd_parallel</code> used ?</a></h2>
+<ul>
+<li>See the table below for <code>cmd_serial</code> and <code>cmd_parallel</code> in the input file. <code>cmd_serial</code> is used if cycle0 or <code>n_parallel</code>=1. If <code>n_replica</code> is not divisible by <code>n_parallel</code>, then <code>cmd_serial</code> is used for the remaining replicas. Otherwise, <code>cmd_parallel</code> is used.</li>
+</ul>
+<div class="table-wrapper"><table><thead><tr><th>GPU</th><th>MPI</th><th>n_parallel</th><th>command</th></tr></thead><tbody>
+<tr><td>x</td><td>x</td><td>1</td><td>cmd_serial</td></tr>
+<tr><td>x</td><td>x</td><td>n</td><td>cmd_serial</td></tr>
+<tr><td>x</td><td>o</td><td>1</td><td>cmd_serial</td></tr>
+<tr><td>x</td><td>o</td><td>n</td><td>cmd_parallel</td></tr>
+<tr><td>o</td><td>x</td><td>1</td><td>cmd_serial</td></tr>
+<tr><td>o</td><td>x</td><td>n</td><td>cmd_serial</td></tr>
+<tr><td>o</td><td>o</td><td>1</td><td>cmd_seiral</td></tr>
+<tr><td>o</td><td>o</td><td>n</td><td>cmd_parallel</td></tr>
+</tbody></table>
+</div>
+<h2 id="gromacs"><a class="header" href="#gromacs">Gromacs</a></h2>
+<p>To run the simulation using gromacs, write in the inputfile as in <a href="mdrun/inputfile.html#gromacs">this example</a>. The details of each keyword are as follows.</p>
+<h4 id="keywords-1"><a class="header" href="#keywords-1">keywords</a></h4>
+<ul>
+<li><strong>simulator: str, required</strong>
+<ul>
+<li>Software used inside PaCS-MD. e.g. "gromacs"</li>
+</ul>
+</li>
+<li><strong>cmd_mpi: str, default=""</strong>
+<ul>
+<li>Command for MPI parallelizataion. e.g. "mpirun -np 4"</li>
+</ul>
+</li>
+<li><strong>cmd_serial: str, required</strong>
+<ul>
+<li>Command to run simulation in serial. e.g. "gmx_mpi mdrun -ntomp 6"</li>
+</ul>
+</li>
+<li><strong>cmd_parallel: str, default=cmd_serial</strong>
+<ul>
+<li>Command to run simulation in parallel. e.g. "gmx_mpi mdrun -ntomp 6"</li>
+</ul>
+</li>
+<li><strong>structure: str, required</strong>
+<ul>
+<li>Structure file path for MD simulation. e.g. "./input.gro"</li>
+<li>This is also used as the initial structure of PaCS-MD</li>
+</ul>
+</li>
+<li><strong>topology: str, required</strong>
+<ul>
+<li>Topology file path for MD simulation. e.g. "./topol.top"</li>
+</ul>
+</li>
+<li><strong>mdconf: str, required</strong>
+<ul>
+<li>Parameter file path for MD simulation. e.g. "./parameter.mdp"</li>
+</ul>
+</li>
+<li><strong>index_file: str, required</strong>
+<ul>
+<li>Gromacs index file path. e.g. "./index.ndx"</li>
+</ul>
+</li>
+<li><strong>trajectory_extension: str, required</strong>
+<ul>
+<li>Trajectory file extension. (The "." is necessary.) e.g. ".trr"</li>
+</ul>
+</li>
+</ul>
+<h2 id="amber"><a class="header" href="#amber">Amber</a></h2>
+<p>To run the simulation using amber, write in the inputfile as in <a href="mdrun/inputfile.html#amber">this example</a>. The details of each keyword are as follows.</p>
+<h4 id="keywords-2"><a class="header" href="#keywords-2">keywords</a></h4>
+<ul>
+<li><strong>simulator: str, required</strong>
+<ul>
+<li>Software used inside PaCS-MD. e.g. "amber"</li>
+</ul>
+</li>
+<li><strong>cmd_mpi: str, default=""</strong>
+<ul>
+<li>Command for MPI such as mpirun. e.g. "mpirun -np 4"</li>
+</ul>
+</li>
+<li><strong>cmd_serial: str, required</strong>
+<ul>
+<li>Command to run simulation in serial. e.g. "pmemd.cuda"</li>
+</ul>
+</li>
+<li><strong>cmd_parallel: str, default=cmd_serial</strong>
+<ul>
+<li>Command to run simulation in parallel. e.g. "pmemd.cuda"</li>
+</ul>
+</li>
+<li><strong>structure: str, required</strong>
+<ul>
+<li>Structure file path for MD simulation. e.g. "./input.rst7"</li>
+<li>This is also used as the initial structure of PaCS-MD.</li>
+</ul>
+</li>
+<li><strong>topology: str, required</strong>
+<ul>
+<li>Topology file path for MD simulation. e.g. "./topology.parm7"</li>
+</ul>
+</li>
+<li><strong>mdconf: str, required</strong>
+<ul>
+<li>Parameter file path for MD simulation. e.g. "./parameter.mdin"</li>
+</ul>
+</li>
+<li><strong>trajectory_extension: str, required</strong>
+<ul>
+<li>Trajectory file extension. (The "." is necessary.) e.g. ".nc"</li>
+</ul>
+</li>
+</ul>
+<h2 id="namd"><a class="header" href="#namd">NAMD</a></h2>
+<p>To run the simulation using NAMD, write in the inputfile as in <a href="mdrun/inputfile.html#namd">this example</a>. The details of each keyword are as follows.</p>
+<h4 id="keywords-3"><a class="header" href="#keywords-3">keywords</a></h4>
+<ul>
+<li><strong>simulator: str, required</strong>
+<ul>
+<li>Software used inside PaCS-MD. e.g. "namd"</li>
+</ul>
+</li>
+<li><strong>cmd_mpi: str, default=""</strong>
+<ul>
+<li>Command for MPI parallelizataion. e.g. "mpirun -np 4"</li>
+</ul>
+</li>
+<li><strong>cmd_serial: str, required</strong>
+<ul>
+<li>Command to run simulation in serial. e.g. "namd2 +p4"</li>
+</ul>
+</li>
+<li><strong>cmd_parallel: str, default=cmd_serial</strong>
+<ul>
+<li>Command to run simulation in parallel. e.g. "namd2 +p4"</li>
+</ul>
+</li>
+<li><strong>structure: str, required</strong>
+<ul>
+<li>Structure file path for MD simulation. e.g. "./input.pdb"</li>
+<li>This is also used as the initial structure of PaCS-MD.</li>
+</ul>
+</li>
+<li><strong>topology: str, required</strong>
+<ul>
+<li>Topology file path for MD simulation. e.g. "./topology.psf"</li>
+</ul>
+</li>
+<li><strong>mdconf: str, required</strong>
+<ul>
+<li>Parameter file path for MD simulation. e.g. "./parameter.conf"</li>
+</ul>
+</li>
+<li><strong>trajectory_extension: str, required</strong>
+<ul>
+<li>Trajectory file extension. (The "." is necessary.) e.g. ".dcd"</li>
+</ul>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="analyzer"><a class="header" href="#analyzer">Analyzer</a></h1>
+<ul>
+<li>In PaCS-MD, the analyzer is a component that evaluates the snapshot of each trajectory in each cycle and ranks them based on the evaluation type specified in the input file.</li>
+<li>Some of the top ranked frames become the initial structure of each replica in the next cycle.</li>
+<li>You can use the following evaluation functions by setting the <code>#analyzer</code> keyword in your input file. Depending on the phenomenon of interest, the appropriate <code>type</code> must be selected.</li>
+<li>If you do not find a <code>type</code> that meets your purpose, you can implement it yourself by setting <code>type</code> = <a href="mdrun/analyzer.html#template">template</a>.</li>
+<li>The following are some commonly used evaluation types.</li>
+</ul>
+<p><em>Content</em></p>
+<ul>
+<li><a href="mdrun/analyzer.html#dissociation">Dissociation</a></li>
+<li><a href="mdrun/analyzer.html#association">Association</a></li>
+<li><a href="mdrun/analyzer.html#target">Target</a></li>
+<li><a href="mdrun/analyzer.html#rmsd">RMSD</a></li>
+<li><a href="mdrun/analyzer.html#edgeexpansion">EdgeExpansion</a></li>
+<li><a href="mdrun/analyzer.html#a_d">A_D</a></li>
+<li><a href="mdrun/analyzer.html#template">Template</a></li>
+</ul>
+<h2 id="dissociation"><a class="header" href="#dissociation">Dissociation</a></h2>
+<ul>
+<li>Evaluate snapshots of each trajectory so that the centers of mass of the two selected groups are far apart.</li>
+<li>Usage Example
+<ul>
+<li>Ligand dissociating from a protein</li>
+<li>Separate the distance between the two domains of a protein</li>
+</ul>
+</li>
+<li>For more information, see <a href="mdrun/analyzer/dissociation.html">here</a>.</li>
+<li>See <a href="mdrun/inputfile.html#dissociation">here</a> for an example input file.</li>
+</ul>
+<details><summary> Papers </summary>
+<pre><code>[1] Protein-Ligand Dissociation Simulated by Parallel Cascade Selection Molecular Dynamics, https://doi.org/10.1021/acs.jctc.7b00504
+[2] Dissociation Process of a MDM2/p53 Complex Investigated by Parallel Cascade Selection Molecular Dynamics and the Markov State Model, https://doi.org/10.1021/acs.jpcb.8b10309
+[3] Binding free energy of protein/ligand complexes calculated using dissociation Parallel Cascade Selection Molecular Dynamics and Markov state model, https://doi.org/10.2142/biophysico.bppb-v18.037
+[4] High pressure inhibits signaling protein binding to the flagellar motor and bacterial chemotaxis through enhanced hydration, https://doi.org/10.1038/s41598-020-59172-3
+[5] Dissociation Pathways of the p53 DNA Binding Domain from DNA and Critical Roles of Key Residues Elucidated by dPaCS-MD/MSM, https://doi.org/10.1021/acs.jcim.1c01508
+</code></pre>
+</details>
+<h2 id="association"><a class="header" href="#association">Association</a></h2>
+<ul>
+<li>Evaluate snapshots of each trajectory so that the centers of mass of the two selected groups are close together.</li>
+<li>Usage Example
+<ul>
+<li>Bringing a ligand closer to a protein</li>
+<li>Bringing two domains of a protein closer together</li>
+</ul>
+</li>
+<li>For more information, see <a href="mdrun/analyzer/association.html">here</a>.</li>
+<li>See <a href="mdrun/inputfile.html#association">here</a> for an example input file.</li>
+</ul>
+<details><summary> Papers </summary>
+</details>
+<h2 id="target"><a class="header" href="#target">Target</a></h2>
+<ul>
+<li>Evaluate snapshots of each trajectory so that the RMSD from the reference structure becomes smaller.</li>
+<li>Usage Example
+<ul>
+<li>Finding transitions between two known structures.</li>
+</ul>
+</li>
+<li>Evaluate to follow the <code>reference</code> structure using RMSD.</li>
+<li>For more information, see <a href="mdrun/analyzer/target.html">here</a>.</li>
+<li>See <a href="mdrun/inputfile.html#target">here</a> for an example input file.</li>
+</ul>
+<details><summary> Papers </summary>
+<pre><code>[1] Parallel cascade selection molecular dynamics (PaCS-MD) to generate conformational transition pathway, https://doi.org/10.1063/1.4813023
+</code></pre>
+</details>
+<h2 id="rmsd"><a class="header" href="#rmsd">RMSD</a></h2>
+<ul>
+<li>Evaluate snapshots of each trajectory so that the RMSD from the reference structure becomes larger.</li>
+<li>Usage Example
+<ul>
+<li>Sampling a wide range of structures</li>
+<li>Sampling a wide range of ligand binding modes</li>
+</ul>
+</li>
+<li>For more information, see <a href="mdrun/analyzer/rmsd.html">here</a>.</li>
+<li>See <a href="mdrun/inputfile.html#rmsd">here</a> for an example input file.</li>
+</ul>
+<details><summary> Papers </summary>
+<pre><code>[1] Inhibition of the hexamerization of SARS-CoV-2 endoribonuclease and modeling of RNA structures bound to the hexamer, https://doi.org/10.1038/s41598-022-07792-2
+</code></pre>
+</details>
+<h2 id="edgeexpansion"><a class="header" href="#edgeexpansion">EdgeExpansion</a></h2>
+<ul>
+<li>Evaluate snapshots of each trajectory so that the frame forms the convex hull of the 4-dimentional principal component space(PCs).</li>
+<li>Usage Example
+<ul>
+<li>Sampling a wide range of phase space without knowing the reference structure</li>
+</ul>
+</li>
+<li>For more information, see <a href="mdrun/analyzer/edgeexpansion.html">here</a>.</li>
+<li>See <a href="mdrun/inputfile.html#edgeexpansion">here</a> for an example input file.</li>
+</ul>
+<details><summary> Papers </summary>
+<pre><code>[1] Edge expansion parallel cascade selection molecular dynamics simulation for investigating large-amplitude collective motions of proteins, https://doi.org/10.1063/5.0004654
+</code></pre>
+</details>
+<h2 id="a_d"><a class="header" href="#a_d">A_D</a></h2>
+<ul>
+<li>Evaluate snapshots of each trajectory so that the distance between the centers of mass of the two selected groups fluctuates significantly within a certain range.</li>
+<li>Usage Example
+<ul>
+<li>Observing large movements of proteins, such as opening and closing.</li>
+<li>Observing the binding and unbinding of ligands.</li>
+</ul>
+</li>
+<li>For more information, see <a href="mdrun/analyzer/a_d.html">here</a>.</li>
+<li>See <a href="mdrun/inputfile.html#a_d">here</a> for an example input file.</li>
+</ul>
+<details><summary> Papers </summary>
+<pre><code>[1] Kinetic Selection and Relaxation of the Intrinsically Disordered Region of a Protein upon Binding, https://doi.org/10.1021/acs.jctc.9b01203
+</code></pre>
+</details>
+<h2 id="template"><a class="header" href="#template">Template</a></h2>
+<ul>
+<li>Evaluate snapshots of each trajectory using a user-defined evaluation function.</li>
+<li>Additional variables can be specified in <code>input.toml</code></li>
+<li>Usage Example
+<ul>
+<li>If you want to use a different evaluation function than the ones provided.</li>
+</ul>
+</li>
+<li>For more information, <a href="mdrun/template.html">click here</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="rmsd-1"><a class="header" href="#rmsd-1">RMSD</a></h1>
+<ul>
+<li>Evaluate snapshots of each trajectory so that the RMSD from the reference structure becomes larger.</li>
+<li>The structure of the groups specified by <code>selection1</code> and <code>selection3</code> are superimposed by the least squares method and the RMSD is calculated with the structure of the groups specified by <code>selection2</code> and <code>selection4</code>.</li>
+<li>Usage Example
+<ul>
+<li>Sampling a wide range of structures</li>
+<li>Sampling a wide range of ligand binding modes</li>
+</ul>
+</li>
+<li>See <a href="mdrun/analyzer/../inputfile.html#rmsd">here</a> for an example input file.</li>
+</ul>
+<h4 id="keywords-4"><a class="header" href="#keywords-4">keywords</a></h4>
+<ul>
+<li><strong>type: str, required</strong>
+<ul>
+<li>evaluation type, "rmsd"</li>
+</ul>
+</li>
+<li><strong>threshold: float, required</strong>
+<ul>
+<li>PaCS-MD terminates the calculation when the evaluation value exceeds this threshold (in units of nm).</li>
+</ul>
+</li>
+<li><strong>skip_frame: int, default=1</strong>
+<ul>
+<li>Number of frames to skip when ranking CVs.</li>
+<li>If you set <code>skip_frame=2</code>, PaCS-MD will use every other frame.</li>
+</ul>
+</li>
+<li><strong>analyzer: str, default="mdtraj"</strong>
+<ul>
+<li>Trajectory tool used to calculate the evaluation value.</li>
+<li>"mdtraj", "gromacs" and "cpptraj" are supported.</li>
+</ul>
+</li>
+<li><strong>reference: str, required</strong>
+<ul>
+<li>Structure file path for the reference structure of RMSD calculation.</li>
+</ul>
+</li>
+<li><strong>selection1: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories (least squares fit)</li>
+<li>Depending on the <code>analyzer</code>, there are different ways to specify <code>selection</code>.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection. e.g. "resid 5 to 100 and name CA"</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), the <code>selection</code> should follow Gromacs index group in <code>index.ndx</code>. (Gromacs supported only)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>selection2: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories (RMSD calculation)</li>
+<li>Depending on the <code>analyzer</code>, there are different ways to specify <code>selection</code>.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection. e.g. "resid 5 to 100 and name CA"</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), the <code>selection</code> should follow Gromacs index group in <code>index.ndx</code>. (Gromacs supported only)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>selection3: str, default=<code>selection1</code></strong>
+<ul>
+<li>Selection string or name of index group for specified group in <code>reference</code> (least squares fit)</li>
+<li>If your <code>reference</code> structure has different topology from your trajectories, you can utilize this option. (e.g. <code>reference</code> has different configuration about mutation, missing residues or modified residues from your the trajectories.) Otherwise, you don't need to specify this option.</li>
+<li>This option is valid when <code>analyzer="mdtraj"</code> or <code>analyzer="cpptraj"</code>.</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), this option is ignored and the same selection indice are automatically used for your trajectories and the <code>reference</code>.</li>
+</ul>
+</li>
+<li><strong>selection4: str, default=<code>selection2</code></strong>
+<ul>
+<li>Selection string or name of index group for specified group in <code>reference</code> (RMSD calculation)</li>
+<li>If your <code>reference</code> structure has different topology from your trajectories, you can utilize this option. (e.g. <code>reference</code> has different configuration about mutation, missing residues or modified residues from your the trajectories.) Otherwise, you don't need to specify this option.</li>
+<li>This option is valid when <code>analyzer="mdtraj"</code> or <code>analyzer="cpptraj"</code>.</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), this option is ignored and the same selection indices are automatically used for your trajectories and the <code>reference</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="papers"><a class="header" href="#papers">Papers</a></h4>
+<pre><code>[1] Inhibition of the hexamerization of SARS-CoV-2 endoribonuclease and modeling of RNA structures bound to the hexamer, https://doi.org/10.1038/s41598-022-07792-2
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="rmsd-2"><a class="header" href="#rmsd-2">RMSD</a></h1>
+<ul>
+<li>Evaluate snapshots of each trajectory so that the RMSD from the reference structure becomes smaller.</li>
+<li>The structure of the groups specified by <code>selection1</code> and <code>selection3</code> are superimposed by the least squares method and the RMSD is calculated with the structure of the groups specified by <code>selection2</code> and <code>selection4</code>.</li>
+<li>Usage Example
+<ul>
+<li>Finding transitions between two known structures.</li>
+</ul>
+</li>
+<li>See <a href="mdrun/analyzer/../inputfile.html#target">here</a> for an example input file.</li>
+</ul>
+<h4 id="keywords-5"><a class="header" href="#keywords-5">keywords</a></h4>
+<ul>
+<li><strong>type: str, required</strong>
+<ul>
+<li>evaluation type, "target".</li>
+</ul>
+</li>
+<li><strong>threshold: float, required</strong>
+<ul>
+<li>PaCS-MD terminates the calculation when the evaluation value falls below this threshold (in units of nm).</li>
+</ul>
+</li>
+<li><strong>skip_frame: int, default=1</strong>
+<ul>
+<li>Number of frames to skip when ranking CVs.</li>
+<li>If you set <code>skip_frame=2</code>, PaCS-MD will use every other frame.</li>
+</ul>
+</li>
+<li><strong>analyzer: str, default="mdtraj"</strong>
+<ul>
+<li>Trajectory tool used to calculate the evaluation value.</li>
+<li>"mdtraj", "gromacs" and "cpptraj" are supported.</li>
+</ul>
+</li>
+<li><strong>reference: str, required</strong>
+<ul>
+<li>Structure file path for the reference structure of RMSD calculation.</li>
+</ul>
+</li>
+<li><strong>selection1: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories (least squares fit)</li>
+<li>Depending on the <code>analyzer</code>, there are different ways to specify <code>selection</code>.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection. e.g. "resid 5 to 100 and name CA"</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), the <code>selection</code> should follow Gromacs index group in <code>index.ndx</code>. (Gromacs supported only)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>selection2: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories (RMSD calculation)</li>
+<li>Depending on the <code>analyzer</code>, there are different ways to specify <code>selection</code>.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection. e.g. "resid 5 to 100 and name CA"</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), the <code>selection</code> should follow Gromacs index group in <code>index.ndx</code>. (Gromacs supported only)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>selection3: str, default=<code>selection1</code></strong>
+<ul>
+<li>Selection string or name of index group for specified group in <code>reference</code> (least squares fit)</li>
+<li>If your <code>reference</code> structure has different topology from your trajectories, you can utilize this option. (e.g. <code>reference</code> has different configuration about mutation, missing residues or modified residues from your the trajectories.) Otherwise, you don't need to specify this option.</li>
+<li>This option is valid when <code>analyzer="mdtraj"</code> or <code>analyzer="cpptraj"</code>.</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), this option is ignored and the same selection indice are automatically used for your trajectories and the <code>reference</code>.</li>
+</ul>
+</li>
+<li><strong>selection4: str, default=<code>selection2</code></strong>
+<ul>
+<li>Selection string or name of index group for specified group in <code>reference</code> (RMSD calculation)</li>
+<li>If your <code>reference</code> structure has different topology from your trajectories, you can utilize this option. (e.g. <code>reference</code> has different configuration about mutation, missing residues or modified residues from your the trajectories.) Otherwise, you don't need to specify this option.</li>
+<li>This option is valid when <code>analyzer="mdtraj"</code> or <code>analyzer="cpptraj"</code>.</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), this option is ignored and the same selection indices are automatically used for your trajectories and the <code>reference</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="papers-1"><a class="header" href="#papers-1">Papers</a></h4>
+<pre><code>[1] Parallel cascade selection molecular dynamics (PaCS-MD) to generate conformational transition pathway, https://doi.org/10.1063/1.4813023
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="dissociation-1"><a class="header" href="#dissociation-1">Dissociation</a></h1>
+<ul>
+<li>
+<p>Evaluate snapshots of each trajectory so that the centers of mass of the two selected groups are far apart.</p>
+</li>
+<li>
+<p>The two selected groups are <code>selection1</code> and <code>selection2</code> in the input file.</p>
+</li>
+<li>
+<p>Usage Example</p>
+<ul>
+<li>Ligand dissociating from a protein</li>
+<li>Separate the distance between the two domains of a protein</li>
+</ul>
+</li>
+<li>
+<p>See <a href="mdrun/analyzer/../inputfile.html#dissociation">here</a> for an example input file.</p>
+</li>
+</ul>
+<h4 id="keywords-6"><a class="header" href="#keywords-6">keywords</a></h4>
+<ul>
+<li><strong>type: str, required</strong>
+<ul>
+<li>evaluation type, "dissociation".</li>
+</ul>
+</li>
+<li><strong>threshold: float, required</strong>
+<ul>
+<li>PaCS-MD terminates the calculation when the evaluation value exceeds this threshold.</li>
+</ul>
+</li>
+<li><strong>skip_frame: int, default=1</strong>
+<ul>
+<li>Number of frames to skip when ranking CVs</li>
+<li>If you set <code>skip_frame=2</code>, PaCS-MD will use every other frame.</li>
+</ul>
+</li>
+<li><strong>analyzer: str, default="mdtraj"</strong>
+<ul>
+<li>Trajectory tool used to calculate the evaluation value.</li>
+<li>"mdtraj", "gromacs" and "cpptraj" are supported.</li>
+</ul>
+</li>
+<li><strong>selection1: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories</li>
+<li>Depending on the <code>analyzer</code>, there are different ways to specify <code>selection</code>.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection. e.g. "resid 5 to 100 and name CA"</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), the <code>selection</code> should follow Gromacs index group in <code>index.ndx</code>. (Gromacs supported only)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>selection2: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories</li>
+<li>Depending on the <code>analyzer</code>, there are different ways to specify <code>selection</code>.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection. e.g. "resid 5 to 100 and name CA"</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), the <code>selection</code> should follow Gromacs index group in <code>index.ndx</code>. (Gromacs supported only)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="papers-2"><a class="header" href="#papers-2">Papers</a></h4>
+<pre><code>[1] Protein-Ligand Dissociation Simulated by Parallel Cascade Selection Molecular Dynamics, https://doi.org/10.1021/acs.jctc.7b00504
+[2] Dissociation Process of a MDM2/p53 Complex Investigated by Parallel Cascade Selection Molecular Dynamics and the Markov State Model, https://doi.org/10.1021/acs.jpcb.8b10309
+[3] Binding free energy of protein/ligand complexes calculated using dissociat
+ion Parallel Cascade Selection Molecular Dynamics and Markov state model, http
+s://doi.org/10.2142/biophysico.bppb-v18.037
+[4] High pressure inhibits signaling protein binding to the flagellar motor an
+d bacterial chemotaxis through enhanced hydration, https://doi.org/10.1038/s41
+598-020-59172-3
+[5] Dissociation Pathways of the p53 DNA Binding Domain from DNA and Critical
+Roles of Key Residues Elucidated by dPaCS-MD/MSM, https://doi.org/10.1021/acs.
+jcim.1c01508
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="association-1"><a class="header" href="#association-1">Association</a></h1>
+<ul>
+<li>
+<p>Evaluate snapshots of each trajectory so that the centers of mass of the two selected groups are close together.</p>
+</li>
+<li>
+<p>The two selected groups are <code>selection1</code> and <code>selection2</code> in the input file.</p>
+</li>
+<li>
+<p>Usage Example</p>
+<ul>
+<li>Bringing a ligand closer to a protein</li>
+<li>Bringing two domains of a protein closer together</li>
+</ul>
+</li>
+<li>
+<p>See <a href="mdrun/analyzer/../inputfile.html#association">here</a> for an example input file.</p>
+</li>
+</ul>
+<h4 id="keywords-7"><a class="header" href="#keywords-7">keywords</a></h4>
+<ul>
+<li><strong>type: str, required</strong>
+<ul>
+<li>evaluation type, "association".</li>
+</ul>
+</li>
+<li><strong>threshold: float, required</strong>
+<ul>
+<li>PaCS-MD terminates the calculation when the evaluation value falls below this threshold (in units of nm).</li>
+</ul>
+</li>
+<li><strong>skip_frame: int, default=1</strong>
+<ul>
+<li>Number of frames to skip when ranking CVs.</li>
+<li>If you set <code>skip_frame=2</code>, PaCS-MD will use every other frame.</li>
+</ul>
+</li>
+<li><strong>analyzer: str, default="mdtraj"</strong>
+<ul>
+<li>Trajectory tool used to calculate the evaluation value.</li>
+<li>"mdtraj", "gromacs" and "cpptraj" are supported.</li>
+</ul>
+</li>
+<li><strong>selection1: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories</li>
+<li>Depending on the <code>analyzer</code>, there are different ways to specify <code>selection</code>.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection. e.g. "resid 5 to 100 and name CA"</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), the <code>selection</code> should follow Gromacs index group in <code>index.ndx</code>. (Gromacs supported only)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>selection2: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories</li>
+<li>Depending on the <code>analyzer</code>, there are different ways to specify <code>selection</code>.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection. e.g. "resid 5 to 100 and name CA"</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), the <code>selection</code> should follow Gromacs index group in <code>index.ndx</code>. (Gromacs supported only)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="papers-3"><a class="header" href="#papers-3">Papers</a></h4>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="a_d-1"><a class="header" href="#a_d-1">A_D</a></h1>
+<ul>
+<li>Evaluate snapshots of each trajectory so that the distance between the centers of mass of the two selected groups fluctuates significantly within a certain range.</li>
+<li>Usage Example
+<ul>
+<li>Observing large movements of proteins, such as opening and closing.</li>
+<li>Observing the binding and unbinding of ligands.</li>
+</ul>
+</li>
+<li>See <a href="mdrun/analyzer/../inputfile.html#a_d">here</a> for an example input file.</li>
+</ul>
+<h4 id="keywords-8"><a class="header" href="#keywords-8">keywords</a></h4>
+<ul>
+<li><strong>type: str, required</strong>
+<ul>
+<li>evaluation type, "a_d".</li>
+</ul>
+</li>
+<li><strong>skip_frame: int, default=1</strong>
+<ul>
+<li>Number of frames to skip when ranking CVs.</li>
+<li>If you set <code>skip_frame=2</code>, PaCS-MD will use every other frame.</li>
+</ul>
+</li>
+<li><strong>analyzer: str, default="mdtraj"</strong>
+<ul>
+<li>Trajectory tool used to calculate the evaluation value.</li>
+<li>"mdtraj", "gromacs" and "cpptraj" are supported.</li>
+</ul>
+</li>
+<li><strong>selection1: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories</li>
+<li>Depending on the <code>analyzer</code>, there are different ways to specify <code>selection</code>.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection. e.g. "resid 5 to 100 and name CA"</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), the <code>selection</code> should follow Gromacs index group in <code>index.ndx</code>. (Gromacs supported only)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>selection2: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories</li>
+<li>Depending on the <code>analyzer</code>, there are different ways to specify <code>selection</code>.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection. e.g. "resid 5 to 100 and name CA"</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), the <code>selection</code> should follow Gromacs index group in <code>index.ndx</code>. (Gromacs supported only)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>d_threshold: float, required</strong>
+<ul>
+<li>Threshold for switching from dissociation to association mode. If the maximum value of cv calculated while in dissociation mode exceeds this value, it switches to association mode.</li>
+</ul>
+</li>
+<li><strong>frame_sel: int, required</strong>
+<ul>
+<li>One of the conditions used to switch from association to dissociation.</li>
+<li>If the highest ranking frame in association mode is less than this value, it will be assumed that there has been no change from the previous cycle (i.e., it has come as close as possible).　Hence, we consider the molecule to be within bound.</li>
+</ul>
+</li>
+<li><strong>bound_threshold: int, required</strong>
+<ul>
+<li>One of the conditions used to switch from association to dissociation.</li>
+<li>When the number of bound cycles exceeds this value, the mode is switched from association to disassociation and the number of bound cycles is initialized to 0.</li>
+</ul>
+</li>
+</ul>
+<p>Papers</p>
+<pre><code>[1] Kinetic Selection and Relaxation of the Intrinsically Disordered Region of
+ a Protein upon Binding, https://doi.org/10.1021/acs.jctc.9b01203
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="edgeexpansion-1"><a class="header" href="#edgeexpansion-1">EdgeExpansion</a></h1>
+<ul>
+<li>Evaluate snapshots of each trajectory so that the frame forms the convex hull of the 4-dimentional principal component space(PCs).</li>
+<li>Snapshots of each cycle are projected onto a 4-dimensional principal component spaces (PCs). Its convex hull is computed and the initial structure of the next cycle is selected from the polygon's vertices.</li>
+<li>Usage Example
+<ul>
+<li>Sampling a wide range of phase space without knowing the reference structure</li>
+</ul>
+</li>
+<li>See <a href="mdrun/analyzer/inputfile.html#edgeexpansion">here</a> for an example input file.</li>
+</ul>
+<h4 id="keywords-9"><a class="header" href="#keywords-9">keywords</a></h4>
+<ul>
+<li><strong>type: str, required</strong>
+<ul>
+<li>Evaluation type, "ee".</li>
+</ul>
+</li>
+<li><strong>skip_frame: int, default=1</strong>
+<ul>
+<li>Number of frames to skip when ranking CVs.</li>
+<li>If you set <code>skip_frame=2</code>, PaCS-MD will use every other frame.</li>
+</ul>
+</li>
+<li><strong>analyzer: str, default="mdtraj"</strong>
+<ul>
+<li>Trajectory tool used to calculate the evaluation value.</li>
+<li>only "mdtraj" is supported.</li>
+</ul>
+</li>
+<li><strong>reference: str, required</strong>
+<ul>
+<li>Trajectory file used to compute the covariance matrix in Principal Component Analysis (PCA).</li>
+<li>If this value is not set, the covariance matrix is computed based on the trajectory of cycle 0.</li>
+</ul>
+</li>
+<li><strong>selection1: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories (least squares fit)
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>selection2: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories (PCA calculation)</li>
+<li>No correction by atomic weights or number of atoms is made when calculating the covariance matrix or projecting.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>selection3: str, default=<code>selection1</code></strong>
+<ul>
+<li>Selection string or name of index group for specified group in <code>reference</code> (least squares fit)</li>
+<li>If your <code>reference</code> structure has different topology from your trajectories, you can utilize this option. (e.g. <code>reference</code> has different configuration about mutation, missing residues or modified residues from your the trajectories)</li>
+<li>Otherwise, you don't need to specify this option.</li>
+</ul>
+</li>
+<li><strong>selection4: str, default=<code>selection2</code></strong>
+<ul>
+<li>Selection string or name of index group for specified group in <code>reference</code>  (PCA calculation)</li>
+<li>If your <code>reference</code> structure has different topology from your trajectories, you can utilize this option. (e.g. <code>reference</code> has different configuration about mutation, missing residues or modified residues from your the trajectories)</li>
+<li>Otherwise, you don't need to specify this option.</li>
+</ul>
+</li>
+</ul>
+<h4 id="papers-4"><a class="header" href="#papers-4">Papers</a></h4>
+<pre><code>[1] Edge expansion parallel cascade selection molecular dynamics simulation for investigating large-amplitude collective motions of proteins, https://doi.org/10.1063/5.0004654
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="template-1"><a class="header" href="#template-1">Template</a></h1>
+<ul>
+<li>Template type is a type that can be defined by the user yourself. It is possible to include user-specific variables in input.toml, and these variables can be used in template type in which they are defined.</li>
+<li>This feature embodies the flexibility of PaCS-MD. This is also a feature that recognizes that the development team alone is limited in its ability to support such flexibility.</li>
+<li>This is for advanced users and requires familiarity with PaCS-MD and the simulator used internally (Gromacs, Amber, Namd). If you are not familiar with it, please practice with other types.</li>
+</ul>
+<p><em>Content</em></p>
+<ul>
+<li><a href="mdrun/analyzer/template.html#template">Template</a>
+<ul>
+<li><a href="mdrun/analyzer/template.html#step1-get-original-source-code">Step1: Get original source code</a></li>
+<li><a href="mdrun/analyzer/template.html#step2-code-template-type">Step2: Code template type</a>
+<ul>
+<li><a href="mdrun/analyzer/template.html#calculate_cv">calculate_cv</a></li>
+<li><a href="mdrun/analyzer/template.html#ranking">ranking</a></li>
+<li><a href="mdrun/analyzer/template.html#is_threshold">is_threshold</a></li>
+</ul>
+</li>
+<li><a href="mdrun/analyzer/template.html#step3-prepare-inputtoml">Step3: Prepare input.toml</a></li>
+<li><a href="mdrun/analyzer/template.html#step4-run-pacs-md">Step4: Run PaCS-MD</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="step1-get-original-source-code"><a class="header" href="#step1-get-original-source-code">Step1: Get original source code</a></h2>
+<ul>
+<li>Go to <a href="https://github.com/Kitaolab/PaCS-Toolkit">github repository</a> and download it.</li>
+</ul>
+<h2 id="step2-code-template-type"><a class="header" href="#step2-code-template-type">Step2: Code template type</a></h2>
+<ul>
+<li>You will see <code>template.py</code> is in <code>pacsmd/md/analyzer/template.py</code></li>
+<li>Here is template type</li>
+</ul>
+<pre><code class="language-python">class Template(SuperAnalyzer):
+    def calculate_cv(self, settings: MDsettings, cycle: int, replica: int, send_rev) -&gt; None:
+        """
+        TODO
+        1. Read trajectory based on self.cycle
+        2. Calculate the value that suited the evaluation type.
+        3. send the values by send_rev.send(ret_arr)
+        """
+        pass
+
+    def ranking(self, settings: MDsettings, CVs: List[Snapshot]) -&gt; List[Snapshot]:
+        """
+        CVs: List[Snapshot]
+            The CVs is a list of Snapshot objects
+            that contain the CV for each frame in the trajectory.
+        Snapshot
+        TODO:
+            Arrange them in ascending, descending, etc.
+            order to match the PaCSMD evaluation type.
+        Example:
+        sorted_cv = sorted(CVs, key=lambda x: x.cv)
+        return sorted_cv
+        """
+        pass
+
+    def is_threshold(self, settings: MDsettings, CVs: List[Snapshot] = None) -&gt; bool:
+        if CVs is None:
+            CVs = self.CVs
+        return CVs[0].cv &lt; settings.threshold
+</code></pre>
+<ul>
+<li>You need to code 3 types mainly (<code>calculate_cv</code>, <code>ranking</code> and <code>is_threshold</code>)</li>
+</ul>
+<h3 id="calculate_cv"><a class="header" href="#calculate_cv">calculate_cv</a></h3>
+<ul>
+<li><code>calcurate_cv</code> is the core of each evaluation type. Here collective variables(CVs) (distance, RMSD, energy, etc.) are calculated from the MD simulation results in each replica and returned in a list. The evaluation type should be well defined so that the frames are chosen in the direction you wish to sample.</li>
+<li>We recommend you to refer to other evaluation types (e.g. dissociation.py, rmsd.py, etc.).</li>
+</ul>
+<h3 id="ranking"><a class="header" href="#ranking">ranking</a></h3>
+<ul>
+<li>In <code>ranking</code>, the list of CVs calculated by <code>calcurate_cv</code> is sorted in descending or ascending order.</li>
+<li>If you want to separate two residues, sort in descending order as the distance increases. Conversely, if you want to bring them closer together, sort in ascending order so that the distance becomes smaller.</li>
+</ul>
+<h3 id="is_threshold"><a class="header" href="#is_threshold">is_threshold</a></h3>
+<ul>
+<li><code>is_threshold</code> determines if the top of the list of CVs (the frame with the most desired CV of all frames) is above or below the threshold set by the user. The inequality should be changed according to the situation.</li>
+<li>If you want to simulate a larger distance, the process would be such that if it goes above a certain distance, it will terminate.</li>
+</ul>
+<h2 id="step3-prepare-inputtoml"><a class="header" href="#step3-prepare-inputtoml">Step3: Prepare input.toml</a></h2>
+<ul>
+<li>In <code>input.toml</code>, you can define variables you want to use.</li>
+</ul>
+<pre><code class="language-toml">## analyzer
+type = "template"
+threshold = "???"
+
+### user defined variable
+user-defined-variable1 = 123
+user-defined-variable2 = "hoge"
+...
+</code></pre>
+<ul>
+<li>If you set your variables like the above example, you can use the variables in <code>template.py</code> like the following example</li>
+</ul>
+<pre><code class="language-python3">class Template(SuperAnalyzer):
+    def calculate_cv(self, settings: MDsettings, cycle: int) -&gt; List[float]:
+        ...
+            if traj.distance &gt; setttings.user-defined-variable1:
+                break
+        ...
+
+        return list_float
+</code></pre>
+<h2 id="step4-run-pacs-md"><a class="header" href="#step4-run-pacs-md">Step4: Run PaCS-MD</a></h2>
+<ul>
+<li>Now you can run your original PaCS-MD</li>
+</ul>
+<pre><code class="language-shell">pacs mdrun -t 1 -f input.toml
+</code></pre>
+<ul>
+<li>Please make a pull_request in <a href="https://github.com/Kitaolab/PaCS-Toolkit">Github</a> for new possible template scripts.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="input-file"><a class="header" href="#input-file">Input file</a></h1>
+<ul>
+<li>PaCS-MD requires an input file. Here are the variables in the input file</li>
+<li>input file must be in <a href="https://toml.io/en/">toml format</a>.</li>
+</ul>
+<p><em>Contents</em></p>
+<ul>
+<li><a href="mdrun/inputfile.html#input-file">Input file</a>
+<ul>
+<li><a href="mdrun/inputfile.html#sample-input-file">sample input file</a></li>
+<li><a href="mdrun/inputfile.html#basic-option">basic option</a></li>
+<li><a href="mdrun/inputfile.html#simulator-option">simulator option</a>
+<ul>
+<li><a href="mdrun/inputfile.html#gromacs">Gromacs</a></li>
+<li><a href="mdrun/inputfile.html#amber">Amber</a></li>
+<li><a href="mdrun/inputfile.html#namd">NAMD</a></li>
+</ul>
+</li>
+<li><a href="mdrun/inputfile.html#analyzer-option">analyzer option</a>
+<ul>
+<li><a href="mdrun/inputfile.html#target">Target</a></li>
+<li><a href="mdrun/inputfile.html#rmsd">RMSD</a></li>
+<li><a href="mdrun/inputfile.html#association">Association</a></li>
+<li><a href="mdrun/inputfile.html#dissociation">Dissociation</a></li>
+<li><a href="mdrun/inputfile.html#edgeexpansion">EdgeExpansion</a></li>
+<li><a href="mdrun/inputfile.html#a_d">A_D</a></li>
+<li><a href="mdrun/inputfile.html#template">Template</a></li>
+</ul>
+</li>
+<li><a href="mdrun/inputfile.html#hidden-option-no-need-to-specify">hidden option (No need to specify)</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="sample-input-file"><a class="header" href="#sample-input-file">sample input file</a></h2>
+<ul>
+<li>please check <a href="https://github.com/Kitaolab/PaCS-Toolkit/tree/main/jobscripts">here</a></li>
+</ul>
+<h2 id="basic-option"><a class="header" href="#basic-option">basic option</a></h2>
+<details><summary> click here </summary>
+<ul>
+<li><strong>max_cycle: int, default=1</strong>
+<ul>
+<li>Maximum number of cycles to run. (ex. 1, ..., 123, ..., 999)</li>
+</ul>
+</li>
+<li><strong>n_replica: int, default=1</strong>
+<ul>
+<li>Number of replica. (ex. 1, ..., 123, ..., 999)</li>
+</ul>
+</li>
+<li><strong>n_parallel: int, default=1</strong>
+<ul>
+<li>Number of replica calculated at a time</li>
+</ul>
+</li>
+<li><strong>centering: bool, default=True</strong>
+<ul>
+<li>Whether to bring the molecule selected by centering_selection to the center of the simulation cell when creating the initial structure for the next cycle</li>
+</ul>
+</li>
+<li><strong>centering_selection: str, default="protein" or "Protein" or "@CA,C,O,N,H"</strong>
+<ul>
+<li>Molecules to be moved to the center</li>
+<li>default value will be changed to match <code>analyzer</code>
+<ul>
+<li>if <code>analyzer</code> == "mdtraj", default="protein"</li>
+<li>if <code>analyzer</code> == "gromacs", default="Protein"</li>
+<li>if <code>analyzer</code> == "cpptraj", default="@CA,C,O,N,H"</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>working_dir: str, default="./."</strong>
+<ul>
+<li>Directory where pacsmd will run</li>
+</ul>
+</li>
+<li><strong>rmmol: bool, default=false</strong>
+<ul>
+<li>Whether rmmol is executed after each cycle</li>
+</ul>
+</li>
+<li><strong>keep_selection: str, (required if <code>rmmol=true</code>)</strong>
+<ul>
+<li>Molecular name or index group to be left in the trajectory when rmmol</li>
+</ul>
+</li>
+<li><strong>rmfile: bool, default=false</strong>
+<ul>
+<li>Whether rmfile is executed after trial</li>
+</ul>
+</li>
+</ul>
+</details>
+<pre><code class="language-toml">max_cycle = 2                     # Maximum number of cycles to run. (ex. 1, ..., 123, ..., 999)
+n_replica = 3                     # Number of replica. (ex. 1, ..., 123, ..., 999)
+n_parallel = 3                    # Number of replica calculated at a time
+centering = true                  # Whether to move the molecule to the center
+centering_selection = "protein"   # Name of molecule to move in the center
+working_dir = "/work/"            # Directory where pacsmd will run
+rmmol = true                      # Whether rmmol is executed after each cycle
+keep_selection = "not water"      # Molecular name or index group to be kept in the trajectory when rmmol
+rmfile = true                     # Whether rmfile is executed after trial
+</code></pre>
+<h2 id="simulator-option"><a class="header" href="#simulator-option">simulator option</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>analyzer \ simulator</th><th>gromacs</th><th>amber</th><th>namd</th></tr></thead><tbody>
+<tr><td>mdtraj</td><td>o</td><td>o</td><td>o</td></tr>
+<tr><td>gromacs</td><td>o</td><td>x</td><td>x</td></tr>
+<tr><td>cpptraj</td><td>x</td><td>o</td><td>x</td></tr>
+</tbody></table>
+</div>
+<h3 id="gromacs-1"><a class="header" href="#gromacs-1">Gromacs</a></h3>
+<details><summary> click here </summary>
+<ul>
+<li><strong>simulator: str, required</strong>
+<ul>
+<li>Software used inside PaCS-MD</li>
+</ul>
+</li>
+<li><strong>cmd_mpi: str, default=""</strong>
+<ul>
+<li>Commands for MPI such as mpirun, blank is OK</li>
+</ul>
+</li>
+<li><strong>cmd_serial: str, required</strong>
+<ul>
+<li>Commands to run the simulator serially</li>
+</ul>
+</li>
+<li><strong>cmd_parallel: str, default=cmd_serial</strong>
+<ul>
+<li>Commands to run the simulator parallelly</li>
+</ul>
+</li>
+<li><strong>structure: str, required</strong>
+<ul>
+<li>Structural file such as gro, pdb, rst7, etc.</li>
+</ul>
+</li>
+<li><strong>topology: str, required</strong>
+<ul>
+<li>Topology file such as top, parm7, psf, etc.</li>
+</ul>
+</li>
+<li><strong>mdconf: str, required</strong>
+<ul>
+<li>Parameter file such as mdp, mdin, namd, etc.</li>
+</ul>
+</li>
+<li><strong>index_file: str, (required if Gromacs)</strong>
+<ul>
+<li>Gromacs index file</li>
+</ul>
+</li>
+<li><strong>trajectory_extension: str, required</strong>
+<ul>
+<li>Trajectory file extension. ("." is necessary)</li>
+</ul>
+</li>
+</ul>
+</details>
+<pre><code class="language-toml">simulator = "gromacs"                   # Software used inside PaCS-MD
+cmd_mpi = "mpirun -np 4"                # Commands for MPI such as mpirun, blank is OK
+cmd_serial = "gmx_mpi mdrun -ntomp 6"   # Commands to run the simulator serially
+cmd_parllel = "gmx_mpi mdrun -ntomp 6"  # Commands to run the simulator parallelly
+structure = "/work/input.gro"           # Structural file such as gro, pdb, rst7, etc.
+topology = "/work/topol.top"            # Topology file such as top, parm7, psf, etc.
+mdconf = "/work/parameter.mdp"          # Parameter file such as mdp, mdin, namd, etc.
+index_file = "/work/index.ndx"          # Gromacs index file
+trajectory_extension = ".xtc"           # Trajectory file extension. ("." is necessary)
+</code></pre>
+<h3 id="amber-1"><a class="header" href="#amber-1">Amber</a></h3>
+<details><summary> click here </summary>
+<ul>
+<li><strong>simulator: str, required</strong>
+<ul>
+<li>Software used inside PaCS-MD</li>
+</ul>
+</li>
+<li><strong>cmd_mpi: str, default=""</strong>
+<ul>
+<li>Commands for MPI such as mpirun, blank is OK</li>
+</ul>
+</li>
+<li><strong>cmd_serial: str, required</strong>
+<ul>
+<li>Commands to run the simulator serially</li>
+</ul>
+</li>
+<li><strong>cmd_parallel: str, default=cmd_serial</strong>
+<ul>
+<li>Commands to run the simulator parallelly</li>
+</ul>
+</li>
+<li><strong>structure: str, required</strong>
+<ul>
+<li>Structural file such as gro, pdb, rst7, etc.</li>
+</ul>
+</li>
+<li><strong>topology: str, required</strong>
+<ul>
+<li>Topology file such as top, parm7, psf, etc.</li>
+</ul>
+</li>
+<li><strong>mdconf: str, required</strong>
+<ul>
+<li>Parameter file such as mdp, mdin, namd, etc.</li>
+</ul>
+</li>
+<li><strong>trajectory_extension: str, required</strong>
+<ul>
+<li>Trajectory file extension. ("." is necessary)</li>
+</ul>
+</li>
+</ul>
+</details>
+<pre><code class="language-toml">simulator = "amber"                     # Software used inside PaCS-MD
+cmd_mpi = ""                            # Commands for MPI such as mpirun, blank is OK
+cmd_serial = "pmemd.cuda"               # Commands to run the simulator serially
+cmd_parllel = "pmemd.cuda"              # Commands to run the simulator parallelly
+structure = "/work/structure.rst7"      # Structural file such as gro, pdb, rst7, etc.
+topology = "/work/topology.parm7"       # Topology file such as top, parm7, psf, etc.
+mdconf = "/work/parameter.mdin"         # Parameter file such as mdp, mdin, namd, etc.
+trajectory_extension = ".nc"            # Trajectory file extension. ("." is necessary)
+</code></pre>
+<h3 id="namd-1"><a class="header" href="#namd-1">NAMD</a></h3>
+<details><summary> click here </summary>
+<ul>
+<li><strong>simulator: str, required</strong>
+<ul>
+<li>Software used inside PaCS-MD</li>
+</ul>
+</li>
+<li><strong>cmd_mpi: str, default=""</strong>
+<ul>
+<li>Commands for MPI such as mpirun, blank is OK</li>
+</ul>
+</li>
+<li><strong>cmd_serial: str, required</strong>
+<ul>
+<li>Commands to run the simulator serially</li>
+</ul>
+</li>
+<li><strong>cmd_parallel: str, default=cmd_serial</strong>
+<ul>
+<li>Commands to run the simulator parallelly</li>
+</ul>
+</li>
+<li><strong>structure: str, required</strong>
+<ul>
+<li>Structural file such as gro, pdb, rst7, etc.</li>
+</ul>
+</li>
+<li><strong>topology: str, required</strong>
+<ul>
+<li>Topology file such as top, parm7, psf, etc.</li>
+</ul>
+</li>
+<li><strong>mdconf: str, required</strong>
+<ul>
+<li>Parameter file such as mdp, mdin, namd, etc.</li>
+</ul>
+</li>
+<li><strong>trajectory_extension: str, required</strong>
+<ul>
+<li>Trajectory file extension. ("." is necessary)</li>
+</ul>
+</li>
+</ul>
+</details>
+<pre><code class="language-toml">simulator = "namd"                      # Software used inside PaCS-MD
+cmd_mpi = "mpirun -np 4"                # Commands for MPI such as mpirun, blank is OK
+cmd_serial = "namd2 +p6"                # Commands to run the simulator serially
+cmd_parllel = "namd2 +p6"               # Commands to run the simulator parallelly
+structure = "/work/input.pdb"           # Structural file such as gro, pdb, rst7, etc.
+topology = "/work/ionized.psf"          # Topology file such as top, parm7, psf, etc.
+mdconf = "/work/production.namd"        # Parameter file such as mdp, mdin, namd, etc.
+trajectory_extension = ".dcd"           # Trajectory file extension. ("." is necessary)
+</code></pre>
+<h2 id="analyzer-option"><a class="header" href="#analyzer-option">analyzer option</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>analyzer \ type</th><th>dissociation</th><th>association</th><th>rmsd</th><th>target</th><th>ee</th><th>a_d</th><th>template</th></tr></thead><tbody>
+<tr><td>mdtraj</td><td>o</td><td>o</td><td>o</td><td>o</td><td>o</td><td>o</td><td>-</td></tr>
+<tr><td>gromacs</td><td>o</td><td>o</td><td>o</td><td>o</td><td>x</td><td>o</td><td>-</td></tr>
+<tr><td>cpptraj</td><td>o</td><td>o</td><td>o</td><td>o</td><td>x</td><td>o</td><td>-</td></tr>
+</tbody></table>
+</div>
+<h3 id="target-1"><a class="header" href="#target-1">Target</a></h3>
+<details><summary> click here </summary>
+<ul>
+<li><strong>type: str, required</strong>
+<ul>
+<li>evaluation type, "target".</li>
+</ul>
+</li>
+<li><strong>threshold: float, required</strong>
+<ul>
+<li>PaCS-MD terminates the calculation when the evaluation value falls below this threshold (in units of nm).</li>
+</ul>
+</li>
+<li><strong>skip_frame: int, default=1</strong>
+<ul>
+<li>Number of frames to skip when ranking CVs.</li>
+<li>If you set <code>skip_frame=2</code>, PaCS-MD will use every other frame.</li>
+</ul>
+</li>
+<li><strong>analyzer: str, default="mdtraj"</strong>
+<ul>
+<li>Trajectory tool used to calculate the evaluation value.</li>
+<li>"mdtraj", "gromacs" and "cpptraj" are supported.</li>
+</ul>
+</li>
+<li><strong>reference: str, required</strong>
+<ul>
+<li>Structure file path for the reference structure of RMSD calculation.</li>
+</ul>
+</li>
+<li><strong>selection1: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories (least squares fit)</li>
+<li>Depending on the <code>analyzer</code>, there are different ways to specify <code>selection</code>.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection. e.g. "resid 5 to 100 and name CA"</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), the <code>selection</code> should follow Gromacs index group in <code>index.ndx</code>. (Gromacs supported only)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>selection2: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories (RMSD calculation)</li>
+<li>Depending on the <code>analyzer</code>, there are different ways to specify <code>selection</code>.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection. e.g. "resid 5 to 100 and name CA"</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), the <code>selection</code> should follow Gromacs index group in <code>index.ndx</code>. (Gromacs supported only)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>selection3: str, default=<code>selection1</code></strong>
+<ul>
+<li>Selection string or name of index group for specified group in <code>reference</code> (least squares fit)</li>
+<li>If your <code>reference</code> structure has different topology from your trajectories, you can utilize this option. (e.g. <code>reference</code> has different configuration about mutation, missing residues or modified residues from your the trajectories.) Otherwise, you don't need to specify this option.</li>
+<li>This option is valid when <code>analyzer="mdtraj"</code> or <code>analyzer="cpptraj"</code>.</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), this option is ignored and the same selection indices are automatically used for your trajectories and the <code>reference</code>.</li>
+</ul>
+</li>
+<li><strong>selection4: str, default=<code>selection2</code></strong>
+<ul>
+<li>Selection string or name of index group for specified group in <code>reference</code> (RMSD calculation)</li>
+<li>If your <code>reference</code> structure has different topology from your trajectories, you can utilize this option. (e.g. <code>reference</code> has different configuration about mutation, missing residues or modified residues from your the trajectories.) Otherwise, you don't need to specify this option.</li>
+<li>This option is valid when <code>analyzer="mdtraj"</code> or <code>analyzer="cpptraj"</code>.</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), this option is ignored and the same selection indices are automatically used for your trajectories and the <code>reference</code>.</li>
+</ul>
+</li>
+</ul>
+</details>
+<pre><code class="language-toml">type = "target"                 # Evaluation type
+threshold = 0.01                # CV threshold used to decide whether to terminate the calculation (in units of nm)
+skip_frame = 1                  # How many frames to skip when ranking CVs
+
+# if analyzer == "mdtraj"
+analyzer = "mdtraj"             # Trajectory tool used to calculate the evaluation type
+reference = "/work/ref.pdb"     # Structure for comparison
+selection1 = "backbone"         # Selection string for specified group in trajectroies (least squares fit)
+selection2 = "backbone"         # Selection string for specified group in trajectories (RMSD calculation)
+selection3 = "backbone and (not resid 1 to 10)"         # Selection string for specified group in reference (least squares fit)
+selection4 = "backbone and (not resid 1 to 10)"         # Selection string for specified group in reference (RMSD calculation)
+
+# else if analyzer == "gromacs"
+# analyzer = "gromacs"          # Trajectory tool used to calculate the evaluation type
+# selection1 = "Backbone"       # Name of index group for specified group in trajectories (least squares fit)
+# selection2 = "Backbone"       # Name of index group for specified group in trajectories (RMSD calculation)
+
+# else if analyzer == "cpptraj"
+# analyzer = "cpptraj"          # Trajectory tool used to calculate the evaluation type
+# selection1 = "@CA,N,O,C"      # Selection string for specified group in trajectroies (least squares fit)
+# selection2 = "@CA,N,O,C"      # Selection string for specified group in trajectories (RMSD calculation)
+</code></pre>
+<h3 id="rmsd-3"><a class="header" href="#rmsd-3">RMSD</a></h3>
+<details><summary> click here </summary>
+<ul>
+<li><strong>type: str, required</strong>
+<ul>
+<li>evaluation type, "rmsd"</li>
+</ul>
+</li>
+<li><strong>threshold: float, required</strong>
+<ul>
+<li>PaCS-MD terminates the calculation when the evaluation value exceeds this threshold (in units of nm).</li>
+</ul>
+</li>
+<li><strong>skip_frame: int, default=1</strong>
+<ul>
+<li>Number of frames to skip when ranking CVs.</li>
+<li>If you set <code>skip_frame=2</code>, PaCS-MD will use every other frame.</li>
+</ul>
+</li>
+<li><strong>analyzer: str, default="mdtraj"</strong>
+<ul>
+<li>Trajectory tool used to calculate the evaluation value.</li>
+<li>"mdtraj", "gromacs" and "cpptraj" are supported.</li>
+</ul>
+</li>
+<li><strong>reference: str, required</strong>
+<ul>
+<li>Structure file path for the reference structure of RMSD calculation.</li>
+</ul>
+</li>
+<li><strong>selection1: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories (least squares fit)</li>
+<li>Depending on the <code>analyzer</code>, there are different ways to specify <code>selection</code>.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection. e.g. "resid 5 to 100 and name CA"</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), the <code>selection</code> should follow Gromacs index group in <code>index.ndx</code>. (Gromacs supported only)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>selection2: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories (RMSD calculation)</li>
+<li>Depending on the <code>analyzer</code>, there are different ways to specify <code>selection</code>.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection. e.g. "resid 5 to 100 and name CA"</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), the <code>selection</code> should follow Gromacs index group in <code>index.ndx</code>. (Gromacs supported only)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>selection3: str, default=<code>selection1</code></strong>
+<ul>
+<li>Selection string or name of index group for specified group in <code>reference</code> (least squares fit)</li>
+<li>If your <code>reference</code> structure has different topology from your trajectories, you can utilize this option. (e.g. <code>reference</code> has different configuration about mutation, missing residues or modified residues from your the trajectories.) Otherwise, you don't need to specify this option.</li>
+<li>This option is valid when <code>analyzer="mdtraj"</code> or <code>analyzer="cpptraj"</code>.</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), this option is ignored and the same selection indices are automatically used for your trajectories and the <code>reference</code>.</li>
+</ul>
+</li>
+<li><strong>selection4: str, default=<code>selection2</code></strong>
+<ul>
+<li>Selection string or name of index group for specified group in <code>reference</code> (RMSD calculation)</li>
+<li>If your <code>reference</code> structure has different topology from your trajectories, you can utilize this option. (e.g. <code>reference</code> has different configuration about mutation, missing residues or modified residues from your the trajectories.) Otherwise, you don't need to specify this option.</li>
+<li>This option is valid when <code>analyzer="mdtraj"</code> or <code>analyzer="cpptraj"</code>.</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), this option is ignored and the same selection indices are automatically used for your trajectories and the <code>reference</code>.</li>
+</ul>
+</li>
+</ul>
+</details>
+<pre><code class="language-toml">type = "rmsd"                   # Evaluation type
+threshold = 2                   # CV threshold used to decide whether to terminate the calculation (in units of nm)
+skip_frame = 1                  # How many frames to skip when ranking CVs
+
+# if analyzer == "mdtraj"
+analyzer = "mdtraj"             # Trajectory tool used to calculate the evaluation type
+reference = "/work/ref.pdb"     # Structure for comparison
+selection1 = "backbone"         # Selection string for specified group in trajectories (least squares fit)
+selection2 = "backbone"         # Selection string for specified group in trajectories (RMSD calculation)
+selection3 = "backbone and (not resid 1 to 10)"         # Selection string for specified group in reference (least squares fit)
+selection4 = "backbone and (not resid 1 to 10)"         # Selection string for specified group in reference (RMSD calculation)
+
+# else if analyzer == "gromacs"
+# analyzer = "gromacs"          # Trajectory tool used to calculate the evaluation type
+# selection1 = "Backbone"       # Name of index group for specified group in trajectories (least squares fit)
+# selection2 = "Backbone"       # Name of index group for specified group in trajectories (RMSD calculation)
+
+# else if analyzer == "cpptraj"
+# analyzer = "gromacs"          # Trajectory tool used to calculate the evaluation type
+# selection1 = "@CA,N,O,C"      # Selection string for specified group in trajectories (least squares fit)
+# selection2 = "@CA,N,O,C"      # Selection string for specified group in trajectories (RMSD calculation)
+</code></pre>
+<h3 id="association-2"><a class="header" href="#association-2">Association</a></h3>
+<details><summary> click here </summary>
+<ul>
+<li><strong>type: str, required</strong>
+<ul>
+<li>evaluation type, "association".</li>
+</ul>
+</li>
+<li><strong>threshold: float, required</strong>
+<ul>
+<li>PaCS-MD terminates the calculation when the evaluation value falls below this threshold (in units of nm).</li>
+</ul>
+</li>
+<li><strong>skip_frame: int, default=1</strong>
+<ul>
+<li>Number of frames to skip when ranking CVs.</li>
+<li>If you set <code>skip_frame=2</code>, PaCS-MD will use every other frame.</li>
+</ul>
+</li>
+<li><strong>analyzer: str, default="mdtraj"</strong>
+<ul>
+<li>Trajectory tool used to calculate the evaluation value.</li>
+<li>"mdtraj", "gromacs" and "cpptraj" are supported.</li>
+</ul>
+</li>
+<li><strong>selection1: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories</li>
+<li>Depending on the <code>analyzer</code>, there are different ways to specify <code>selection</code>.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection. e.g. "resid 5 to 100 and name CA"</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), the <code>selection</code> should follow Gromacs index group in <code>index.ndx</code>. (Gromacs supported only)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>selection2: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories</li>
+<li>Depending on the <code>analyzer</code>, there are different ways to specify <code>selection</code>.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection. e.g. "resid 5 to 100 and name CA"</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), the <code>selection</code> should follow Gromacs index group in <code>index.ndx</code>. (Gromacs supported only)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</details>
+<pre><code class="language-toml">type = "association"            # Evaluation type
+threshold = 0.3                 # CV threshold used to decide whether to terminate the calculation (in units of nm)
+skip_frame = 1                  # How many frames to skip when ranking CVs
+
+# if analyzer == "mdtraj"
+analyzer = "mdtraj"             # Trajectory tool used to calculate the evaluation type
+selection1 = "resid 1 to 5"     # Selection string for specified group in trajectories
+selection2 = "resid 6 to 10"    # Selection string for specified group in trajectories
+
+# else if analyzer == "gromacs"
+# analyzer = "gromacs"          # Trajectory tool used to calculate the evaluation type
+# selection1 = "resid_1_to_5"   # Name of index group for specified group in trajectories
+# selection2 = "resid_6_to_10"  # Name of index group for specified group in trajectories
+
+# else if analyzer == "cpptraj"
+# analyzer = "cpptraj"          # Trajectory tool used to calculate the evaluation type
+# selection1 = ":1-5"           # Name of index group for specified group in trajectories
+# selection2 = ":6-10"          # Name of index group for specified group in trajectories
+</code></pre>
+<h3 id="dissociation-2"><a class="header" href="#dissociation-2">Dissociation</a></h3>
+<details><summary> click here </summary>
+<ul>
+<li><strong>type: str, required</strong>
+<ul>
+<li>evaluation type, "dissociation".</li>
+</ul>
+</li>
+<li><strong>threshold: float, required</strong>
+<ul>
+<li>PaCS-MD terminates the calculation when the evaluation value exceeds this threshold.</li>
+</ul>
+</li>
+<li><strong>skip_frame: int, default=1</strong>
+<ul>
+<li>Number of frames to skip when ranking CVs</li>
+<li>If you set <code>skip_frame=2</code>, PaCS-MD will use every other frame.</li>
+</ul>
+</li>
+<li><strong>analyzer: str, default="mdtraj"</strong>
+<ul>
+<li>Trajectory tool used to calculate the evaluation value.</li>
+<li>"mdtraj", "gromacs" and "cpptraj" are supported.</li>
+</ul>
+</li>
+<li><strong>selection1: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories</li>
+<li>Depending on the <code>analyzer</code>, there are different ways to specify <code>selection</code>.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection. e.g. "resid 5 to 100 and name CA"</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), the <code>selection</code> should follow Gromacs index group in <code>index.ndx</code>. (Gromacs supported only)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>selection2: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories</li>
+<li>Depending on the <code>analyzer</code>, there are different ways to specify <code>selection</code>.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection. e.g. "resid 5 to 100 and name CA"</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), the <code>selection</code> should follow Gromacs index group in <code>index.ndx</code>. (Gromacs supported only)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</details>
+<pre><code class="language-toml">type = "dissociation"           # Evaluation type
+threshold = 10                  # CV threshold used to decide whether to terminate the calculation (in units of nm)
+skip_frame = 1                  # How many frames to skip when ranking CVs
+
+# if analyzer == "mdtraj"
+analyzer = "mdtraj"             # Trajectory tool used to calculate the evaluation type
+selection1 = "resid 1 to 5"     # Selection string for specified group in trajectories
+selection2 = "resid 6 to 10"    # Selection string for specified group in trajectories
+
+# else if analyzer == "gromacs"
+# analyzer = "gromacs"      # Trajectory tool used to calculate the evaluation type
+# selection1 = "resid_1_to_5"   # Name of index group for specified group in trajectories
+# selection2 = "resid_6_to_10"  # Name of index group for specified group in trajectories
+
+# else if analyzer == "cpptraj"
+# analyzer = "cpptraj"          # Trajectory tool used to calculate the evaluation type
+# selection1 = ":1-5"           # Name of index group for specified group in trajectories
+# selection2 = ":6-10"          # Name of index group for specified group in trajectories
+</code></pre>
+<h3 id="edgeexpansion-2"><a class="header" href="#edgeexpansion-2">EdgeExpansion</a></h3>
+<details><summary> click here </summary>
+<ul>
+<li><strong>type: str, required</strong>
+<ul>
+<li>Evaluation type, "ee".</li>
+</ul>
+</li>
+<li><strong>skip_frame: int, default=1</strong>
+<ul>
+<li>Number of frames to skip when ranking CVs.</li>
+<li>If you set <code>skip_frame=2</code>, PaCS-MD will use every other frame.</li>
+</ul>
+</li>
+<li><strong>analyzer: str, default="mdtraj"</strong>
+<ul>
+<li>Trajectory tool used to calculate the evaluation value.</li>
+<li>only "mdtraj" is supported.</li>
+</ul>
+</li>
+<li><strong>reference: str, required</strong>
+<ul>
+<li>Trajectory file used to compute the covariance matrix in Principal Component Analysis (PCA).</li>
+<li>If this value is not set, the covariance matrix is computed based on the trajectory of cycle 0.</li>
+</ul>
+</li>
+<li><strong>selection1: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories (least squares fit)
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>selection2: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories (PCA calculation)</li>
+<li>No correction by atomic weights or number of atoms is made when calculating the covariance matrix or projecting.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>selection3: str, default=<code>selection1</code></strong>
+<ul>
+<li>Selection string or name of index group for specified group in <code>reference</code> (least squares fit)</li>
+<li>If your <code>reference</code> structure has different topology from your trajectories, you can utilize this option. (e.g. <code>reference</code> has different configuration about mutation, missing residues or modified residues from your the trajectories)</li>
+<li>Otherwise, you don't need to specify this option.</li>
+</ul>
+</li>
+<li><strong>selection4: str, default=<code>selection2</code></strong>
+<ul>
+<li>Selection string or name of index group for specified group in <code>reference</code>  (PCA calculation)</li>
+<li>If your <code>reference</code> structure has different topology from your trajectories, you can utilize this option. (e.g. <code>reference</code> has different configuration about mutation, missing residues or modified residues from your the trajectories)</li>
+<li>Otherwise, you don't need to specify this option.</li>
+</ul>
+</li>
+</ul>
+</details>
+<pre><code class="language-toml">type = "ee"                     # Evaluation type
+skip_frame = 1                  # How many frames to skip when ranking CVs
+
+# if analyzer == "mdtraj"
+analyzer = "mdtraj"             # Trajectory tool used to calculate the evaluation type
+selection1 = "backbone"         # Selection string for specified group in trajectories (least squares fit)
+selection2 = "backbone"         # Selection string for specified group in trajectories (RMSD calculation)
+selection3 = "backbone"         # Selection string for specified group in reference (least squares fit)
+selection4 = "backbone"         # Selection string for specified group in reference (RMSD calculation)
+</code></pre>
+<h3 id="a_d-2"><a class="header" href="#a_d-2">A_D</a></h3>
+<details><summary> click here </summary>
+<ul>
+<li><strong>type: str, required</strong>
+<ul>
+<li>evaluation type, "a_d".</li>
+</ul>
+</li>
+<li><strong>skip_frame: int, default=1</strong>
+<ul>
+<li>Number of frames to skip when ranking CVs.</li>
+<li>If you set <code>skip_frame=2</code>, PaCS-MD will use every other frame.</li>
+</ul>
+</li>
+<li><strong>analyzer: str, default="mdtraj"</strong>
+<ul>
+<li>Trajectory tool used to calculate the evaluation value.</li>
+<li>"mdtraj", "gromacs" and "cpptraj" are supported.</li>
+</ul>
+</li>
+<li><strong>selection1: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories</li>
+<li>Depending on the <code>analyzer</code>, there are different ways to specify <code>selection</code>.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection. e.g. "resid 5 to 100 and name CA"</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), the <code>selection</code> should follow Gromacs index group in <code>index.ndx</code>. (Gromacs is only supported)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>selection2: str, required</strong>
+<ul>
+<li>Selection string or name of index group for specified group in trajectories</li>
+<li>Depending on the <code>analyzer</code>, there are different ways to specify <code>selection</code>.
+<ul>
+<li>If you use mdtraj (<code>analyzer="mdtraj"</code>), the <code>selection</code> should follow mdtraj's atom selection. e.g. "resid 5 to 100 and name CA"</li>
+<li>If you use gromacs (<code>analyzer="gromacs"</code>), the <code>selection</code> should follow Gromacs index group in <code>index.ndx</code>. (Gromacs is only supported)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>d_threshold: float, required</strong>
+<ul>
+<li>Threshold for switching from dissociation to association mode. If the maximum value of cv calculated while in dissociation mode exceeds this value, it switches to associtaion mode.</li>
+</ul>
+</li>
+<li><strong>frame_sel: int, required</strong>
+<ul>
+<li>One of the conditions used to switch from association to dissociation.</li>
+<li>If the highest ranking frame in association mode is less than this value, it is judged that there has been no change from the previous cycle (i.e., it has come as close as it can).　Also, at this time, we consider it to be within bound.</li>
+</ul>
+</li>
+<li><strong>bound_threshold: int, required</strong>
+<ul>
+<li>One of the conditions used to switch from association to dissociation.</li>
+<li>When the number of bound cycles exceeds this value, the mode is switched from association to disassociation and the number of bound cycles is initialized to 0. When the number of bound cycles exceeds this value, the mode is switched from association to disassociation and the number of bound cycles is initialized to 0.</li>
+</ul>
+</li>
+</ul>
+</details>
+<pre><code class="language-toml">type = "a_d"                    # Evaluation type
+skip_frame = 1                  # How many frames to skip when ranking CVs
+
+# if analyzer == "mdtraj"
+analyzer = "mdtraj"             # Trajectory tool used to calculate the evaluation type
+selection1 = "resid 1"          # Selection string for specified group in trajectories
+selection2 = "resid 9"          # Selection string for specified group in trajectories
+d_threshold = 3.0               # threshold for dissociation to association
+frame_sel = 5                   # number of frames to be used for judging whether the system has converged
+bound_threshold = 3             # threshold for association to dissociation
+</code></pre>
+<h3 id="template-2"><a class="header" href="#template-2">Template</a></h3>
+<details><summary> click here </summary>
+<ul>
+<li><strong>type: str, required</strong>
+<ul>
+<li>Evaluation type</li>
+</ul>
+</li>
+<li><strong>skip_frame: int, default=1</strong>
+<ul>
+<li>Number of frames to skip when ranking CVs</li>
+</ul>
+</li>
+<li><strong>threshold: float, required</strong>
+<ul>
+<li>CV threshold for determining to terminate a trial</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Template type is a type that can be defined by the user. It is possible to include user-specific variables in input.toml, and these variables can be used in template type in which they are defined. For more information, click <a href="mdrun/reference/template.html">here</a>.</p>
+</blockquote>
+</details>
+<pre><code class="language-toml">type = "template"
+threshold = "???"
+
+# user defined variable
+user-defined-variable1 = 123
+user-defined-variable2 = "hoge"
+...
+</code></pre>
+<h2 id="hidden-option-no-need-to-specify"><a class="header" href="#hidden-option-no-need-to-specify">hidden option (No need to specify)</a></h2>
+<details><summary> click here </summary>
+- **cmd_gmx: str**
+  - Gromacs command (ex. gmx, gmx_mpi)
+  - will be created from `cmd_serial`
+- **top_mdtraj: str**
+  - topology file for mdtraj
+  - will be created from `input.toml`
+- **structure_extension: str**
+  - Structure file extension
+  - will be created from `structure`
+</details>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="reference"><a class="header" href="#reference">Reference</a></h1>
+<pre><code>[1] Harada, R., &amp; Kitao, A. (2013). Parallel cascade selection molecular dynamics (PaCS-MD) to generate conformational transition pathway. In The Journal of Chemical Physics (Vol. 139, Issue 3). AIP Publishing. https://doi.org/10.1063/1.4813023
+
+[2] Tran, D. P., Takemura, K., Kuwata, K., &amp; Kitao, A. (2017). Protein–Ligand Dissociation Simulated by Parallel Cascade Selection Molecular Dynamics. In Journal of Chemical Theory and Computation (Vol. 14, Issue 1, pp. 404–417). American Chemical Society (ACS). https://doi.org/10.1021/acs.jctc.7b00504
+
+[3] Tran, D. P., &amp; Kitao, A. (2019). Dissociation Process of a MDM2/p53 Complex Investigated by Parallel Cascade Selection Molecular Dynamics and the Markov State Model. In The Journal of Physical Chemistry B (Vol. 123, Issue 11, pp. 2469–2478). American Chemical Society (ACS). https://doi.org/10.1021/acs.jpcb.8b10309
+
+[4] Takaba, K., Tran, D. P., &amp; Kitao, A. (2020). Edge expansion parallel cascade selection molecular dynamics simulation for investigating large-amplitude collective motions of proteins. In The Journal of Chemical Physics (Vol. 152, Issue 22). AIP Publishing. https://doi.org/10.1063/5.0004654
+
+[5] Hata, H., Nishihara, Y., Nishiyama, M., Sowa, Y., Kawagishi, I., &amp; Kitao, A. (2020). High pressure inhibits signaling protein binding to the flagellar motor and bacterial chemotaxis through enhanced hydration. In Scientific Reports (Vol. 10, Issue 1). Springer Science and Business Media LLC. https://doi.org/10.1038/s41598-020-59172-3
+
+[6] Tran, D. P., &amp; Kitao, A. (2020). Kinetic Selection and Relaxation of the Intrinsically Disordered Region of a Protein upon Binding. In Journal of Chemical Theory and Computation (Vol. 16, Issue 4, pp. 2835–2845). American Chemical Society (ACS). https://doi.org/10.1021/acs.jctc.9b01203
+
+[7] Hata, H., Phuoc Tran, D., Marzouk Sobeh, M., &amp; Kitao, A. (2021). Binding free energy of protein/ligand complexes calculated using dissociation Parallel Cascade Selection Molecular Dynamics and Markov state model. In Biophysics and Physicobiology (Vol. 18, Issue 0, pp. 305–316). Biophysical Society of Japan. https://doi.org/10.2142/biophysico.bppb-v18.037
+
+[8] Sobeh, M. M., &amp; Kitao, A. (2022). Dissociation Pathways of the p53 DNA Binding Domain from DNA and Critical Roles of Key Residues Elucidated by dPaCS-MD/MSM. In Journal of Chemical Information and Modeling (Vol. 62, Issue 5, pp. 1294–1307). American Chemical Society (ACS). https://doi.org/10.1021/acs.jcim.1c01508
+
+[9] Tran, D. P., Taira, Y., Ogawa, T., Misu, R., Miyazawa, Y., &amp; Kitao, A. (2022). Inhibition of the hexamerization of SARS-CoV-2 endoribonuclease and modeling of RNA structures bound to the hexamer. In Scientific Reports (Vol. 12, Issue 1). Springer Science and Business Media LLC. https://doi.org/10.1038/s41598-022-07792-2
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="rmmol"><a class="header" href="#rmmol">rmmol</a></h1>
+<ul>
+<li>This command is used after executing <code>pacs mdrun</code>.</li>
+<li>This command removes unnecessary atoms from the trajectory created by running PaCS-MD.</li>
+<li>This command reduces the file size and the burden on the computer capacity.</li>
+</ul>
+<h3 id="caution"><a class="header" href="#caution">Caution</a></h3>
+<ul>
+<li>This command is not reversible.</li>
+<li>This command operates on all trajectories of one trial at a time.</li>
+<li>If you want to apply it to more than one trial, you could easily achieve it by writing an iteration shell script.</li>
+</ul>
+<h3 id="example-2"><a class="header" href="#example-2">Example</a></h3>
+<ul>
+<li>The following example removes water molecules from the trajectory.</li>
+</ul>
+<h4 id="mdtraj"><a class="header" href="#mdtraj">mdtraj</a></h4>
+<pre><code class="language-shell">pacs rmmol mdtraj -t 1 -k "not water" -e .xtc -m trial001/cycle000/replica001/prd.gro
+</code></pre>
+<h4 id="gromacs-2"><a class="header" href="#gromacs-2">gromacs</a></h4>
+<pre><code class="language-shell">pacs rmmol gmx -t 1 -k "not_water" -e .xtc -n index.ndx -g gmx 
+</code></pre>
+<h4 id="cpptraj"><a class="header" href="#cpptraj">cpptraj</a></h4>
+<pre><code class="language-shell">pacs rmmol cpptraj -t 1 -k "not water" -e .nc -p trial001/cycle000/replica001/prd.parm7
+</code></pre>
+<h3 id="arguments-1"><a class="header" href="#arguments-1">Arguments</a></h3>
+<h4 id="mdtraj-1"><a class="header" href="#mdtraj-1">mdtraj</a></h4>
+<pre><code class="language-plaintext">usage: pacs rmmol mdtraj [-h] [-t] [-k] [-e] [-m]
+</code></pre>
+<ul>
+<li><code>-t, --trial</code> (int):
+<ul>
+<li>trial number without 0-fill when pacsmd was conducted (e.g. <code>-t 1</code>)</li>
+</ul>
+</li>
+<li><code>-k, --keep_selection</code> (str):
+<ul>
+<li>atom selection to be retained in trajectory (e.g. <code>-k "not water"</code>)</li>
+</ul>
+</li>
+<li><code>-e, --trajectory_extension</code> (str):
+<ul>
+<li>trajectory extension (e.g. <code>-e .xtc</code>)</li>
+</ul>
+</li>
+<li><code>-m, --top_mdtraj</code> (str):
+<ul>
+<li>topology file path for mdtraj analysis (e.g. <code>-m trial001/cycle000/replica001/prd.pdb</code>)</li>
+</ul>
+</li>
+</ul>
+<h4 id="gromacs-3"><a class="header" href="#gromacs-3">gromacs</a></h4>
+<pre><code class="language-plaintext">usage: pacs rmmol gmx [-h] [-t] [-k] [-n] [-g] [-e]
+</code></pre>
+<ul>
+<li><code>-t, --trial</code> (int):
+<ul>
+<li>trial number without 0-fill when pacsmd was conducted (e.g. <code>-t 1</code>)</li>
+</ul>
+</li>
+<li><code>-k, --keep_selection</code> (str):
+<ul>
+<li>index group to be retained in trajectory (e.g. <code>-k "not_water"</code>)</li>
+</ul>
+</li>
+<li><code>-e, --trajectory_extension</code> (str):
+<ul>
+<li>gromacs trajectory extension (e.g. <code>-e .xtc</code>)</li>
+</ul>
+</li>
+<li><code>-n, --index_file</code> (str):
+<ul>
+<li>index file for gromacs (e.g. <code>-n index.ndx</code>)</li>
+</ul>
+</li>
+<li><code>-g, --cmd_gmx</code> (str):
+<ul>
+<li>gromacs command prefix (e.g. <code>-g gmx</code>)</li>
+</ul>
+</li>
+</ul>
+<h4 id="cpptraj-1"><a class="header" href="#cpptraj-1">cpptraj</a></h4>
+<pre><code class="language-plaintext">usage: pacs rmmol cpptraj [-h] [-t] [-k] [-e] [-p]
+</code></pre>
+<ul>
+<li><code>-t, --trial</code> (int):
+<ul>
+<li>trial number without 0-fill when pacsmd was conducted (e.g. <code>-t 1</code>)</li>
+</ul>
+</li>
+<li><code>-k, --keep_selection</code> (str):
+<ul>
+<li>atom selection to be retained in trajectory (e.g. <code>-k :!WAT</code>)</li>
+</ul>
+</li>
+<li><code>-e, --trajectory_extension</code> (str):
+<ul>
+<li>trajectory extension (e.g. <code>-e .nc</code>)</li>
+</ul>
+</li>
+<li><code>-p, --topology</code> (str):
+<ul>
+<li>topology file path for cpptraj analysis (e.g. <code>-p trial001/cycle000/replica001/prd.parm7</code>)</li>
+</ul>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="rmfile"><a class="header" href="#rmfile">rmfile</a></h1>
+<ul>
+<li>This command is used after executing <code>pacs mdrun</code>.</li>
+<li>This command deletes backup files and other unnecessary files.</li>
+<li>This command reduces the number of files and the burden on the computer capacity.</li>
+</ul>
+<h3 id="caution-1"><a class="header" href="#caution-1">Caution</a></h3>
+<ul>
+<li>This command is not reversible.</li>
+</ul>
+<h3 id="example-3"><a class="header" href="#example-3">Example</a></h3>
+<ul>
+<li>The following example removes unnecessary files from the directory.</li>
+</ul>
+<pre><code class="language-shell">pacs rmfile -t 1 -s "gromacs"
+</code></pre>
+<h3 id="arguments-2"><a class="header" href="#arguments-2">Arguments</a></h3>
+<pre><code class="language-plaintext">usage: pacs rmfile [-h] [-t] [-s]
+</code></pre>
+<ul>
+<li><code>-t, --trial</code> (int):
+<ul>
+<li>trial number without 0-fill when pacsmd was conducted (e.g. <code>-t 1</code>)</li>
+</ul>
+</li>
+<li><code>-s, --simulator</code> (str):
+<ul>
+<li>simulator name (e.g. <code>-s "gromacs"</code>)</li>
+<li>Only <code>"gromacs"</code>, <code>"amber"</code>, and "<code>namd</code>" are accepted.</li>
+</ul>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="fit"><a class="header" href="#fit">fit</a></h1>
+<ul>
+<li>This command is used after executing <code>pacs mdrun</code></li>
+<li>This command makes new trajectories that fit to the reference structure.</li>
+<li>The newly created trajectories are placed in the same hierarchy as the original trajectories.</li>
+</ul>
+<h3 id="caution-2"><a class="header" href="#caution-2">Caution</a></h3>
+<ul>
+<li>Fitting the molecules by using the script could take a long time (around 1 hour
+for 1 trial)</li>
+</ul>
+<h3 id="example-4"><a class="header" href="#example-4">Example</a></h3>
+<ul>
+<li>In the following example, trajectories for all cycles and all replicas of trial1 are fitted with the protein, and then the output files are saved.</li>
+</ul>
+<h4 id="for-single-trajectory"><a class="header" href="#for-single-trajectory">for single trajectory</a></h4>
+<pre><code class="language-shell">pacs fit traj mdtraj -tf ./trial001/cycle001/replica001/prd.xtc -top ./inputs/input.gro -r ./inputs/input.gro -ts "backbone" -rs "backbone"
+</code></pre>
+<h4 id="for-single-trial"><a class="header" href="#for-single-trial">for single trial</a></h4>
+<pre><code class="language-shell">pacs fit trial mdtraj -t 1 -s ./trial001/cycle001/replica001/prd.pdb -r ./trial001/cycle001/replica001/prd.pdb -ts "protein" -rs "protein" -tf prd.xtc -p 10
+</code></pre>
+<h3 id="arguments-3"><a class="header" href="#arguments-3">Arguments</a></h3>
+<h4 id="for-single-trajectory-1"><a class="header" href="#for-single-trajectory-1">for single trajectory</a></h4>
+<pre><code class="language-plaintext">usage: pacs fit mdtraj [-h] [-tf] [-top] [-r] [-ts] [-rs] [-p] [-o]
+</code></pre>
+<ul>
+<li><code>-tf, --trj_file</code> (str):
+<ul>
+<li>file name of the trajectory to be fitted (e.g. <code>-tf prd.xtc</code>)</li>
+</ul>
+</li>
+<li><code>-top, --topology</code> (str):
+<ul>
+<li>topology file path for loading trajectory (e.g. <code>-s trial001/cycle000/replica001/prd.pdb</code>)</li>
+</ul>
+</li>
+<li><code>-r, --ref_structure</code> (str):
+<ul>
+<li>reference structure file path for fitting reference (e.g. <code>-r trial001/cycle000/replica001/prd.pdb</code>)</li>
+</ul>
+</li>
+<li><code>-ts, --trj_selection</code> (str):
+<ul>
+<li>atom selection for fitting trajectory (e.g. <code>-ts "protein"</code>)</li>
+</ul>
+</li>
+<li><code>-rs, --ref_selection</code> (str):
+<ul>
+<li>atom selection for fitting reference (e.g. <code>-rs "protein"</code>)</li>
+</ul>
+</li>
+<li><code>-p, --parallel</code> (int):
+<ul>
+<li>number of parallel processes (e.g. <code>-p 10</code>)</li>
+<li>default: 1</li>
+</ul>
+</li>
+<li><code>-o, --out</code> (str):
+<ul>
+<li>output file name (e.g. <code>-o prd_fit.xtc</code>)</li>
+<li>default: <code>{trj_file}_fit.{ext}</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="for-single-trial-1"><a class="header" href="#for-single-trial-1">for single trial</a></h4>
+<pre><code class="language-plaintext">usage: pacs fit trial mdtraj [-h] [-t] [-tf] [-top] [-r] [-ts] [-rs] [-p] [-o]
+</code></pre>
+<ul>
+<li><code>-t, --trial</code> (int):
+<ul>
+<li>trial number (e.g. <code>-t 1</code>)</li>
+</ul>
+</li>
+<li><code>-tf, --trj_file</code> (str):
+<ul>
+<li>file name of the trajectory to be fitted (e.g. <code>-tf prd.xtc</code>)</li>
+</ul>
+</li>
+<li><code>-top, --topology</code> (str):
+<ul>
+<li>topology file path for loading trajectory (e.g. <code>-s trial001/cycle000/replica001/prd.pdb</code>)</li>
+</ul>
+</li>
+<li><code>-r, --ref_structure</code> (str):
+<ul>
+<li>reference structure file path for fitting reference (e.g. <code>-r trial001/cycle000/replica001/prd.pdb</code>)</li>
+</ul>
+</li>
+<li><code>-ts, --trj_selection</code> (str):
+<ul>
+<li>atom selection for fitting trajectory (e.g. <code>-ts "protein"</code>)</li>
+</ul>
+</li>
+<li><code>-rs, --ref_selection</code> (str):
+<ul>
+<li>atom selection for fitting reference (e.g. <code>-rs "protein"</code>)</li>
+</ul>
+</li>
+<li><code>-p, --parallel</code> (int):
+<ul>
+<li>number of parallel processes (e.g. <code>-p 10</code>)</li>
+<li>default: 1</li>
+</ul>
+</li>
+<li><code>-o, --out</code> (str):
+<ul>
+<li>output file name (e.g. <code>-o prd_fit.xtc</code>)</li>
+<li>default: <code>{trj_file}_fit.{ext}</code></li>
+</ul>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="genrepresent"><a class="header" href="#genrepresent">genrepresent</a></h1>
+<ul>
+<li>This command is used after executing PaCS-MD.</li>
+<li>This command traces each cycle in reverse order, starting with the frame with the best CV in the last cycle, and generates one continuous trajectory file.</li>
+<li>The generated file is named <code>repr_complete</code> and located in the <code>genrepresent</code> directory.</li>
+<li>File extension is determined by the user.</li>
+</ul>
+<h3 id="caution-3"><a class="header" href="#caution-3">Caution</a></h3>
+<ul>
+<li>This command operates on all of the trajectories in one trial at a time.</li>
+<li>If you want to apply this for the multiplie trials, you could simply write an iteration shell script to achieve it.</li>
+</ul>
+<h3 id="example-5"><a class="header" href="#example-5">Example</a></h3>
+<ul>
+<li>The following example generates a trajectory file.</li>
+</ul>
+<h4 id="mdtraj-2"><a class="header" href="#mdtraj-2">mdtraj</a></h4>
+<pre><code class="language-shell">pacs genrepresent mdtraj -t 1 -trj prd.xtc -top ./inputs/input.gro
+</code></pre>
+<h4 id="gromacs-4"><a class="header" href="#gromacs-4">gromacs</a></h4>
+<pre><code class="language-shell">pacs genrepresent gmx -t 1 -trj prd.xtc -top ./inputs/input.gro -g gmx_mpi
+</code></pre>
+<h4 id="cpptraj-2"><a class="header" href="#cpptraj-2">cpptraj</a></h4>
+<pre><code class="language-shell">pacs genrepresent cpptraj -t 1 -trj prd.nc -top inputs/input.prmtop 
+</code></pre>
+<h3 id="arguments-4"><a class="header" href="#arguments-4">Arguments</a></h3>
+<h4 id="mdtraj-3"><a class="header" href="#mdtraj-3">mdtraj</a></h4>
+<pre><code class="language-plaintext">usage: pacs genrepresent mdtraj [-h] [-t] [-trj] [-top]
+</code></pre>
+<ul>
+<li><code>-t, --trial</code> (int):
+<ul>
+<li>trial number without 0-fill when pacsmd was conducted (e.g. <code>-t 1</code>)</li>
+</ul>
+</li>
+<li><code>-trj, --trajectory</code> (str):
+<ul>
+<li>trajectory file name (e.g. <code>-trj prd.xtc</code>)</li>
+</ul>
+</li>
+<li><code>-top, --topology</code> (str):
+<ul>
+<li>topology file path (e.g. <code>-m trial001/cycle000/replica001/prd.pdb</code>)</li>
+</ul>
+</li>
+</ul>
+<h4 id="gromacs-5"><a class="header" href="#gromacs-5">gromacs</a></h4>
+<pre><code class="language-plaintext">usage: pacs genrepresent gmx [-h] [-t] [-trj] [-top] [-g]
+</code></pre>
+<ul>
+<li><code>-t, --trial</code> (int):
+<ul>
+<li>trial number without 0-fill when pacsmd was conducted (e.g. <code>-t 1</code>)</li>
+</ul>
+</li>
+<li><code>-trj, --trajectory</code> (str):
+<ul>
+<li>trajectory file name (e.g. <code>-trj prd.xtc</code>)</li>
+</ul>
+</li>
+<li><code>-top, --topology</code> (str):
+<ul>
+<li>topology file path (e.g. <code>-m trial001/cycle000/replica001/input.gro</code>)</li>
+</ul>
+</li>
+<li><code>-g, --cmd_gmx</code> (str):
+<ul>
+<li>gromacs command prefix (e.g. <code>-g gmx_mpi</code>)</li>
+</ul>
+</li>
+</ul>
+<h4 id="cpptraj-3"><a class="header" href="#cpptraj-3">cpptraj</a></h4>
+<pre><code class="language-plaintext">usage: pacs genrepresent cpptraj [-h] [-t] [-trj] [-top]
+</code></pre>
+<ul>
+<li><code>-t, --trial</code> (int):
+<ul>
+<li>trial number without 0-fill when pacsmd was conducted (e.g. <code>-t 1</code>)</li>
+</ul>
+</li>
+<li><code>-trj, --trajectory</code> (str):
+<ul>
+<li>trajectory file name (e.g. <code>-trj prd.nc</code>)</li>
+</ul>
+</li>
+<li><code>-top, --topology</code> (str):
+<ul>
+<li>topology file path (e.g. <code>-m trial001/cycle000/replica001/input.parm7</code>)</li>
+</ul>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="gencom"><a class="header" href="#gencom">gencom</a></h1>
+<ul>
+<li>This command is employed after executing PaCS-MD.</li>
+<li>The COMs of a selected atom group from a trajectory (generated by "gencom traj") or multiple trajectories in one trial of PaCS-MD (generated by "gencom trial") can be computed and outputted in pdb format.</li>
+<li>The COMs are stored as a VIRTUAL SITE in the pdb file.</li>
+<li>This command visualizes the migration paths of atoms and supports intuitive interpretation.</li>
+</ul>
+<h2 id="gencom-traj"><a class="header" href="#gencom-traj">gencom traj</a></h2>
+<ul>
+<li>This command is used after executing PaCS-MD.</li>
+<li>The COMs of a selected atom group from a trajectory file can be calculated and outputted in pdb format.</li>
+<li>This command visualizes the migration paths of atoms and supports intuitive interpretation.</li>
+</ul>
+<h3 id="example-6"><a class="header" href="#example-6">Example</a></h3>
+<ul>
+<li>The following example generates a pathway file <code>pathway.pdb</code> that contains the COMs of ligand from the <code>prd.xtc</code> file.</li>
+</ul>
+<pre><code class="language-shell">pacs gencom traj mdtraj -trj ./trial001/cycle001/replica001/prd.xtc -top ./inputs/input.gro -s "resname ligand"
+</code></pre>
+<h3 id="arguments-5"><a class="header" href="#arguments-5">Arguments</a></h3>
+<pre><code class="language-plaintext">usage: pacs gencom traj mdtraj [-h] [-trj] [-top] [-s] [-r] [-o]
+</code></pre>
+<ul>
+<li><code>-trj, --trajectory</code> (str):
+<ul>
+<li>trajectory file path (e.g. <code>-trj best_complete_fit.xtc</code>)</li>
+</ul>
+</li>
+<li><code>-top, --top_mdtraj</code> (str):
+<ul>
+<li>topology file path for mdtraj (e.g. <code>-s ./trial001/cycle000/replica001/rmmol_top.pdb</code>)</li>
+</ul>
+</li>
+<li><code>-s, --selection</code> (str):
+<ul>
+<li>atom selection for visualization (e.g. <code>-s "resname ligand"</code>)</li>
+</ul>
+</li>
+<li><code>-r, --resid</code> (int):
+<ul>
+<li>Index of the visualized center of mass on the output pdb (e.g. <code>-r 1</code>)</li>
+<li>default: <code>1</code></li>
+</ul>
+</li>
+<li><code>-o, --output</code> (str):
+<ul>
+<li>output file path (e.g. <code>-o pathway.pdb</code>)</li>
+<li>default: <code>pathway.pdb</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="gencom-trial"><a class="header" href="#gencom-trial">gencom trial</a></h2>
+<ul>
+<li>This command is used after executing PaCS-MD.</li>
+<li>The COMs of a selected atom group from all of the trajectories within one trial of PaCS-MD can be calculated and outputted in pdb format.</li>
+<li>This command visualizes the migration paths of atoms and supports intuitive interpretation.</li>
+</ul>
+<h3 id="example-7"><a class="header" href="#example-7">Example</a></h3>
+<ul>
+<li>The following example generates a pathway file <code>pathway.pdb</code> that saves the COMs of ligand from <code>prd_fit.xtc</code> file in the trial 1.</li>
+</ul>
+<pre><code class="language-shell">pacsmd gencom trial mdtraj -t 1 -trj prd_fit.xtc -top ./inputs/input.gro -s "resname ligand"
+</code></pre>
+<h3 id="arguments-6"><a class="header" href="#arguments-6">Arguments</a></h3>
+<pre><code class="language-plaintext">usage: pacs gencom trial mdtraj [-h] [-t] [-trj] [-top] [-s] [-r] [-o] [-sf]
+</code></pre>
+<ul>
+<li><code>-t, --trial</code> (int):
+<ul>
+<li>trial number without 0-fill when pacsmd was conducted (e.g. <code>-t 1</code>)</li>
+</ul>
+</li>
+<li><code>-trj, --trajectory</code> (str):
+<ul>
+<li>trajectory file name (e.g. <code>-trj prd_rmmol_fit.xtc</code>)</li>
+</ul>
+</li>
+<li><code>-top, --top_mdtraj</code> (str):
+<ul>
+<li>topology file path for mdtraj (e.g. <code>-s ./trial001/cycle000/replica001/rmmol_top.pdb</code>)</li>
+</ul>
+</li>
+<li><code>-s, --selection</code> (str):
+<ul>
+<li>atom selection for ligand (e.g. <code>-s "resname ligand"</code>)</li>
+</ul>
+</li>
+<li><code>-r, --resid</code> (int):
+<ul>
+<li>Index of the visualized center of mass on the output pdb (e.g. <code>-r 1</code>)</li>
+<li>default: <code>1</code></li>
+</ul>
+</li>
+<li><code>-o, --output</code> (str):
+<ul>
+<li>output file path (e.g. <code>-o pathway.pdb</code>)</li>
+<li>default: <code>pathway.pdb</code></li>
+</ul>
+</li>
+<li><code>-sf, --stride_frame</code> (int):
+<ul>
+<li>stride to skip when extracting the com for visualization  (e.g. <code>-sf 10</code>)</li>
+<li>default: <code>10</code></li>
+</ul>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="genfeature"><a class="header" href="#genfeature">genfeature</a></h1>
+<ul>
+<li>This command is used after executing <code>pacs mdrun</code>.</li>
+<li>This command generates data that will be used for MSM analysis.</li>
+<li>This command supports parallel process.</li>
+</ul>
+<div class="table-wrapper"><table><thead><tr><th>feature</th><th>mdtraj</th><th>gmx</th><th>cpptraj</th></tr></thead><tbody>
+<tr><td>comdist</td><td>o</td><td>x</td><td>x</td></tr>
+<tr><td>comvec</td><td>o</td><td>x</td><td>x</td></tr>
+<tr><td>pca</td><td>o</td><td>x</td><td>x</td></tr>
+<tr><td>tica</td><td>o</td><td>x</td><td>x</td></tr>
+<tr><td>rmsd</td><td>o</td><td>x</td><td>x</td></tr>
+<tr><td>xyz</td><td>o</td><td>x</td><td>x</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="comdist"><a class="header" href="#comdist">comdist</a></h1>
+<ul>
+<li>Center of mass distance</li>
+<li>Calculate the distance between the centers of mass of <code>s1</code> and <code>s2</code>.</li>
+</ul>
+<h3 id="example-8"><a class="header" href="#example-8">Example</a></h3>
+<ul>
+<li>The following example generates features about COM distance for MSM analysis</li>
+</ul>
+<h4 id="mdtraj-4"><a class="header" href="#mdtraj-4">mdtraj</a></h4>
+<pre><code class="language-shell">pacs genfeature comdist mdtraj -t 1 -tf prd.xtc -top inputs/example_gromacs/input.gro -s1 "residue 1" -s2 "residue 9" 
+</code></pre>
+<h3 id="arguments-7"><a class="header" href="#arguments-7">Arguments</a></h3>
+<h4 id="mdtraj-5"><a class="header" href="#mdtraj-5">mdtraj</a></h4>
+<pre><code class="language-plaintext">usage: pacs genfeature comdist mdtraj [-h] [-t] [-tf] [-top] [-od] [-p] [-s1] [-s2] 
+</code></pre>
+<ul>
+<li><code>-t, --trial</code> (int):
+<ul>
+<li>trial number without 0-fill</li>
+</ul>
+</li>
+<li><code>-tf, --trj-file</code> (str):
+<ul>
+<li>trajectory file name (e.g. prd.xtc prd_rmmol.trr)</li>
+</ul>
+</li>
+<li><code>-top, --topology</code> (str):
+<ul>
+<li>topology file path (e.g. .inputs/input.gro)</li>
+</ul>
+</li>
+<li><code>-od, --outdir</code> (str):
+<ul>
+<li>output directory path</li>
+</ul>
+</li>
+<li><code>-p, --n_parallel</code> (int):
+<ul>
+<li>number of parallel</li>
+</ul>
+</li>
+<li><code>-s1, --selection1</code> (str):
+<ul>
+<li>mdtraj selection1 for calculating distance</li>
+</ul>
+</li>
+<li><code>-s2, --selection1</code> (str):
+<ul>
+<li>mdtraj selection2 for calculating distance</li>
+</ul>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="comvec"><a class="header" href="#comvec">comvec</a></h1>
+<ul>
+<li>Center of mass vector</li>
+</ul>
+<h3 id="example-9"><a class="header" href="#example-9">Example</a></h3>
+<ul>
+<li>The following example generates features about COM vector for MSM analysis</li>
+</ul>
+<h4 id="mdtraj-6"><a class="header" href="#mdtraj-6">mdtraj</a></h4>
+<pre><code class="language-shell">pacs genfeature comvec mdtraj -t 1 -tf prd.xtc -top inputs/input.gro -ref inputs/input.gro -ft "name CA" -fr "name CA" -s1 "resid 1" -s2 "resid 9"
+</code></pre>
+<h3 id="arguments-8"><a class="header" href="#arguments-8">Arguments</a></h3>
+<h4 id="mdtraj-7"><a class="header" href="#mdtraj-7">mdtraj</a></h4>
+<pre><code class="language-plaintext">usage: pacs genfeature comvec mdtraj [-h] [-t] [-tf] [-top] [-od] [-p] [-ref] [-ft] [-fr] [-s1] [-s2]
+</code></pre>
+<ul>
+<li><code>-t, --trial</code> (int):
+<ul>
+<li>trial number without 0-fill</li>
+</ul>
+</li>
+<li><code>-tf, --trj-file</code> (str):
+<ul>
+<li>trajectory file name (e.g. prd.xtc prd_rmmol.trr)</li>
+</ul>
+</li>
+<li><code>-top, --topology</code> (str):
+<ul>
+<li>topology file path (e.g. .inputs/input.gro)</li>
+</ul>
+</li>
+<li><code>-od, --outdir</code> (str):
+<ul>
+<li>output directory path</li>
+</ul>
+</li>
+<li><code>-p, --n_parallel</code> (int):
+<ul>
+<li>number of parallel</li>
+</ul>
+</li>
+<li><code>-ref, --reference</code> (str):
+<ul>
+<li>reference file path for fitting</li>
+</ul>
+</li>
+<li><code>-ft, --fit-trj</code> (str):
+<ul>
+<li>fitting selection for mdtraj in trajectory</li>
+</ul>
+</li>
+<li><code>-fr, --fit-ref</code> (str):
+<ul>
+<li>fitting selection for mdtraj in reference</li>
+</ul>
+</li>
+<li><code>-s1, --selection1</code> (str):
+<ul>
+<li>mdtraj selection1 for calculating distance</li>
+</ul>
+</li>
+<li><code>-s2, --selection1</code> (str):
+<ul>
+<li>mdtraj selection2 for calculating distance</li>
+</ul>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="pca"><a class="header" href="#pca">pca</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tica"><a class="header" href="#tica">tica</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="rmsd-4"><a class="header" href="#rmsd-4">RMSD</a></h1>
+<ul>
+<li>Root Mean Square Deviation</li>
+</ul>
+<h3 id="example-10"><a class="header" href="#example-10">Example</a></h3>
+<ul>
+<li>The following example generates features about RMSD for MSM analysis</li>
+</ul>
+<h4 id="mdtraj-8"><a class="header" href="#mdtraj-8">mdtraj</a></h4>
+<pre><code class="language-shell">pacs genfeature rmsd mdtraj -t 1 -tf prd.xtc -top ./inputs/input.gro -ref ./inputs/input.gro -ft "protein" -fr "protein" -ct "name CA" -cr "name CA"
+</code></pre>
+<h3 id="arguments-9"><a class="header" href="#arguments-9">Arguments</a></h3>
+<h4 id="mdtraj-9"><a class="header" href="#mdtraj-9">mdtraj</a></h4>
+<pre><code class="language-plaintext">usage: pacs genfeature pca mdtraj [-h] [-tf] [-top] [-od] [-p] [-ref] [-ft] [-fr] [-ct] [-cr]
+</code></pre>
+<ul>
+<li><code>-t, --trial</code> (int):
+<ul>
+<li>trial number without 0-fill</li>
+</ul>
+</li>
+<li><code>-tf, --trj-file</code> (str):
+<ul>
+<li>trajectory file name (ex. prd.xtc prd_rmmol.trr)</li>
+</ul>
+</li>
+<li><code>-top, --topology</code> (str):
+<ul>
+<li>topology file path (ex. .inputs/input.gro)</li>
+</ul>
+</li>
+<li><code>-od, --outdir</code> (str):
+<ul>
+<li>output directory path</li>
+</ul>
+</li>
+<li><code>-p, --n_parallel</code> (int):
+<ul>
+<li>number of parallel</li>
+</ul>
+</li>
+<li><code>-ref, --reference</code> (str):
+<ul>
+<li>reference file path for fitting/RMSD calculation</li>
+</ul>
+</li>
+<li><code>-ft, --fit-trj</code> (str):
+<ul>
+<li>mdtraj selection for fitting in trajectory</li>
+</ul>
+</li>
+<li><code>-fr, --fit-ref</code> (str):
+<ul>
+<li>mdtraj selection for fitting in reference</li>
+</ul>
+</li>
+<li><code>-ct, --cal-trj</code> (str):
+<ul>
+<li>mdtraj selection for calculating RMSD in trajectory</li>
+</ul>
+</li>
+<li><code>-cr, --cal-ref</code> (str):
+<ul>
+<li>mdtraj selection for calculating RMSD in reference</li>
+</ul>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="xyz"><a class="header" href="#xyz">XYZ</a></h1>
+<ul>
+<li>(x, y, z), 3 dimension coordinates</li>
+</ul>
+<h3 id="example-11"><a class="header" href="#example-11">Example</a></h3>
+<ul>
+<li>The following example generates features about (x, y, z) for MSM analysis</li>
+</ul>
+<h4 id="mdtraj-10"><a class="header" href="#mdtraj-10">mdtraj</a></h4>
+<pre><code class="language-shell">pacs genfeature xyz mdtraj -t 1 -tf prd.xtc -top ./trial001/cycle000/replica001/input.gro -s "residue 1 to 5"
+</code></pre>
+<h3 id="arguments-10"><a class="header" href="#arguments-10">Arguments</a></h3>
+<h4 id="mdtraj-11"><a class="header" href="#mdtraj-11">mdtraj</a></h4>
+<pre><code class="language-plaintext">usage: pacs genfeature xyz mdtraj [-h] [-t] [-tf] [-top] [-od OUTDIR] [-p N_PARALLEL] [-s] 
+</code></pre>
+<ul>
+<li><code>-t, --trial</code> (int):
+<ul>
+<li>trial number without 0-fill</li>
+</ul>
+</li>
+<li><code>-tf, --trj-file</code> (str):
+<ul>
+<li>trajectory file name (ex. prd.xtc prd_rmmol.trr)</li>
+</ul>
+</li>
+<li><code>top, --topology</code> (str):
+<ul>
+<li>topology file path (ex. .inputs/input.gro)</li>
+</ul>
+</li>
+<li><code>-od, --outdir</code> (str):
+<ul>
+<li>output directory path</li>
+</ul>
+</li>
+<li><code>-p, --n_parallel</code> (int):
+<ul>
+<li>number of parallel</li>
+</ul>
+</li>
+<li><code>-s, --selection</code> (str):
+<ul>
+<li>mdtraj selection extracted in trajectory</li>
+</ul>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="faq"><a class="header" href="#faq">FAQ</a></h1>
+<p><em><strong>Content</strong></em></p>
+<ul>
+<li><a href="FAQ.html#faq">FAQ</a>
+<ul>
+<li><a href="FAQ.html#q-how-can-i-check-pacsmd-progress-">Q: How can I check pacsmd progress ?</a>
+<ul>
+<li><a href="FAQ.html#a-you-check-it-by-seeing-pacsmd-standard-output-or-error">A. You check it by seeing pacsmd standard output or error.</a></li>
+</ul>
+</li>
+<li><a href="FAQ.html#q-what-should-i-do-if-there-are-not-evaluation-types-that-i-want-to-use">Q: What should I do if there are not evaluation types that I want to use.</a>
+<ul>
+<li><a href="FAQ.html#a-some-evaluation-types-are-still-in-progress-if-you-need-you-could-also-develop-by-yourself">A: Some evaluation types are still in progress. If you need you could also develop by yourself.</a></li>
+</ul>
+</li>
+<li><a href="FAQ.html#q-dissociation-pacs-md-takes-a-lot-of-time-some-simulations-could-not-completed">Q: dissociation PaCS-MD takes a lot of time. Some simulations could not completed.</a>
+<ul>
+<li><a href="FAQ.html#a-please-check-com-of-selected-molecules">A: Please check COM of selected molecules.</a></li>
+</ul>
+</li>
+<li><a href="FAQ.html#q-minor-dissociation-pathway-was-obtained-is-is-ok-">Q: Minor dissociation pathway was obtained. Is is OK ?</a>
+<ul>
+<li><a href="FAQ.html#a-it-really-depends-on-cases-but-you-need-to--check-carefully-by-yourself">A: It really depends on cases but you need to  check carefully by yourself.</a></li>
+</ul>
+</li>
+<li><a href="FAQ.html#q-i-got-errors-during-running-pacs-md">Q: I got errors during running PaCS-MD</a>
+<ul>
+<li><a href="FAQ.html#a-please-read-the-error-messages-carefully">A: Please read the error messages carefully.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="q-how-can-i-check-pacsmd-progress-"><a class="header" href="#q-how-can-i-check-pacsmd-progress-">Q: How can I check pacsmd progress ?</a></h2>
+<h3 id="a-you-check-it-by-seeing-pacsmd-standard-output-or-error"><a class="header" href="#a-you-check-it-by-seeing-pacsmd-standard-output-or-error">A. You check it by seeing pacsmd standard output or error.</a></h3>
+<pre><code class="language-txt">INFO       2023-12-16 23:22:04  [    parser.py     -       parse      ] input_ims.toml was read successfully
+INFO       2023-12-16 23:22:04  [   __main__.py    -      &lt;module&gt;    ] pacsmd version 0.1.1
+INFO       2023-12-16 23:22:04  [   __main__.py    -        main      ] PaCS-MD starts
+INFO       2023-12-16 23:22:04  [   __main__.py    -     prepare_md   ] MDsettings(..)
+INFO       2023-12-16 23:22:04  [   __main__.py    -      pacs_md     ] cycle000 starts
+INFO       2023-12-16 23:23:15  [superSimulator.py -  record_finished ] replica001 done
+INFO       2023-12-16 23:23:18  [ superAnalyzer.py -      analyze     ] The top ranking CV is replica 1 frame 32 cv 1.864649296784787
+INFO       2023-12-16 23:23:19  [     rmmol.py     -    make_top_gmx  ] topology file rmmol_top.pdb has been created in ./trial001/cycle000/replica001
+INFO       2023-12-16 23:23:19  [   __main__.py    -      pacs_md     ] cycle000 done
+INFO       2023-12-16 23:23:44  [     Cycle.py     -       export     ] export to cycle001 is completed
+INFO       2023-12-16 23:23:46  [     rmmol.py     -     rmmol_gmx    ] trajectory file in cycle000 have been reduced
+...
+</code></pre>
+<ul>
+<li>But sometimes you cannot check it because some supercomputers do not generate log files. If so, you can check it by seeing <code>trialXXX/cycleXXX/replicaXXX/summary/progress.log</code>. Here is a sample command for you to check quickly.</li>
+</ul>
+<pre><code class="language-shell"> head -n 1 trial001/cycle*/summary/cv_ranked.log | grep frame | awk '{print NR "," $6}'
+</code></pre>
+<p>And then you can get the following results. First column denotes the cycle number and second column represents CV(for example, COM distance if type == "dissociation").</p>
+<pre><code class="language-txt">1,1.864649296784787
+2,1.9111852343506632
+3,1.9179890510636395
+4,1.9223202126596912
+5,1.915256901828055
+6,1.9316632729334582
+7,1.9657408272709807
+8,1.9565950015268871
+9,1.951968749749852
+10,1.9565426138983022
+11,1.9765695029520212
+12,2.015255318811986
+13,2.047009037596073
+14,2.0903023704717936
+15,2.126198720722031
+16,2.1582448887927432
+17,2.2197207031516375
+18,2.232262081387398
+19,2.2752254833312677
+20,2.3406157309562796
+21,2.372434614483611
+22,2.4393667210979166
+23,2.480949213506798
+24,2.575250861566694
+25,2.579432883406738
+</code></pre>
+<h2 id="q-what-should-i-do-if-there-are-not-evaluation-types-that-i-want-to-use"><a class="header" href="#q-what-should-i-do-if-there-are-not-evaluation-types-that-i-want-to-use">Q: What should I do if there are not evaluation types that I want to use.</a></h2>
+<h3 id="a-some-evaluation-types-are-still-in-progress-if-you-need-you-could-also-develop-by-yourself"><a class="header" href="#a-some-evaluation-types-are-still-in-progress-if-you-need-you-could-also-develop-by-yourself">A: Some evaluation types are still in progress. If you need you could also develop by yourself.</a></h3>
+<ul>
+<li>While PaCS-MD offers many evaluation types, we could not incorporate all of them. You're welcome to utilize our template as a reference and develop your own set of evaluation types. <a href="./reference_manual/template.html">template page</a>.</li>
+</ul>
+<h2 id="q-dissociation-pacs-md-takes-a-lot-of-time-some-simulations-could-not-completed"><a class="header" href="#q-dissociation-pacs-md-takes-a-lot-of-time-some-simulations-could-not-completed">Q: dissociation PaCS-MD takes a lot of time. Some simulations could not completed.</a></h2>
+<h3 id="a-please-check-com-of-selected-molecules"><a class="header" href="#a-please-check-com-of-selected-molecules">A: Please check COM of selected molecules.</a></h3>
+<ul>
+<li>
+<p>Sometimes wrong selections might lead to wrong dissociation pathway and free energy.</p>
+</li>
+<li>
+<p>But there are some examples where the selections are actually correct but not dissociated based on the initial structure.</p>
+</li>
+<li>
+<p>You can check COM quickly by employing the following command.</p>
+</li>
+</ul>
+<pre><code class="language-shell">$ pacs gencom traj mdtraj -s init.gro -t init.gro -ls "resid 168 || resid 253" -o com_of_r168_r253.pdb
+$ pacs gencom traj mdtraj -s init.gro -t init.gro -ls "resname Lig" -o com_of_ligand.pdb
+$ vmd -m init.gro com_of_r168_r253.pdb com_of_ligand.pdb
+</code></pre>
+<h2 id="q-minor-dissociation-pathway-was-obtained-is-is-ok-"><a class="header" href="#q-minor-dissociation-pathway-was-obtained-is-is-ok-">Q: Minor dissociation pathway was obtained. Is is OK ?</a></h2>
+<h3 id="a-it-really-depends-on-cases-but-you-need-to--check-carefully-by-yourself"><a class="header" href="#a-it-really-depends-on-cases-but-you-need-to--check-carefully-by-yourself">A: It really depends on cases but you need to  check carefully by yourself.</a></h3>
+<ul>
+<li>Minor pathway may actually emerge, but it could stem from incorrect selections or initial structures, etc. Therefore it's crucial to assess their validity before proceeding with your simulation.</li>
+</ul>
+<h2 id="q-i-got-errors-during-running-pacs-md"><a class="header" href="#q-i-got-errors-during-running-pacs-md">Q: I got errors during running PaCS-MD</a></h2>
+<h3 id="a-please-read-the-error-messages-carefully"><a class="header" href="#a-please-read-the-error-messages-carefully">A: Please read the error messages carefully.</a></h3>
+<ul>
+<li>
+<p>Since PaCS-MD relies on various other libraries. many issues may arise due to incorrect settings. Before reporting your concerns to Github, please ensure whether the problem genuinely lies with PaCS-MD or not.</p>
+</li>
+<li>
+<p>Additionally, since PaCS-MD is often employed on supercomputers, certain issues might be attributed to the supercomputers themselves. For example, PaCS-MD may encounter difficulties running on supercomputers, or errors might arise that are unrelated to the associated libraries.</p>
+</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="mermaid.min.js"></script>
+        <script src="mermaid-init.js"></script>
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
