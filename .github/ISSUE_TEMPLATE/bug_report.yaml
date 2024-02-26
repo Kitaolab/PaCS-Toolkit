@@ -1,0 +1,102 @@
+name: Bug Report
+description: Create bug report
+title: "bug title"
+labels: ["bug"]
+
+assignees:
+  - octocat
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+
+  - type: input
+    id: contact
+    attributes:
+      label: Contact Details
+      description: How can we get in touch with you if we need more info?
+      placeholder: ex. email@example.com
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: check1
+    attributes:
+      label: Check no related issues
+      options:
+        - label: I have verified that there are no related issues
+          required: true
+
+  - type: checkboxes
+    id: check2
+    attributes:
+      label: Check possible issue related to pacsmd
+      options:
+        - label: Most likely a problem with the pacsmd code, not with the supercomputer or dependent software
+          required: true
+
+  - type: checkboxes
+    id: check3
+    attributes:
+      label: Check log file and data file
+      options:
+        - label: I have prepared enough log file and data file to reproduce
+          required: true
+
+  - type: checkboxes
+    id: check4
+    attributes:
+      label: Check document
+      options:
+        - label: I have read PaCS-MD document carefully
+          required: true
+
+  - type: input
+    id: pacsmd-version
+    attributes:
+      label: PaCS-MD version
+      placeholder: ex. 0.1.1
+    validations:
+      required: false
+
+  - type: dropdown
+    id: software
+    attributes:
+      label: Software
+      description: Which software did you use ?
+      options:
+        - GROMACS
+        - AMBER
+        - NAMD
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Also tell us, what did you expect to happen?
+      placeholder: Explain here
+    validations:
+      required: true
+
+  - type: textarea
+    id: input-toml
+    attributes:
+      label: input.toml for PaCS-MD
+      description: Please copy and paste your input.toml
+
+  - type: textarea
+    id: log
+    attributes:
+      label: Log file for PaCS-MD
+      description: Please copy and paste your log file
+
+  - type: textarea
+    id: log_rep
+    attributes:
+      label: Log file in replica for PaCS-MD
+      description: Please copy and paste your log file in replica
+

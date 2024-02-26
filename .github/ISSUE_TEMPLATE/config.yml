@@ -1,0 +1,26 @@
+blank_issues_enabled: true
+contact_links:
+  - name: GROMACS
+    url: https://www.gromacs.org/
+    about: Please ask about gromacs source code.
+  - name: AMBER
+    url: https://ambermd.org/
+    about: Please ask about amber source code.
+  - name: NAMD
+    url: https://www.ks.uiuc.edu/Research/namd/
+    about: Please ask about namd source code.
+  - name: ISSP supercomputer
+    url: https://mdcl.issp.u-tokyo.ac.jp/scc/system
+    about: Please ask about issp(b/c) supercomputer
+  - name: IMS supercomputer
+    url: https://ccportal.ims.ac.jp/
+    about: Please ask about ims supercomputer
+  - name: TSUBAME3 supercomputer
+    url: https://www.t3.gsic.titech.ac.jp/
+    about: Please ask about tsubame3 supercomputer
+  - name: Fugaku supercomputer
+    url: https://www.r-ccs.riken.jp/en/fugaku/
+    about: Please ask about fugaku supercomputer
+  - name: MDtraj
+    url: https://github.com/mdtraj/mdtraj
+    about: Please ask about mdtraj

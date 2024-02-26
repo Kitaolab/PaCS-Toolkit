@@ -1,0 +1,6 @@
+pysen==0.10.1
+flake8==5.0.4
+flake8-bugbear==23.3.12
+black==23.3.0
+isort==5.11.5
+mypy==1.4.1

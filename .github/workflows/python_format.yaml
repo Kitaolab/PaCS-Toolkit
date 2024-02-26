@@ -1,0 +1,35 @@
+name: pysen auto formatter
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+    formatter:
+        name: formatter
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                python-version: [3.7]
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v3
+
+          - name: Set up Python ${{ matrix.python-version }}
+            uses: actions/setup-python@v4
+            with:
+              python-version: ${{ matrix.python-version }}
+
+          - name: Install pipenv
+            run: |
+              python -m pip install --upgrade pip
+              python -m pip install -r requirements_dev.txt
+
+          - name: Run Format
+            run: pysen run format
+
+          - name: Auto Commit
+            uses: stefanzweifel/git-auto-commit-action@v4
+            with:
+              commit_message: '[Action] pipenv run fmt'

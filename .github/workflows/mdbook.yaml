@@ -1,0 +1,32 @@
+name: PaCS-MD document using mdBook
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: cargo version
+        run: cargo --version
+      - name: Install
+        run: |
+          cargo install mdbook-mermaid
+          cargo install mdbook
+      - name: Build
+        run: mdbook build
+        working-directory: ./docs
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/book

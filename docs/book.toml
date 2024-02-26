@@ -1,0 +1,12 @@
+[book]
+authors = ["Kitao-lab"]
+language = "en"
+multilingual = false
+src = "src"
+title = "PaCS-Toolkit User Guide"
+
+[preprocessor.mermaid]
+command = "mdbook-mermaid"
+
+[output.html]
+additional-js = ["mermaid.min.js", "mermaid-init.js"]

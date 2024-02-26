@@ -1,0 +1,47 @@
+# PaCS-MD sample jobscript for fugaku
+
+### This script is just for reference
+### You need to modify accordingly
+
+# total_core = 5 x 48 = 240
+# OMP = 12
+# MPI = 2o
+# core_per_replica = 240 / 5 = 48 (cycle>=1)
+
+## basic
+max_cycle = 200                                     # Maximum number of cycles to run. (ex. 1, ..., 123, ..., 999)
+n_replica = 50                                      # Number of replica. (ex. 1, ..., 123, ..., 999)
+n_parallel = 5                                      # Number of replica which are calculated at a time
+centering = true                                    # Whether to move the molecule to the center
+centering_selection = "Protein"                     # Name of molecule to move in the center
+working_dir = "./."                                 # Directory where pacsmd will run
+
+## simulator
+simulator = "gromacs"                               # Simulator used inside PaCS-MD
+cmd_mpi = "mpirun -np 20"                           # Commands for MPI such as mpirun, blank is OK
+cmd_serial = "gmx_mpi mdrun -ntomp 12"              # Commands to run the simulator serially
+cmd_parallel = "gmx_mpi mdrun -ntomp 12"            # Commands to run the simulator parallelly
+structure = "./inputs/input.gro"                    # Structural file such as gro, pdb, rst7, etc.
+topology = "./inputs/topol.top"                     # Topology file such as top, parm7, psf, etc.
+mdconf = "./inputs/parameter.mdp"                   # Parameter file such as mdp, mdin, namd, etc.
+index_file = "./inputs/index.ndx"                   # Gromacs index file
+trajectory_extension = ".xtc"                       # Trajectory file extension. ("." is necessary)
+
+## analyzer
+type = "target"                                     # Evaluation type
+threshold = 0.01                                    # CV threshold used to decide whether to terminate the calculation (in units of nm)
+skip_frame = 1                                      # How many frames to skip when ranking CVs
+analyzer = "gromacs"                                # Trajectory tool used to calculate the evaluation type
+reference = "./inputs/ref.pdb"                      # Structure for comparison
+selection1 = "Backbone"                             # Selection string for specified group in trajectroies (least squares fit)
+selection2 = "Backbone"                             # Selection string for specified group in trajectories (RMSD calculation)
+selection3 = "Backbone"                             # Selection string for specified group in reference (least squares fit)
+selection4 = "Backbone"                             # Selection string for specified group in reference (RMSD calculation)
+
+## postprocess
+genrepresent = true                                 # Whether genrepresent is executed after trial
+rmmol = true                                        # Whether rmmol is executed after each cycle
+keep_selection = "not_Water"                        # Molecular name or index group to be left in the trajectory when rmmol
+rmfile = true                                       # Whether rmfile is executed after trial
+
+cmd_gmx = "gmx"                                     # cmd_gmx for analyze (This command is necessary to specify on fugaku)
