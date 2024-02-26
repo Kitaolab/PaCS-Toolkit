@@ -1,5 +1,4 @@
 import multiprocessing as mp
-import subprocess
 from pathlib import Path
 
 from pacs.models.settings import MDsettings
@@ -55,7 +54,7 @@ def fit_mdtraj(settings: MDsettings, trj_file: str, out_file: str) -> None:
     parent = Path(trj_file).parent
     stem = Path(trj_file).stem
     fit_trj_file = (
-        f"{parent}/{stem}_fit{ext}" if out_file == None else f"{parent}/{out_file}"
+        f"{parent}/{stem}_fit{ext}" if out_file is None else f"{parent}/{out_file}"
     )
 
     ref_structure = settings.reference

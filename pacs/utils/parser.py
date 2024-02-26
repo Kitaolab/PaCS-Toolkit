@@ -160,7 +160,7 @@ class Parser:
             "--keep_selection",
             type=str,
             required=True,
-            help='selection of molecules to be retained in trajectory files. (e.g. "not water")',
+            help='selection to be retained in trajectory files. (e.g. "not water")',
         )
         parser_rmmol_mdtraj.add_argument(
             "-e",
