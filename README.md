@@ -12,7 +12,7 @@ We believe our package will benefit your research.
 
 
 ## Document
-- The documentation of PaCS-ToolKit is [here](./docs/).
+- The documentation of PaCS-ToolKit is [here](https://kitaolab.github.io/PaCS-Toolkit/).
 
 ## Quick install
 
@@ -23,7 +23,7 @@ We believe our package will benefit your research.
 pip install "git+https://github.com/Kitaolab/PaCS-Toolkit.git[all]"
 ~~~
 
-see [document](docs/src/install.md) for more information.
+see [document](https://kitaolab.github.io/PaCS-Toolkit/) for more information.
 
 </details>
 
