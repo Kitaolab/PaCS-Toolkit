@@ -262,8 +262,6 @@ judge -- Yes --&gt; End;
 </ul>
 <p><em>Content</em></p>
 <ul>
-<li><a href="quickstart.html#quick-start">Quick Start</a>
-<ul>
 <li><a href="quickstart.html#step1-installing-by-pip-or-conda">Step1: Installing by pip or conda</a></li>
 <li><a href="quickstart.html#step2-preparing-initial-files">Step2: Preparing initial files</a></li>
 <li><a href="quickstart.html#step3-preparing-input-file-for-pacs-md">Step3: Preparing input file for PaCS-MD</a></li>
@@ -275,8 +273,6 @@ judge -- Yes --&gt; End;
 <li><a href="quickstart.html#step5-making-new-fitted-trajectories-from-pacsmd-results">Step5: Making new fitted trajectories from pacsmd results</a></li>
 <li><a href="quickstart.html#step6-extracting-collective-variables-from-fitted-trajectories">Step6: Extracting collective-variables from fitted trajectories</a></li>
 <li><a href="quickstart.html#step7-building-msm-and-predicting-free-energy">Step7: Building MSM and predicting free energy</a></li>
-</ul>
-</li>
 </ul>
 <h2 id="step1-installing-by-pip-or-conda"><a class="header" href="#step1-installing-by-pip-or-conda">Step1: Installing by pip or conda</a></h2>
 <ol>
@@ -393,30 +389,26 @@ trial002/
 </code></pre>
 <h2 id="step5-making-new-fitted-trajectories-from-pacsmd-results"><a class="header" href="#step5-making-new-fitted-trajectories-from-pacsmd-results">Step5: Making new fitted trajectories from pacsmd results</a></h2>
 <ul>
-<li>Before performing visual_pathway or MSM(especially 3D-MSM and volume correction and etc.) and etc, you need to make fitted trajectories from pacsmd results</li>
-<li>For fitting, we prepare <code>pacsmd fitting mdtraj</code> command. But you can use existing software such as <code>gmx trjconv</code> or <code>cpptraj</code> as usual.</li>
-<li>See <a href="./reference_manual/function.html">function</a> for more information.</li>
+<li>For some analyses, fitting trajectories can make subsequent calculations smoother.</li>
+<li>For fitting, we prepare <code>pacs fit mdtraj</code> command. But you can use existing software such as <code>gmx trjconv</code> or <code>cpptraj</code> as usual.</li>
 </ul>
-<pre><code class="language-shell">$ pacs fit mdtraj -s rmmol_top.pdb -r ref.gro -ts protein -rs protein -tf prd_rmmol.xtc -t 1 -p 1
+<pre><code class="language-shell">$ pacs fit trial mdtraj -t 1 -tf prd_rmmol.xtc -top rmmol_top.pdb -r ref.gro -ts protein -rs protein
 </code></pre>
 <h2 id="step6-extracting-collective-variables-from-fitted-trajectories"><a class="header" href="#step6-extracting-collective-variables-from-fitted-trajectories">Step6: Extracting collective-variables from fitted trajectories</a></h2>
 <ul>
 <li>After making fitted trajectories, you need to extract CV to build MSM, where CV denotes collective variables such as "distance" and "inter COM vector" and "PCA" and etc.</li>
-<li>For extracting CVs, we got <code>pacsmd cv</code> command. But this command provides you only frequently used CV such as comd-distance, com-vector, pca, tica and rmsd.</li>
+<li>For extracting CVs, we got <code>pacs genfeature</code> command. But this command provides you only frequently used CV such as com-distance, com-vector and rmsd.</li>
 <li>So if you want to use other specific CVs, you need to write a code by yourself.</li>
 </ul>
-<pre><code class="language-shell">$ pacs genfeature mdtraj comdist -s input.gro -s1 "resname Lig" -s2 "protein" -tf prd.xtc -t 1 -p 1
+<pre><code class="language-shell">$ pacs genfeature comdist mdtraj -t 1 -tf prd.xtc -top inputs/example_gromacs/input.gro -s1 "residue 1" -s2 "residue 9" 
 $ ls
 comdist-CV/
 </code></pre>
 <h2 id="step7-building-msm-and-predicting-free-energy"><a class="header" href="#step7-building-msm-and-predicting-free-energy">Step7: Building MSM and predicting free energy</a></h2>
 <ul>
-<li>After extracting CVs, you would like to obtain free energy landscape related to extracted CVs.</li>
-<li>To calculate free energy, we provide MSM notebooks. The notebooks outline the process for computing free energy landscape.</li>
-<li>But these are just sample notebooks, so you need to check carefully when you use these notebook.</li>
+<li>After extracting CVs, various analyses can be performed on them.</li>
+<li>PaCS-MD is especially compatible with analyses using MSM.</li>
 </ul>
-<pre><code class="language-shell">$ code pacsmd/MSM/distance.ipynb
-</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="install"><a class="header" href="#install">Install</a></h1>
 <p><em>Content</em></p>
 <ul>
