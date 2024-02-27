@@ -3,7 +3,7 @@
 - Snapshots of each cycle are projected onto a 4-dimensional principal component spaces (PCs). Its convex hull is computed and the initial structure of the next cycle is selected from the polygon's vertices.
 - Usage Example
   - Sampling a wide range of phase space without knowing the reference structure
-- See [here](inputfile.md#edgeexpansion) for an example input file.
+- See [here](../inputfile.md#edgeexpansion) for an example input file.
 
 #### keywords
 - **type: str, required**

@@ -4,22 +4,21 @@
 - input file must be in [toml format](https://toml.io/en/).
 
 *Contents*
-- [Input file](#input-file)
-  - [sample input file](#sample-input-file)
-  - [basic option](#basic-option)
-  - [simulator option](#simulator-option)
-    - [Gromacs](#gromacs)
-    - [Amber](#amber)
-    - [NAMD](#namd)
-  - [analyzer option](#analyzer-option)
-    - [Target](#target)
-    - [RMSD](#rmsd)
-    - [Association](#association)
-    - [Dissociation](#dissociation)
-    - [EdgeExpansion](#edgeexpansion)
-    - [A\_D](#a_d)
-    - [Template](#template)
-  - [hidden option (No need to specify)](#hidden-option-no-need-to-specify)
+- [sample input file](#sample-input-file)
+- [basic option](#basic-option)
+- [simulator option](#simulator-option)
+  - [Gromacs](#gromacs)
+  - [Amber](#amber)
+  - [NAMD](#namd)
+- [analyzer option](#analyzer-option)
+  - [Target](#target)
+  - [RMSD](#rmsd)
+  - [Association](#association)
+  - [Dissociation](#dissociation)
+  - [EdgeExpansion](#edgeexpansion)
+  - [A\_D](#a_d)
+  - [Template](#template)
+- [hidden option (No need to specify)](#hidden-option-no-need-to-specify)
 
 ## sample input file
 - please check [here](https://github.com/Kitaolab/PaCS-Toolkit/tree/main/jobscripts)
@@ -512,7 +511,7 @@ bound_threshold = 3             # threshold for association to dissociation
   - Number of frames to skip when ranking CVs
 - **threshold: float, required**
   - CV threshold for determining to terminate a trial
-> Template type is a type that can be defined by the user. It is possible to include user-specific variables in input.toml, and these variables can be used in template type in which they are defined. For more information, click [here](reference/template.md).
+> Template type is a type that can be defined by the user. It is possible to include user-specific variables in input.toml, and these variables can be used in template type in which they are defined. For more information, click [here](./analyzer/template.md).
 
 </details>
 

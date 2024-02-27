@@ -69,7 +69,6 @@ loop 0, max_cycle
 end
 ```
 
-- Below is an overview of each component. If necessary, see [Reference](reference.md) for more information on each component.
 - simulator
   - The simulator performs one short MD on the starting structure in cycle 0.
   - In the other cycles, it executes n_replica short MDs, starting from the top-ranking structure of each cycle.

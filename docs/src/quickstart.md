@@ -44,7 +44,7 @@ pip install -e ".[mdtraj]"
 ## Step3: Preparing input file for PaCS-MD
 - PaCS-MD requires **a toml format input file.** Please make input.toml
   - Please adjust the above settings as needed.
-  - For more information about this file, please refer to [input file](reference/inputfile.md).
+  - For more information about this file, please refer to [input file](./mdrun/inputfile.md).
 ```shell
 vim input.toml
 ```
