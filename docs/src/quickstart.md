@@ -4,15 +4,14 @@
 - If you want to try other PaCS-MD, please refer to [Analyzer](reference/analyzer.md).
 
 *Content*
-- [Quick Start](#quick-start)
-  - [Step1: Installing by pip or conda](#step1-installing-by-pip-or-conda)
-  - [Step2: Preparing initial files](#step2-preparing-initial-files)
-  - [Step3: Preparing input file for PaCS-MD](#step3-preparing-input-file-for-pacs-md)
-  - [Step4: Running PaCS-MD](#step4-running-pacs-md)
-    - [Supplement: Runing other trial](#supplement-runing-other-trial)
-  - [Step5: Making new fitted trajectories from pacsmd results](#step5-making-new-fitted-trajectories-from-pacsmd-results)
-  - [Step6: Extracting collective-variables from fitted trajectories](#step6-extracting-collective-variables-from-fitted-trajectories)
-  - [Step7: Building MSM and predicting free energy](#step7-building-msm-and-predicting-free-energy)
+- [Step1: Installing by pip or conda](#step1-installing-by-pip-or-conda)
+- [Step2: Preparing initial files](#step2-preparing-initial-files)
+- [Step3: Preparing input file for PaCS-MD](#step3-preparing-input-file-for-pacs-md)
+- [Step4: Running PaCS-MD](#step4-running-pacs-md)
+  - [Supplement: Runing other trial](#supplement-runing-other-trial)
+- [Step5: Making new fitted trajectories from pacsmd results](#step5-making-new-fitted-trajectories-from-pacsmd-results)
+- [Step6: Extracting collective-variables from fitted trajectories](#step6-extracting-collective-variables-from-fitted-trajectories)
+- [Step7: Building MSM and predicting free energy](#step7-building-msm-and-predicting-free-energy)
 
 
 ## Step1: Installing by pip or conda
@@ -129,30 +128,25 @@ trial002/
 ```
 
 ## Step5: Making new fitted trajectories from pacsmd results
-- Before performing visual_pathway or MSM(especially 3D-MSM and volume correction and etc.) and etc, you need to make fitted trajectories from pacsmd results
-- For fitting, we prepare `pacsmd fitting mdtraj` command. But you can use existing software such as `gmx trjconv` or `cpptraj` as usual.
-- See [function](./reference_manual/function.md) for more information.
+- For some analyses, fitting trajectories can make subsequent calculations smoother.
+- For fitting, we prepare `pacs fit mdtraj` command. But you can use existing software such as `gmx trjconv` or `cpptraj` as usual.
 ```shell
-$ pacs fit mdtraj -s rmmol_top.pdb -r ref.gro -ts protein -rs protein -tf prd_rmmol.xtc -t 1 -p 1
+$ pacs fit trial mdtraj -t 1 -tf prd_rmmol.xtc -top rmmol_top.pdb -r ref.gro -ts protein -rs protein
 ```
 
 ## Step6: Extracting collective-variables from fitted trajectories
 - After making fitted trajectories, you need to extract CV to build MSM, where CV denotes collective variables such as "distance" and "inter COM vector" and "PCA" and etc.
-- For extracting CVs, we got `pacsmd cv` command. But this command provides you only frequently used CV such as comd-distance, com-vector, pca, tica and rmsd.
+- For extracting CVs, we got `pacs genfeature` command. But this command provides you only frequently used CV such as com-distance, com-vector and rmsd.
 - So if you want to use other specific CVs, you need to write a code by yourself.
 
 ~~~shell
-$ pacs genfeature mdtraj comdist -s input.gro -s1 "resname Lig" -s2 "protein" -tf prd.xtc -t 1 -p 1
+$ pacs genfeature comdist mdtraj -t 1 -tf prd.xtc -top inputs/example_gromacs/input.gro -s1 "residue 1" -s2 "residue 9" 
 $ ls
 comdist-CV/
 ~~~
 
 
 ## Step7: Building MSM and predicting free energy
-- After extracting CVs, you would like to obtain free energy landscape related to extracted CVs.
-- To calculate free energy, we provide MSM notebooks. The notebooks outline the process for computing free energy landscape.
-- But these are just sample notebooks, so you need to check carefully when you use these notebook.
-~~~shell
-$ code pacsmd/MSM/distance.ipynb
-~~~
+- After extracting CVs, various analyses can be performed on them. 
+- PaCS-MD is especially compatible with analyses using MSM.
 
