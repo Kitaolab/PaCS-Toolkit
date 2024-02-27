@@ -307,7 +307,7 @@ pip install -e ".[mdtraj]"
 <li>PaCS-MD requires <strong>a toml format input file.</strong> Please make input.toml
 <ul>
 <li>Please adjust the above settings as needed.</li>
-<li>For more information about this file, please refer to <a href="reference/inputfile.html">input file</a>.</li>
+<li>For more information about this file, please refer to <a href="./mdrun/inputfile.html">input file</a>.</li>
 </ul>
 </li>
 </ul>
@@ -706,9 +706,6 @@ loop 0, max_cycle
 end
 </pre>
 <ul>
-<li>
-<p>Below is an overview of each component. If necessary, see <a href="mdrun/reference.html">Reference</a> for more information on each component.</p>
-</li>
 <li>
 <p>simulator</p>
 <ul>
@@ -1522,7 +1519,7 @@ jcim.1c01508
 <li>Sampling a wide range of phase space without knowing the reference structure</li>
 </ul>
 </li>
-<li>See <a href="mdrun/analyzer/inputfile.html#edgeexpansion">here</a> for an example input file.</li>
+<li>See <a href="mdrun/analyzer/../inputfile.html#edgeexpansion">here</a> for an example input file.</li>
 </ul>
 <h4 id="keywords-9"><a class="header" href="#keywords-9">keywords</a></h4>
 <ul>
@@ -1707,8 +1704,6 @@ user-defined-variable2 = "hoge"
 </ul>
 <p><em>Contents</em></p>
 <ul>
-<li><a href="mdrun/inputfile.html#input-file">Input file</a>
-<ul>
 <li><a href="mdrun/inputfile.html#sample-input-file">sample input file</a></li>
 <li><a href="mdrun/inputfile.html#basic-option">basic option</a></li>
 <li><a href="mdrun/inputfile.html#simulator-option">simulator option</a>
@@ -1730,8 +1725,6 @@ user-defined-variable2 = "hoge"
 </ul>
 </li>
 <li><a href="mdrun/inputfile.html#hidden-option-no-need-to-specify">hidden option (No need to specify)</a></li>
-</ul>
-</li>
 </ul>
 <h2 id="sample-input-file"><a class="header" href="#sample-input-file">sample input file</a></h2>
 <ul>
@@ -2469,7 +2462,7 @@ bound_threshold = 3             # threshold for association to dissociation
 </li>
 </ul>
 <blockquote>
-<p>Template type is a type that can be defined by the user. It is possible to include user-specific variables in input.toml, and these variables can be used in template type in which they are defined. For more information, click <a href="mdrun/reference/template.html">here</a>.</p>
+<p>Template type is a type that can be defined by the user. It is possible to include user-specific variables in input.toml, and these variables can be used in template type in which they are defined. For more information, click <a href="mdrun/./analyzer/template.html">here</a>.</p>
 </blockquote>
 </details>
 <pre><code class="language-toml">type = "template"
