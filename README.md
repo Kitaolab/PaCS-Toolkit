@@ -38,7 +38,7 @@ conda activate pacs
 pip install "git+https://github.com/Kitaolab/PaCS-Toolkit.git[all]"
 ~~~
 
-see [document](docs/src/install.md) for more information.
+see [document](https://kitaolab.github.io/PaCS-Toolkit/) for more information.
 
 </details>
 

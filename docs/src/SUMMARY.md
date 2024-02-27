@@ -33,8 +33,6 @@
 - [genfeature](genfeature.md)
     - [comdist](genfeature/comdist.md)
     - [comvec](genfeature/comvec.md)
-    - [pca](genfeature/pca.md)
-    - [tica](genfeature/tica.md)
     - [rmsd](genfeature/rmsd.md)
     - [xyz](genfeature/xyz.md)
 
