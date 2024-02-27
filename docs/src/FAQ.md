@@ -1,17 +1,16 @@
 # FAQ
 
 ***Content***
-- [FAQ](#faq)
-  - [Q: How can I check pacsmd progress ?](#q-how-can-i-check-pacsmd-progress-)
-    - [A. You check it by seeing pacsmd standard output or error.](#a-you-check-it-by-seeing-pacsmd-standard-output-or-error)
-  - [Q: What should I do if there are not evaluation types that I want to use.](#q-what-should-i-do-if-there-are-not-evaluation-types-that-i-want-to-use)
-    - [A: Some evaluation types are still in progress. If you need you could also develop by yourself.](#a-some-evaluation-types-are-still-in-progress-if-you-need-you-could-also-develop-by-yourself)
-  - [Q: dissociation PaCS-MD takes a lot of time. Some simulations could not completed.](#q-dissociation-pacs-md-takes-a-lot-of-time-some-simulations-could-not-completed)
-    - [A: Please check COM of selected molecules.](#a-please-check-com-of-selected-molecules)
-  - [Q: Minor dissociation pathway was obtained. Is is OK ?](#q-minor-dissociation-pathway-was-obtained-is-is-ok-)
-    - [A: It really depends on cases but you need to  check carefully by yourself.](#a-it-really-depends-on-cases-but-you-need-to--check-carefully-by-yourself)
-  - [Q: I got errors during running PaCS-MD](#q-i-got-errors-during-running-pacs-md)
-    - [A: Please read the error messages carefully.](#a-please-read-the-error-messages-carefully)
+- [Q: How can I check pacsmd progress ?](#q-how-can-i-check-pacsmd-progress-)
+  - [A. You check it by seeing pacsmd standard output or error.](#a-you-check-it-by-seeing-pacsmd-standard-output-or-error)
+- [Q: What should I do if there are not evaluation types that I want to use.](#q-what-should-i-do-if-there-are-not-evaluation-types-that-i-want-to-use)
+  - [A: Some evaluation types are still in progress. If you need you could also develop by yourself.](#a-some-evaluation-types-are-still-in-progress-if-you-need-you-could-also-develop-by-yourself)
+- [Q: dissociation PaCS-MD takes a lot of time. Some simulations could not completed.](#q-dissociation-pacs-md-takes-a-lot-of-time-some-simulations-could-not-completed)
+  - [A: Please check COM of selected molecules.](#a-please-check-com-of-selected-molecules)
+- [Q: Minor dissociation pathway was obtained. Is is OK ?](#q-minor-dissociation-pathway-was-obtained-is-is-ok-)
+  - [A: It really depends on cases but you need to  check carefully by yourself.](#a-it-really-depends-on-cases-but-you-need-to--check-carefully-by-yourself)
+- [Q: I got errors during running PaCS-MD](#q-i-got-errors-during-running-pacs-md)
+  - [A: Please read the error messages carefully.](#a-please-read-the-error-messages-carefully)
 
 
 ## Q: How can I check pacsmd progress ?
@@ -69,7 +68,7 @@ And then you can get the following results. First column denotes the cycle numbe
 
 ## Q: What should I do if there are not evaluation types that I want to use.
 ### A: Some evaluation types are still in progress. If you need you could also develop by yourself.
-- While PaCS-MD offers many evaluation types, we could not incorporate all of them. You're welcome to utilize our template as a reference and develop your own set of evaluation types. [template page](./reference_manual/template.md).
+- While PaCS-MD offers many evaluation types, we could not incorporate all of them. You're welcome to utilize our template as a reference and develop your own set of evaluation types. [template page](./mdrun/analyzer/template.md).
 
 
 ## Q: dissociation PaCS-MD takes a lot of time. Some simulations could not completed.

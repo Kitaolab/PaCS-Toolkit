@@ -119,4 +119,4 @@
 - Additional variables can be specified in `input.toml`
 - Usage Example
   - If you want to use a different evaluation function than the ones provided.
-- For more information, [click here](template.md)
+- For more information, [click here](./analyzer/template.md)

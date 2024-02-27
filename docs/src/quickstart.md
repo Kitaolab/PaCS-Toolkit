@@ -1,7 +1,7 @@
 # Quick Start
 
 - on this page, we will introduce a quick guide on running **dissociation PaCS-MD using gromacs**.
-- If you want to try other PaCS-MD, please refer to [Analyzer](reference/analyzer.md).
+- If you want to try other PaCS-MD, please refer to [Analyzer](./mdrun/analyzer.md).
 
 *Content*
 - [Step1: Installing by pip or conda](#step1-installing-by-pip-or-conda)
