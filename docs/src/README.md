@@ -70,6 +70,7 @@ judge -- Yes --> End;
 
 # Testing team
 - Tegar (lead)
+- Duy
 - Bai
 - Kimizono
 - Lu
