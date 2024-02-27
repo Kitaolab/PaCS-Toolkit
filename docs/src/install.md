@@ -26,13 +26,13 @@ conda activate pacsmd
 
 - if using whole pacstk function
 ~~~shell
-pip install "git+https://github.com/Kitaolab/PaCS-Toolkit.git[all]"
+pip install "git+https://github.com/Kitaolab/PaCS-Toolkit.git#[all]"
 pip install pyemma
 ~~~
 
 - elif using "pacs mdrun" and analyzer == "mdtraj"
 ~~~shell
-pip install "git+https://github.com/Kitaolab/PaCS-Toolkit.git[mdtraj]"
+pip install "git+https://github.com/Kitaolab/PaCS-Toolkit.git#[mdtraj]"
 ~~~
 
 - elif using "pacs mdrun" and analyzer == "gromacs"
@@ -42,19 +42,19 @@ pip install "git+https://github.com/Kitaolab/PaCS-Toolkit.git"
 
 - elif performing MSM
 ~~~shell
-pip install "git+https://github.com/Kitaolab/PaCS-Toolkit.git[msm]"
+pip install "git+https://github.com/Kitaolab/PaCS-Toolkit.git#[msm]"
 pip install pyemma
 ~~~
 
 ### 1.2. Install by pip
 - if using whole pacstk function
 ~~~shell
-pip install "git+https://github.com/Kitaolab/PaCS-Toolkit.git[all]"
+pip install "git+https://github.com/Kitaolab/PaCS-Toolkit.git#[all]"
 ~~~
 
 - elif using "pacs mdrun" and analyzer == "mdtraj"
 ~~~shell
-pip install "git+https://github.com/Kitaolab/PaCS-Toolkit.git[mdtraj]"
+pip install "git+https://github.com/Kitaolab/PaCS-Toolkit.git#[mdtraj]"
 ~~~
 
 - elif using "pacs mdrun" and analyzer == "gromacs"
@@ -64,7 +64,7 @@ pip install "git+https://github.com/Kitaolab/PaCS-Toolkit.git"
 
 - elif performing MSM
 ~~~shell
-pip install "git+https://github.com/Kitaolab/PaCS-Toolkit.git[msm]"
+pip install "git+https://github.com/Kitaolab/PaCS-Toolkit.git#[msm]"
 pip install pyemma
 ~~~
 
