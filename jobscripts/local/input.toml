@@ -37,7 +37,6 @@ selection3 = "backbone"                             # Selection string for speci
 selection4 = "backbone"                             # Selection string for specified group in reference (RMSD calculation)
 
 ## postprocess
-genrepresent = true                                 # Whether genrepresent is executed after trial
 rmmol = true                                        # Whether rmmol is executed after each cycle
 keep_selection = "not resname OPC"                  # Molecular name or index group to be left in the trajectory when rmmol
 rmfile = true                                       # Whether rmfile is executed after trial
