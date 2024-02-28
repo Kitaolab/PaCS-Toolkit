@@ -45,8 +45,6 @@ see [document](https://kitaolab.github.io/PaCS-Toolkit/) for more information.
 
 
 ## Citation
-pleae cite the paper, which is under cosideration. This information will be updated upon publication.
-
 ~~~markdown
 - PaCS-Toolkit
 The paper is under consideration. The information will be updated upon publication.
