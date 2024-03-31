@@ -175,7 +175,7 @@ class MDsettings:
 
         # lower
         if self.type is None:
-            LOGGER("type is None")
+            LOGGER.error("type is None")
             exit(1)
         if self.simulator is None:
             LOGGER.error("simulator is None")
