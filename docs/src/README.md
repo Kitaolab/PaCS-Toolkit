@@ -49,7 +49,21 @@ judge -- Yes --> End;
 ```
 
 ## Citation
-```
+```bib
+@article{Ikizawa2024,
+  title = {PaCS-Toolkit: Optimized Software Utilities for Parallel Cascade Selection Molecular Dynamics (PaCS-MD) Simulations and Subsequent Analyses},
+  volume = {128},
+  ISSN = {1520-5207},
+  url = {http://dx.doi.org/10.1021/acs.jpcb.4c01271},
+  DOI = {10.1021/acs.jpcb.4c01271},
+  number = {15},
+  journal = {The Journal of Physical Chemistry B},
+  publisher = {American Chemical Society (ACS)},
+  author = {Ikizawa,  Shinji and Hori,  Tatsuki and Wijaya,  Tegar Nurwahyu and Kono,  Hiroshi and Bai,  Zhen and Kimizono,  Tatsuhiro and Lu,  Wenbo and Tran,  Duy Phuoc and Kitao,  Akio},
+  year = {2024},
+  month = apr,
+  pages = {3631–3642}
+}
 ```
 
 ## Access
