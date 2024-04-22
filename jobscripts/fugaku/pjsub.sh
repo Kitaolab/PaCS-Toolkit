@@ -14,7 +14,7 @@ spack load /23rofh6
 export OMP_NUM_THREADS=12
 path_to_pacstk="/path/to/pacstk"
 
-ln -s $path_to_pacsmd ./.
+ln -s $path_to_pacstk ./.
 
 for trial in {1..1};
 do
