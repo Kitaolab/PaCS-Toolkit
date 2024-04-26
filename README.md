@@ -45,9 +45,9 @@ see [document](https://kitaolab.github.io/PaCS-Toolkit/) for more information.
 
 
 ## Citation
-~~~markdown
+~~~txt
 - PaCS-Toolkit
-[1] Ikizawa, S, Hori, T., Wijana, T.N., Kono, H., Bai, Z., Kimizono, T., Lu, W., Tran, D.P., & Kitao, A. PaCS-Toolkit: Optimized software utilities for parallel cascade selection molecular dynamics (PaCS-MD) simulations and subsequent analyses. J. Phys. Chem. B. 128, 15, 3631-3642 (2024). https://doi.org/10.1021/acs.jpcb.4c01271
+[1] Ikizawa, S.*, Hori, T.*, Wijana, T.N.*, Kono, H., Bai, Z., Kimizono, T., Lu, W., Tran, D.P., & Kitao, A. PaCS-Toolkit: Optimized software utilities for parallel cascade selection molecular dynamics (PaCS-MD) simulations and subsequent analyses. J. Phys. Chem. B. 128, 15, 3631-3642 (2024). https://doi.org/10.1021/acs.jpcb.4c01271
 
 - Original PaCS-MD or targeted-PaCS-MD (t-PaCS-MD)
 [2] Harada, R., & Kitao, A. Parallel cascade selection molecular dynamics (PaCS-MD) to generate conformational transition pathway. J. Chem. Phys. 139, 035103 (2013). https://doi.org/10.1063/1.4813023
