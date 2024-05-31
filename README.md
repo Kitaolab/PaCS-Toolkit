@@ -21,7 +21,7 @@ We believe our package will benefit your research.
 
 ~~~shell
 # Install all feautres of PaCS-ToolKit
-pip install "git+https://github.com/Kitaolab/PaCS-Toolkit.git#egg=pacs[all]"
+pip install "pacs[all] @ git+https://github.com/Kitaolab/PaCS-Toolkit.git"
 ~~~
 
 see [document](https://kitaolab.github.io/PaCS-Toolkit/) for more information.
@@ -36,7 +36,7 @@ conda create -n pacs "python>=3.7" -y
 conda activate pacs
 
 # Install all features of PaCS-ToolKit
-pip install "git+https://github.com/Kitaolab/PaCS-Toolkit.git#egg=pacs[all]"
+pip install "pacs[all] @ git+https://github.com/Kitaolab/PaCS-Toolkit.git"
 ~~~
 
 see [document](https://kitaolab.github.io/PaCS-Toolkit/) for more information.
