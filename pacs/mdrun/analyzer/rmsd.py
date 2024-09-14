@@ -76,26 +76,33 @@ class RMSD(SuperAnalyzer):
         ref = settings.reference
         dir = settings.each_replica(_cycle=cycle, _replica=replica)
 
+        # nojump treatment
+        if settings.nojump is True:
+            pbc_option = "-pbc nojump"
+        else:
+            pbc_option = "-pbc mol -ur compact"
+        
         cmd_image = f"echo 'System' \
                 | {settings.cmd_gmx} trjconv \
                 -f {dir}/prd{extension} \
                 -s {dir}/prd.tpr \
                 -o {dir}/prd_image{extension} \
-                -pbc mol \
-                -ur compact \
-                1> {dir}/center.log 2>&1"  # NOQA: E221
+                {pbc_option} \
+                1> {dir}/image.log 2>&1"  # NOQA: E221
+
         res_image = subprocess.run(cmd_image, shell=True)
         if res_image.returncode != 0:
             LOGGER.error("error occured at image command")
-            LOGGER.error(f"see {dir}/center.log")
+            LOGGER.error(f"see {dir}/image.log")
             exit(1)
 
         cmd_rms = f"echo {selection1} {selection2} \
                 | {settings.cmd_gmx} rms \
                 -f {dir}/prd_image{extension} \
-                -s {ref} \
+                -s {dir}/prd.tpr \
                 -o {dir}/rms.xvg \
                 -n {ndx} \
+                -pbc no \
                 -xvg none 1> {dir}/rms.log 2>&1"  # NOQA: E221
         res_rms = subprocess.run(cmd_rms, shell=True)
         if res_rms.returncode != 0:

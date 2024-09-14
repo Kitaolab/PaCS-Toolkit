@@ -1,5 +1,6 @@
 # RMSD
 - Root Mean Square Deviation
+- Calculate the RMSD relative to the structure specified in `ref`
 
 ### Example
 - The following example generates features about RMSD for MSM analysis
@@ -14,7 +15,7 @@ pacs genfeature rmsd mdtraj -t 1 -tf prd.xtc -top ./inputs/input.gro -ref ./inpu
 
 #### mdtraj
 ```plaintext
-usage: pacs genfeature pca mdtraj [-h] [-tf] [-top] [-od] [-p] [-ref] [-ft] [-fr] [-ct] [-cr]
+usage: pacs genfeature rmsd mdtraj [-h] [-tf] [-top] [-od] [-p] [-ref] [-ft] [-fr] [-ct] [-cr]
 ```
 
 - `-t, --trial` (int):

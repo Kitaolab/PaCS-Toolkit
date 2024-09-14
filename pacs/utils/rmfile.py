@@ -49,10 +49,12 @@ def rmfile(settings: MDsettings, cycle: int) -> None:
             run_rm(f"{dir}/mdout.mdp")
 
             # .cpt
-            run_rm(f"{dir}/prd.cpt")
+            run_rm(f"-f {dir}/*.cpt")
 
             # .tpr
-            run_rm(f"{dir}/prd.tpr")
+            # keep .tpr files if rmmol=false in mdrun,  in case you want to do rmmol afterward
+            if cycle != 0 and settings.rmmol == True:
+                run_rm(f"{dir}/prd.tpr")
 
             # '#backup#': use -f
             run_rm(f"-f {dir}/\#*")  # NOQA: W605

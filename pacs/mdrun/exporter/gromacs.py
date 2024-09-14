@@ -96,31 +96,61 @@ class eGromacs(SuperExporter):
             _cycle=cycle, _replica=results[replica_rank].replica
         )
         out_dir = settings.each_replica(_cycle=cycle + 1, _replica=replica_rank + 1)
+
+        # treatment for centering option
         if settings.centering is True:
-            cmd_trjconv = f"echo {settings.centering_selection} System \
-                    | {settings.cmd_gmx} trjconv \
-                    -f {from_dir}/prd{extension} \
-                    -o {out_dir}/input{settings.structure_extension} \
-                    -s {settings.structure} \
-                    -b {results[replica_rank].frame} \
-                    -n {settings.index_file} \
-                    -pbc whole \
-                    -center \
-                    -e {results[replica_rank].frame} \
-                    1> {from_dir}/trjconv.log 2>&1"  # NOQA: E221
+            centering_option = "-center"
+            args_to_trjconv = f"{settings.centering_selection} System"
         else:
-            cmd_trjconv = f"echo System \
-                    | {settings.cmd_gmx} trjconv \
-                    -f {from_dir}/prd{extension} \
-                    -o {out_dir}/input{settings.structure_extension} \
-                    -s {settings.structure} \
-                    -b {results[replica_rank].frame} \
-                    -e {results[replica_rank].frame} \
-                    1> {from_dir}/trjconv.log 2>&1"  # NOQA: E221
+            centering_option = ""
+            args_to_trjconv = "System"
+        
+        # treatment for nojump option
+        if settings.nojump is True:
+            pbc_option = "-pbc nojump"
+        else:
+            pbc_option = "-pbc whole"
+
+        # First convert trj with -pbc option, and then extract with -b, -e options
+        # If we do the both at the same time, the -pbc nojump does not work properly
+        cmd_trjconv = f"echo {args_to_trjconv} \
+                | {settings.cmd_gmx} trjconv \
+                -f {from_dir}/prd{extension} \
+                -o {from_dir}/prd_image{extension} \
+                -s {from_dir}/prd.tpr \
+                -n {settings.index_file} \
+                {pbc_option} \
+                {centering_option} \
+                1> {from_dir}/trjconv.log 2>&1"  # NOQA: E221
+
         res_trjconv = subprocess.run(cmd_trjconv, shell=True)
+
         if res_trjconv.returncode != 0:
             LOGGER.error("error occurred at trjconv command")
             LOGGER.error(f"see {from_dir}/trjconv.log")
+            exit(1)
+
+        cmd_extract = f"echo System \
+                | {settings.cmd_gmx} trjconv \
+                -f {from_dir}/prd_image{extension} \
+                -o {out_dir}/input{settings.structure_extension} \
+                -s {from_dir}/prd.tpr \
+                -b {results[replica_rank].frame} \
+                -e {results[replica_rank].frame} \
+                -novel \
+                1> {from_dir}/extract.log 2>&1"  # NOQA: E221
+
+        res_extract = subprocess.run(cmd_extract, shell=True)
+
+        if res_extract.returncode != 0:
+            LOGGER.error("error occurred at extract command")
+            LOGGER.error(f"see {from_dir}/extract.log")
+            exit(1)
+        
+        # remove the intermediate trajectory
+        res_rm = subprocess.run(f"rm {from_dir}/prd_image{extension}", shell=True)
+        if res_rm.returncode != 0:
+            LOGGER.error("error occurred at rm command")
             exit(1)
 
     def frame_to_time(self, settings: MDsettings) -> None:

@@ -1,5 +1,7 @@
 # comvec
 - Center of mass vector
+- Calculate the vector between the centers of mass of `s1` and `s2`
+  - The vector is calculated as `s1` - `s2`
 
 ### Example
 - The following example generates features about COM vector for MSM analysis

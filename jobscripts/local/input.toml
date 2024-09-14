@@ -40,3 +40,6 @@ selection4 = "backbone"                             # Selection string for speci
 rmmol = true                                        # Whether rmmol is executed after each cycle
 keep_selection = "not resname OPC"                  # Molecular name or index group to be left in the trajectory when rmmol
 rmfile = true                                       # Whether rmfile is executed after trial
+
+# not valid for analyzer=mdtraj
+# nojump = true                                       # whether to execute nojump treatment only for gmx

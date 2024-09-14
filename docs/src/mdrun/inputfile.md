@@ -4,21 +4,22 @@
 - input file must be in [toml format](https://toml.io/en/).
 
 *Contents*
-- [sample input file](#sample-input-file)
-- [basic option](#basic-option)
-- [simulator option](#simulator-option)
-  - [Gromacs](#gromacs)
-  - [Amber](#amber)
-  - [NAMD](#namd)
-- [analyzer option](#analyzer-option)
-  - [Target](#target)
-  - [RMSD](#rmsd)
-  - [Association](#association)
-  - [Dissociation](#dissociation)
-  - [EdgeExpansion](#edgeexpansion)
-  - [A\_D](#a_d)
-  - [Template](#template)
-- [hidden option (No need to specify)](#hidden-option-no-need-to-specify)
+- [Input file](#input-file)
+  - [sample input file](#sample-input-file)
+  - [basic option](#basic-option)
+  - [simulator option](#simulator-option)
+    - [Gromacs](#gromacs)
+    - [Amber](#amber)
+    - [NAMD](#namd)
+  - [analyzer option](#analyzer-option)
+    - [Target](#target)
+    - [RMSD](#rmsd)
+    - [Association](#association)
+    - [Dissociation](#dissociation)
+    - [EdgeExpansion](#edgeexpansion)
+    - [A\_D](#a_d)
+    - [Template](#template)
+  - [hidden option (No need to specify)](#hidden-option-no-need-to-specify)
 
 ## sample input file
 - please check [here](https://github.com/Kitaolab/PaCS-Toolkit/tree/main/jobscripts)
@@ -94,6 +95,16 @@ rmfile = true                     # Whether rmfile is executed after trial
   - Gromacs index file
 - **trajectory_extension: str, required**
   - Trajectory file extension. ("." is necessary)
+- **nojump: bool, default=false**
+  - whether to execute `-pbc nojump` treatment for the selection feature calculation in `analayzer`, snapshot extraction in `exporter` and performing rmmol
+  - **valid only when `analyzer` is also gromacs**
+  - If `true`, molecules are allowed to get out of the simulation box in order to avoid the error in MSM due to the jumping of break of the molecule over pbc box.
+  - If `false`, molecules are just made whole by `-pbc mol` and can warp across the pbc box.
+  - Be noted that the output `prd.xtc` files are not processed with these `-pbc` options. (only `prd_rmmol.xtc` files are processed)
+  - This option is recommended to use when a/dissociation and a_d pacsmd is performed using gromacs as simulator and analyzer
+  - `nojump=true` can lead too large coordinate value to cause overflow or loss-of-significane problem. It will not happpen in most cases, but be carefull if your ligand is very small and simulation box is very large.
+  - When this options is applied, analyzer can consider the distance even if ligand exceeds simulation box
+  - This option is not present in example input in the [sample input repository](https://github.com/Kitaolab/PaCS-Toolkit-example/tree/main) since this option was added in version 1.1.0
 
 </details>
 
@@ -107,6 +118,7 @@ topology = "/work/topol.top"            # Topology file such as top, parm7, psf,
 mdconf = "/work/parameter.mdp"          # Parameter file such as mdp, mdin, namd, etc.
 index_file = "/work/index.ndx"          # Gromacs index file
 trajectory_extension = ".xtc"           # Trajectory file extension. ("." is necessary)
+nojump = true                           # whether to execute nojump treatment only for gmx
 ```
 
 
@@ -527,6 +539,7 @@ user-defined-variable2 = "hoge"
 
 ## hidden option (No need to specify)
 <details><summary> click here </summary>
+
 - **cmd_gmx: str**
   - Gromacs command (ex. gmx, gmx_mpi)
   - will be created from `cmd_serial`
@@ -536,4 +549,5 @@ user-defined-variable2 = "hoge"
 - **structure_extension: str**
   - Structure file extension
   - will be created from `structure`
+
 </details>

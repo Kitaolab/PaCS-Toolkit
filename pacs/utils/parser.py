@@ -1,4 +1,5 @@
 import argparse
+import tomli
 import re
 import sys
 from collections import defaultdict
@@ -13,7 +14,7 @@ from pacs.utils.genfeature import comdist, comvec, rmsd, xyz
 from pacs.utils.genrepresent import genrepresent
 from pacs.utils.logger import generate_logger
 from pacs.utils.rmfile import rmfile_all
-from pacs.utils.rmmol import make_top, rmmol_all
+from pacs.utils.rmmol import make_top, rmmol_all, rmmol_log_add_info
 
 # toml lib is not used
 
@@ -210,6 +211,11 @@ class Parser:
             default=".xtc",
             choices=[".xtc", ".trr"],
             help="gromacs trajectory extension. (e.g. -e .xtc, -e .trr)",
+        )
+        parser_rmmol_gmx.add_argument(
+            "--nojump",
+            action="store_true",
+            help="execute gromacs pbc nojump treatment",
         )
 
         # rmmol cpptraj
@@ -873,6 +879,7 @@ class Parser:
                 dic["analyzer"] = "cpptraj"
             conf = MDsettings.__new__(MDsettings)
             conf.__dict__.update(dic)
+            self.check_version(f"./trial{args.trial:03}")
             genrepresent(conf)
             exit(0)
 
@@ -892,12 +899,15 @@ class Parser:
                 dic["analyzer"] = "gromacs"
                 dic["cmd_gmx"] = args.cmd_gmx
                 dic["index_file"] = args.index_file
+                dic["nojump"] = args.nojump
             elif sys.argv[2] == "cpptraj":
                 dic["analyzer"] = "cpptraj"
                 dic["topology"] = args.topology
             conf = MDsettings(**dic)
+            self.check_version(f"./trial{args.trial:03}")
             make_top(conf)
             rmmol_all(conf)
+            rmmol_log_add_info(conf)
             exit(0)
 
         if sys.argv[1] == "rmfile":
@@ -905,6 +915,7 @@ class Parser:
             dic["trial"] = int(args.trial)
             dic["simulator"] = args.simulator
             conf = MDsettings(**dic)
+            self.check_version(f"./trial{args.trial:03}")
             rmfile_all(conf)
             exit(0)
 
@@ -941,6 +952,7 @@ class Parser:
                     dic["selection2"] = args.ref_selection
                     dic["n_parallel"] = int(args.n_parallel)
                     conf = MDsettings(**dic)
+                    self.check_version(f"./trial{args.trial:03}")
                     fit_trial(conf, args.trj_file, args.out)
                     exit(0)
 
@@ -970,6 +982,7 @@ class Parser:
                     dic["selection1"] = args.selection
                     dic["analyzer"] = "mdtraj"
                     conf = MDsettings(**dic)
+                    self.check_version(f"./trial{args.trial:03}")
                     gencom_trial(
                         conf,
                         args.trial,
@@ -984,6 +997,7 @@ class Parser:
             if len(sys.argv) == 2:
                 LOGGER.error("Use -h")
                 exit(1)
+            self.check_version(f"./trial{args.trial:03}")
             if sys.argv[2] == "comvec":
                 comvec.cal_feature_trial(
                     args.trial,
@@ -1041,23 +1055,40 @@ class Parser:
             return None
 
     def read_input(self, file: str) -> dict:
-        dic = defaultdict(str)
-        with open(file, "r") as f:
-            for line in f.readlines():
-                line = line.strip()
-                if line.startswith("#"):
-                    continue
-                if "=" not in line:
-                    continue
-                result = self.parse_line(line)
-                if result is None:
-                    continue
-                if len(result) != 2:
-                    continue
-                key, value = result[0].strip(), result[1].strip()
-                key = key.replace('"', "").replace("'", "")
-                value = value.replace('"', "").replace("'", "")
-                if "#" in value:
-                    value = value.split("#")[0].strip()
-                dic[key] = value
-        return dic
+        with open(file, "rb") as f:
+            toml_dict = tomli.load(f)
+        return toml_dict
+        # dic = defaultdict(str)
+        # with open(file, "r") as f:
+        #     for line in f.readlines():
+        #         line = line.strip()
+        #         if line.startswith("#"):
+        #             continue
+        #         if "=" not in line:
+        #             continue
+        #         result = self.parse_line(line)
+        #         if result is None:
+        #             continue
+        #         if len(result) != 2:
+        #             continue
+        #         key, value = result[0].strip(), result[1].strip()
+        #         key = key.replace('"', "").replace("'", "")
+        #         value = value.replace('"', "").replace("'", "")
+        #         if "#" in value:
+        #             value = value.split("#")[0].strip()
+        #         dic[key] = value
+        # return dic
+
+    def check_version(self, trial_dir: str):
+        version_file = f"{trial_dir}/pacstk.version"
+        if Path(version_file).exists():
+            with open(version_file) as f:
+                line = f.readline().strip()
+                if __version__ != line:
+                    LOGGER.error("PaCS-Toolkit version error")
+                    LOGGER.error(f"Version used in {self.settings.each_trial()} is {line},")
+                    LOGGER.error(f"But you're using PaCS-Toolkit {__version__}")
+                    exit(1)
+        else:
+            LOGGER.error(f"Version file: {version_file} is not found")
+            exit(1)
