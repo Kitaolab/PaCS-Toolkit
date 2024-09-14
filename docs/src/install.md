@@ -12,7 +12,7 @@
 
 ## Requirements
 - [Python](https://www.python.org/) >= 3.7 (but python >= 3.8 is recommended because of deeptime)
-- PaCS-ToolKit currently supports 3 simulator
+- PaCS-Toolkit currently supports 3 simulator
   - [Gromacs](https://www.gromacs.org/) >= 2022.2 tested
   - [Amber](https://ambermd.org/index.php) >= 2023 tested
   - [Namd](https://www.ks.uiuc.edu/Research/namd/) >= 2021-02-20 tested

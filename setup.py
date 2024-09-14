@@ -10,8 +10,8 @@ setup(
     version=__version__,  # type: ignore[name-defined]  # NOQA: F821
     packages=find_packages(),
     description=(
-        "PaCS-ToolKit:",
-        "Tool Kit for Parallel Cascade Selection Molecular Dynamic Simulation",
+        "PaCS-Toolkit:",
+        "Tool kit for Parallel Cascade Selection Molecular Dynamic Simulation",
     ),
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
