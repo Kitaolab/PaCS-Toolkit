@@ -193,7 +193,7 @@
 <pre><code class="language-shell">pacs rmmol mdtraj -t 1 -k "not water" -e .xtc -m trial001/cycle000/replica001/prd.gro
 </code></pre>
 <h4 id="gromacs"><a class="header" href="#gromacs">gromacs</a></h4>
-<pre><code class="language-shell">pacs rmmol gmx -t 1 -k "not_water" -e .xtc -n index.ndx -g gmx 
+<pre><code class="language-shell">pacs rmmol gmx -t 1 -k "not_water" -e .xtc -n index.ndx -g gmx --nojump
 </code></pre>
 <h4 id="cpptraj"><a class="header" href="#cpptraj">cpptraj</a></h4>
 <pre><code class="language-shell">pacs rmmol cpptraj -t 1 -k "not water" -e .nc -p trial001/cycle000/replica001/prd.parm7
