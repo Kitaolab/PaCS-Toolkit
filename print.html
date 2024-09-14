@@ -301,7 +301,7 @@ judge -- Yes --&gt; End;
 pip install -e ".[mdtraj]"
 
 # Or install by conda and pip
-conda create -n pacsmd "python&gt;=3.7" -y
+conda create -n pacsmd "python&gt;=3.8" -y
 conda activate pacsmd
 pip install -e ".[mdtraj]"
 </code></pre>
@@ -414,7 +414,7 @@ trial002/
 <li>For extracting CVs, we got <code>pacs genfeature</code> command. But this command provides you only frequently used CV such as com-distance, com-vector and rmsd.</li>
 <li>So if you want to use other specific CVs, you need to write a code by yourself.</li>
 </ul>
-<pre><code class="language-shell">$ pacs genfeature comdist mdtraj -t 1 -tf prd.xtc -top inputs/example_gromacs/input.gro -s1 "residue 1" -s2 "residue 9" 
+<pre><code class="language-shell">$ pacs genfeature comdist mdtraj -t 1 -tf prd.xtc -top inputs/example_gromacs/input.gro -s1 "residue 1" -s2 "residue 9"
 $ ls
 comdist-CV/
 </code></pre>
@@ -446,25 +446,24 @@ comdist-CV/
 </ul>
 <h2 id="requirements"><a class="header" href="#requirements">Requirements</a></h2>
 <ul>
-<li><a href="https://www.python.org/">Python</a> &gt;= 3.7</li>
-<li>PaCS-ToolKit currently supports 3 simulator
+<li><a href="https://www.python.org/">Python</a> &gt;= 3.7 (but python &gt;= 3.8 is recommended because of deeptime)</li>
+<li>PaCS-Toolkit currently supports 3 simulator
 <ul>
-<li><a href="https://www.gromacs.org/">Gromacs</a></li>
-<li><a href="https://ambermd.org/index.php">Amber</a></li>
-<li><a href="https://www.ks.uiuc.edu/Research/namd/">Namd</a></li>
+<li><a href="https://www.gromacs.org/">Gromacs</a> &gt;= 2022.2 tested</li>
+<li><a href="https://ambermd.org/index.php">Amber</a> &gt;= 2023 tested</li>
+<li><a href="https://www.ks.uiuc.edu/Research/namd/">Namd</a> &gt;= 2021-02-20 tested</li>
 </ul>
 </li>
 </ul>
 <h2 id="1-install-by-pip"><a class="header" href="#1-install-by-pip">1. Install by pip</a></h2>
 <h3 id="11-install-by-conda-and-pip"><a class="header" href="#11-install-by-conda-and-pip">1.1 Install by conda and pip</a></h3>
-<pre><code class="language-shell">conda create -n pacsmd "python&gt;=3.7" -y
+<pre><code class="language-shell">conda create -n pacsmd "python&gt;=3.8" -y
 conda activate pacsmd
 </code></pre>
 <ul>
 <li>if using whole pacstk function</li>
 </ul>
 <pre><code class="language-shell">pip install "pacs[all] @ git+https://github.com/Kitaolab/PaCS-Toolkit.git"
-pip install pyemma
 </code></pre>
 <ul>
 <li>elif using "pacs mdrun" and analyzer == "mdtraj"</li>
@@ -477,10 +476,13 @@ pip install pyemma
 <pre><code class="language-shell">pip install "pacs @ git+https://github.com/Kitaolab/PaCS-Toolkit.git"
 </code></pre>
 <ul>
-<li>elif performing MSM</li>
+<li>elif performing MSM
+<ul>
+<li>python &gt;= 3.8 is recommended because of deeptime</li>
+</ul>
+</li>
 </ul>
 <pre><code class="language-shell">pip install "pacs[msm] @ git+https://github.com/Kitaolab/PaCS-Toolkit.git"
-pip install pyemma
 </code></pre>
 <h3 id="12-install-by-pip"><a class="header" href="#12-install-by-pip">1.2. Install by pip</a></h3>
 <ul>
@@ -499,10 +501,13 @@ pip install pyemma
 <pre><code class="language-shell">pip install "pacs @ git+https://github.com/Kitaolab/PaCS-Toolkit.git"
 </code></pre>
 <ul>
-<li>elif performing MSM</li>
+<li>elif performing MSM
+<ul>
+<li>python &gt;= 3.8 is recommended because of deeptime</li>
+</ul>
+</li>
 </ul>
 <pre><code class="language-shell">pip install "pacs[msm] @ git+https://github.com/Kitaolab/PaCS-Toolkit.git"
-pip install pyemma
 </code></pre>
 <h2 id="2-get-source-code-from-github"><a class="header" href="#2-get-source-code-from-github">2. Get source code from github</a></h2>
 <ul>
@@ -520,18 +525,17 @@ tar -xvzf ${version}.tar.gz
 cd pacsmd-${version}
 </code></pre>
 <h3 id="21-install-by-conda-and-pip-locally"><a class="header" href="#21-install-by-conda-and-pip-locally">2.1. Install by conda and pip locally</a></h3>
-<pre><code class="language-shell">conda create -n pacsmd "python&gt;=3.7" -y
+<pre><code class="language-shell">conda create -n pacsmd "python&gt;=3.8" -y
 conda activate pacsmd
 </code></pre>
 <ul>
 <li>if using whole pacstk function
 <ul>
-<li>pyemma does not recommend pip-install</li>
+<li>python &gt;= 3.8 is recommended because of deeptime</li>
 </ul>
 </li>
 </ul>
 <pre><code class="language-shell">pip install -e ".[all]"
-conda install -c conda-forge pyemma
 </code></pre>
 <ul>
 <li>elif using "pacs mdrun" and analyzer == "mdtraj"</li>
@@ -549,25 +553,19 @@ conda install -c conda-forge pyemma
 <pre><code class="language-shell">pip install -e "."
 </code></pre>
 <ul>
-<li>elif performing MSM
-<ul>
-<li>pyemma does not recommend pip-install</li>
-</ul>
-</li>
+<li>elif performing MSM</li>
 </ul>
 <pre><code>pip install -e ".[msm]"
-conda install -c conda-forge pyemma
 </code></pre>
 <h3 id="22-install-by-pip-locally"><a class="header" href="#22-install-by-pip-locally">2.2. Install by pip locally</a></h3>
 <ul>
 <li>if using whole pacstk function
 <ul>
-<li>pyemma does not work, conda is recommend</li>
+<li>python &gt;= 3.8 is recommended because of deeptime</li>
 </ul>
 </li>
 </ul>
 <pre><code class="language-shell">pip install -e ".[all]"
-pip install pyemma
 </code></pre>
 <ul>
 <li>elif using "pacs mdrun" and analyzer == "mdtraj"</li>
@@ -587,12 +585,11 @@ pip install pyemma
 <ul>
 <li>elif performing MSM
 <ul>
-<li>sometimes pyemma does not work, conda is recommend</li>
+<li>python &gt;= 3.8 is recommended because of deeptime</li>
 </ul>
 </li>
 </ul>
 <pre><code class="language-shell">pip install -e ".[msm]"
-pip install pyemma
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="mdrun"><a class="header" href="#mdrun">mdrun</a></h1>
 <ul>
@@ -1718,6 +1715,8 @@ user-defined-variable2 = "hoge"
 </ul>
 <p><em>Contents</em></p>
 <ul>
+<li><a href="mdrun/inputfile.html#input-file">Input file</a>
+<ul>
 <li><a href="mdrun/inputfile.html#sample-input-file">sample input file</a></li>
 <li><a href="mdrun/inputfile.html#basic-option">basic option</a></li>
 <li><a href="mdrun/inputfile.html#simulator-option">simulator option</a>
@@ -1739,6 +1738,8 @@ user-defined-variable2 = "hoge"
 </ul>
 </li>
 <li><a href="mdrun/inputfile.html#hidden-option-no-need-to-specify">hidden option (No need to specify)</a></li>
+</ul>
+</li>
 </ul>
 <h2 id="sample-input-file"><a class="header" href="#sample-input-file">sample input file</a></h2>
 <ul>
@@ -1866,6 +1867,19 @@ rmfile = true                     # Whether rmfile is executed after trial
 <li>Trajectory file extension. ("." is necessary)</li>
 </ul>
 </li>
+<li><strong>nojump: bool, default=false</strong>
+<ul>
+<li>whether to execute <code>-pbc nojump</code> treatment for the selection feature calculation in <code>analayzer</code>, snapshot extraction in <code>exporter</code> and performing rmmol</li>
+<li><strong>valid only when <code>analyzer</code> is also gromacs</strong></li>
+<li>If <code>true</code>, molecules are allowed to get out of the simulation box in order to avoid the error in MSM due to the jumping of break of the molecule over pbc box.</li>
+<li>If <code>false</code>, molecules are just made whole by <code>-pbc mol</code> and can warp across the pbc box.</li>
+<li>Be noted that the output <code>prd.xtc</code> files are not processed with these <code>-pbc</code> options. (only <code>prd_rmmol.xtc</code> files are processed)</li>
+<li>This option is recommended to use when a/dissociation and a_d pacsmd is performed using gromacs as simulator and analyzer</li>
+<li><code>nojump=true</code> can lead too large coordinate value to cause overflow or loss-of-significane problem. It will not happpen in most cases, but be carefull if your ligand is very small and simulation box is very large.</li>
+<li>When this options is applied, analyzer can consider the distance even if ligand exceeds simulation box</li>
+<li>This option is not present in example input in the <a href="https://github.com/Kitaolab/PaCS-Toolkit-example/tree/main">sample input repository</a> since this option was added in version 1.1.0</li>
+</ul>
+</li>
 </ul>
 </details>
 <pre><code class="language-toml">simulator = "gromacs"                   # Software used inside PaCS-MD
@@ -1877,6 +1891,7 @@ topology = "/work/topol.top"            # Topology file such as top, parm7, psf,
 mdconf = "/work/parameter.mdp"          # Parameter file such as mdp, mdin, namd, etc.
 index_file = "/work/index.ndx"          # Gromacs index file
 trajectory_extension = ".xtc"           # Trajectory file extension. ("." is necessary)
+nojump = true                           # whether to execute nojump treatment only for gmx
 </code></pre>
 <h3 id="amber-1"><a class="header" href="#amber-1">Amber</a></h3>
 <details><summary> click here </summary>
@@ -2489,15 +2504,26 @@ user-defined-variable2 = "hoge"
 </code></pre>
 <h2 id="hidden-option-no-need-to-specify"><a class="header" href="#hidden-option-no-need-to-specify">hidden option (No need to specify)</a></h2>
 <details><summary> click here </summary>
-- **cmd_gmx: str**
-  - Gromacs command (ex. gmx, gmx_mpi)
-  - will be created from `cmd_serial`
-- **top_mdtraj: str**
-  - topology file for mdtraj
-  - will be created from `input.toml`
-- **structure_extension: str**
-  - Structure file extension
-  - will be created from `structure`
+<ul>
+<li><strong>cmd_gmx: str</strong>
+<ul>
+<li>Gromacs command (ex. gmx, gmx_mpi)</li>
+<li>will be created from <code>cmd_serial</code></li>
+</ul>
+</li>
+<li><strong>top_mdtraj: str</strong>
+<ul>
+<li>topology file for mdtraj</li>
+<li>will be created from <code>input.toml</code></li>
+</ul>
+</li>
+<li><strong>structure_extension: str</strong>
+<ul>
+<li>Structure file extension</li>
+<li>will be created from <code>structure</code></li>
+</ul>
+</li>
+</ul>
 </details>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="reference"><a class="header" href="#reference">Reference</a></h1>
 <pre><code class="language-markdown">- PaCS-Toolkit
@@ -2550,7 +2576,7 @@ The paper is under consideration. The information will be updated upon publicati
 <pre><code class="language-shell">pacs rmmol mdtraj -t 1 -k "not water" -e .xtc -m trial001/cycle000/replica001/prd.gro
 </code></pre>
 <h4 id="gromacs-2"><a class="header" href="#gromacs-2">gromacs</a></h4>
-<pre><code class="language-shell">pacs rmmol gmx -t 1 -k "not_water" -e .xtc -n index.ndx -g gmx 
+<pre><code class="language-shell">pacs rmmol gmx -t 1 -k "not_water" -e .xtc -n index.ndx -g gmx --nojump
 </code></pre>
 <h4 id="cpptraj"><a class="header" href="#cpptraj">cpptraj</a></h4>
 <pre><code class="language-shell">pacs rmmol cpptraj -t 1 -k "not water" -e .nc -p trial001/cycle000/replica001/prd.parm7
@@ -2608,6 +2634,13 @@ The paper is under consideration. The information will be updated upon publicati
 <li><code>-g, --cmd_gmx</code> (str):
 <ul>
 <li>gromacs command prefix (e.g. <code>-g gmx</code>)</li>
+</ul>
+</li>
+<li><code>--nojump</code> (bool):
+<ul>
+<li>whether to execute <code>-pbc nojump</code> treatment for the trajectory (e.g. <code>--nojump</code>)</li>
+<li>If your PaCS-MD trajectory was generated with <code>nojump=true</code>, it is strongly strongly recommended to use this options as well</li>
+<li>Also refer to the <code>mdrun/inputfile</code> page for more details.</li>
 </ul>
 </li>
 </ul>
@@ -2687,11 +2720,11 @@ for 1 trial)</li>
 <pre><code class="language-shell">pacs fit traj mdtraj -tf ./trial001/cycle001/replica001/prd.xtc -top ./inputs/input.gro -r ./inputs/input.gro -ts "backbone" -rs "backbone"
 </code></pre>
 <h4 id="for-single-trial"><a class="header" href="#for-single-trial">for single trial</a></h4>
-<pre><code class="language-shell">pacs fit trial mdtraj -t 1 -s ./trial001/cycle001/replica001/prd.pdb -r ./trial001/cycle001/replica001/prd.pdb -ts "protein" -rs "protein" -tf prd.xtc -p 10
+<pre><code class="language-shell">pacs fit trial mdtraj -t 1 -top ./trial001/cycle001/replica001/prd.pdb -r ./trial001/cycle001/replica001/prd.pdb -ts "protein" -rs "protein" -tf prd.xtc -p 10
 </code></pre>
 <h3 id="arguments-3"><a class="header" href="#arguments-3">Arguments</a></h3>
 <h4 id="for-single-trajectory-1"><a class="header" href="#for-single-trajectory-1">for single trajectory</a></h4>
-<pre><code class="language-plaintext">usage: pacs fit mdtraj [-h] [-tf] [-top] [-r] [-ts] [-rs] [-p] [-o]
+<pre><code class="language-plaintext">usage: pacs fit traj mdtraj [-h] [-tf] [-top] [-r] [-ts] [-rs] [-p] [-o]
 </code></pre>
 <ul>
 <li><code>-tf, --trj_file</code> (str):
@@ -2701,7 +2734,7 @@ for 1 trial)</li>
 </li>
 <li><code>-top, --topology</code> (str):
 <ul>
-<li>topology file path for loading trajectory (e.g. <code>-s trial001/cycle000/replica001/prd.pdb</code>)</li>
+<li>topology file path for loading trajectory (e.g. <code>-top trial001/cycle000/replica001/prd.pdb</code>)</li>
 </ul>
 </li>
 <li><code>-r, --ref_structure</code> (str):
@@ -2748,7 +2781,7 @@ for 1 trial)</li>
 </li>
 <li><code>-top, --topology</code> (str):
 <ul>
-<li>topology file path for loading trajectory (e.g. <code>-s trial001/cycle000/replica001/prd.pdb</code>)</li>
+<li>topology file path for loading trajectory (e.g. <code>-top trial001/cycle000/replica001/prd.pdb</code>)</li>
 </ul>
 </li>
 <li><code>-r, --ref_structure</code> (str):
@@ -2978,17 +3011,21 @@ for 1 trial)</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="genfeature"><a class="header" href="#genfeature">genfeature</a></h1>
 <ul>
-<li>This command is used after executing <code>pacs mdrun</code>.</li>
-<li>This command generates data that will be used for MSM analysis.</li>
-<li>This command supports parallel process.</li>
+<li>This command should be executed after running <code>pacs mdrun</code>.</li>
+<li>It generates feature data in <code>.npy</code> format, which is cconvenient for  MSM analysis in Python.
+<ul>
+<li>Feature data files (e.g., <code>t001c002r010.npy</code>) are stored in the directory specified with the <code>-od</code> option.</li>
+<li>Each <code>.npy</code> file has the <code>np.arry</code> in the shape as described in the table below.</li>
 </ul>
-<div class="table-wrapper"><table><thead><tr><th>feature</th><th>mdtraj</th><th>gmx</th><th>cpptraj</th></tr></thead><tbody>
-<tr><td>comdist</td><td>o</td><td>x</td><td>x</td></tr>
-<tr><td>comvec</td><td>o</td><td>x</td><td>x</td></tr>
-<tr><td>pca</td><td>o</td><td>x</td><td>x</td></tr>
-<tr><td>tica</td><td>o</td><td>x</td><td>x</td></tr>
-<tr><td>rmsd</td><td>o</td><td>x</td><td>x</td></tr>
-<tr><td>xyz</td><td>o</td><td>x</td><td>x</td></tr>
+</li>
+<li>This command supports parallel processing.</li>
+</ul>
+<p>Currently implemented analysis tools and the shape of the output data in <code>.npy</code> files.</p>
+<div class="table-wrapper"><table><thead><tr><th>feature</th><th>mdtraj</th><th>gmx</th><th>cpptraj</th><th>shape of <code>.npy</code></th></tr></thead><tbody>
+<tr><td>comdist</td><td>o</td><td>x</td><td>x</td><td>(n_frames,)</td></tr>
+<tr><td>comvec</td><td>o</td><td>x</td><td>x</td><td>(n_frames, 3)</td></tr>
+<tr><td>rmsd</td><td>o</td><td>x</td><td>x</td><td>(n_frames,)</td></tr>
+<tr><td>xyz</td><td>o</td><td>x</td><td>x</td><td>(n_frames, n_atoms, 3)</td></tr>
 </tbody></table>
 </div><div style="break-before: page; page-break-before: always;"></div><h1 id="comdist"><a class="header" href="#comdist">comdist</a></h1>
 <ul>
@@ -3046,6 +3083,11 @@ for 1 trial)</li>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="comvec"><a class="header" href="#comvec">comvec</a></h1>
 <ul>
 <li>Center of mass vector</li>
+<li>Calculate the vector between the centers of mass of <code>s1</code> and <code>s2</code>
+<ul>
+<li>The vector is calculated as <code>s1</code> - <code>s2</code></li>
+</ul>
+</li>
 </ul>
 <h3 id="example-9"><a class="header" href="#example-9">Example</a></h3>
 <ul>
@@ -3113,6 +3155,7 @@ for 1 trial)</li>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="rmsd-4"><a class="header" href="#rmsd-4">RMSD</a></h1>
 <ul>
 <li>Root Mean Square Deviation</li>
+<li>Calculate the RMSD relative to the structure specified in <code>ref</code></li>
 </ul>
 <h3 id="example-10"><a class="header" href="#example-10">Example</a></h3>
 <ul>
@@ -3123,7 +3166,7 @@ for 1 trial)</li>
 </code></pre>
 <h3 id="arguments-9"><a class="header" href="#arguments-9">Arguments</a></h3>
 <h4 id="mdtraj-9"><a class="header" href="#mdtraj-9">mdtraj</a></h4>
-<pre><code class="language-plaintext">usage: pacs genfeature pca mdtraj [-h] [-tf] [-top] [-od] [-p] [-ref] [-ft] [-fr] [-ct] [-cr]
+<pre><code class="language-plaintext">usage: pacs genfeature rmsd mdtraj [-h] [-tf] [-top] [-od] [-p] [-ref] [-ft] [-fr] [-ct] [-cr]
 </code></pre>
 <ul>
 <li><code>-t, --trial</code> (int):

@@ -205,7 +205,7 @@
 pip install -e ".[mdtraj]"
 
 # Or install by conda and pip
-conda create -n pacsmd "python&gt;=3.7" -y
+conda create -n pacsmd "python&gt;=3.8" -y
 conda activate pacsmd
 pip install -e ".[mdtraj]"
 </code></pre>
@@ -318,7 +318,7 @@ trial002/
 <li>For extracting CVs, we got <code>pacs genfeature</code> command. But this command provides you only frequently used CV such as com-distance, com-vector and rmsd.</li>
 <li>So if you want to use other specific CVs, you need to write a code by yourself.</li>
 </ul>
-<pre><code class="language-shell">$ pacs genfeature comdist mdtraj -t 1 -tf prd.xtc -top inputs/example_gromacs/input.gro -s1 "residue 1" -s2 "residue 9" 
+<pre><code class="language-shell">$ pacs genfeature comdist mdtraj -t 1 -tf prd.xtc -top inputs/example_gromacs/input.gro -s1 "residue 1" -s2 "residue 9"
 $ ls
 comdist-CV/
 </code></pre>

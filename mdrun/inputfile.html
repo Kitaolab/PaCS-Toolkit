@@ -180,6 +180,8 @@
 </ul>
 <p><em>Contents</em></p>
 <ul>
+<li><a href="#input-file">Input file</a>
+<ul>
 <li><a href="#sample-input-file">sample input file</a></li>
 <li><a href="#basic-option">basic option</a></li>
 <li><a href="#simulator-option">simulator option</a>
@@ -201,6 +203,8 @@
 </ul>
 </li>
 <li><a href="#hidden-option-no-need-to-specify">hidden option (No need to specify)</a></li>
+</ul>
+</li>
 </ul>
 <h2 id="sample-input-file"><a class="header" href="#sample-input-file">sample input file</a></h2>
 <ul>
@@ -328,6 +332,19 @@ rmfile = true                     # Whether rmfile is executed after trial
 <li>Trajectory file extension. ("." is necessary)</li>
 </ul>
 </li>
+<li><strong>nojump: bool, default=false</strong>
+<ul>
+<li>whether to execute <code>-pbc nojump</code> treatment for the selection feature calculation in <code>analayzer</code>, snapshot extraction in <code>exporter</code> and performing rmmol</li>
+<li><strong>valid only when <code>analyzer</code> is also gromacs</strong></li>
+<li>If <code>true</code>, molecules are allowed to get out of the simulation box in order to avoid the error in MSM due to the jumping of break of the molecule over pbc box.</li>
+<li>If <code>false</code>, molecules are just made whole by <code>-pbc mol</code> and can warp across the pbc box.</li>
+<li>Be noted that the output <code>prd.xtc</code> files are not processed with these <code>-pbc</code> options. (only <code>prd_rmmol.xtc</code> files are processed)</li>
+<li>This option is recommended to use when a/dissociation and a_d pacsmd is performed using gromacs as simulator and analyzer</li>
+<li><code>nojump=true</code> can lead too large coordinate value to cause overflow or loss-of-significane problem. It will not happpen in most cases, but be carefull if your ligand is very small and simulation box is very large.</li>
+<li>When this options is applied, analyzer can consider the distance even if ligand exceeds simulation box</li>
+<li>This option is not present in example input in the <a href="https://github.com/Kitaolab/PaCS-Toolkit-example/tree/main">sample input repository</a> since this option was added in version 1.1.0</li>
+</ul>
+</li>
 </ul>
 </details>
 <pre><code class="language-toml">simulator = "gromacs"                   # Software used inside PaCS-MD
@@ -339,6 +356,7 @@ topology = "/work/topol.top"            # Topology file such as top, parm7, psf,
 mdconf = "/work/parameter.mdp"          # Parameter file such as mdp, mdin, namd, etc.
 index_file = "/work/index.ndx"          # Gromacs index file
 trajectory_extension = ".xtc"           # Trajectory file extension. ("." is necessary)
+nojump = true                           # whether to execute nojump treatment only for gmx
 </code></pre>
 <h3 id="amber"><a class="header" href="#amber">Amber</a></h3>
 <details><summary> click here </summary>
@@ -951,15 +969,26 @@ user-defined-variable2 = "hoge"
 </code></pre>
 <h2 id="hidden-option-no-need-to-specify"><a class="header" href="#hidden-option-no-need-to-specify">hidden option (No need to specify)</a></h2>
 <details><summary> click here </summary>
-- **cmd_gmx: str**
-  - Gromacs command (ex. gmx, gmx_mpi)
-  - will be created from `cmd_serial`
-- **top_mdtraj: str**
-  - topology file for mdtraj
-  - will be created from `input.toml`
-- **structure_extension: str**
-  - Structure file extension
-  - will be created from `structure`
+<ul>
+<li><strong>cmd_gmx: str</strong>
+<ul>
+<li>Gromacs command (ex. gmx, gmx_mpi)</li>
+<li>will be created from <code>cmd_serial</code></li>
+</ul>
+</li>
+<li><strong>top_mdtraj: str</strong>
+<ul>
+<li>topology file for mdtraj</li>
+<li>will be created from <code>input.toml</code></li>
+</ul>
+</li>
+<li><strong>structure_extension: str</strong>
+<ul>
+<li>Structure file extension</li>
+<li>will be created from <code>structure</code></li>
+</ul>
+</li>
+</ul>
 </details>
 
                     </main>

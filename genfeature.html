@@ -175,17 +175,21 @@
                     <main>
                         <h1 id="genfeature"><a class="header" href="#genfeature">genfeature</a></h1>
 <ul>
-<li>This command is used after executing <code>pacs mdrun</code>.</li>
-<li>This command generates data that will be used for MSM analysis.</li>
-<li>This command supports parallel process.</li>
+<li>This command should be executed after running <code>pacs mdrun</code>.</li>
+<li>It generates feature data in <code>.npy</code> format, which is cconvenient for  MSM analysis in Python.
+<ul>
+<li>Feature data files (e.g., <code>t001c002r010.npy</code>) are stored in the directory specified with the <code>-od</code> option.</li>
+<li>Each <code>.npy</code> file has the <code>np.arry</code> in the shape as described in the table below.</li>
 </ul>
-<div class="table-wrapper"><table><thead><tr><th>feature</th><th>mdtraj</th><th>gmx</th><th>cpptraj</th></tr></thead><tbody>
-<tr><td>comdist</td><td>o</td><td>x</td><td>x</td></tr>
-<tr><td>comvec</td><td>o</td><td>x</td><td>x</td></tr>
-<tr><td>pca</td><td>o</td><td>x</td><td>x</td></tr>
-<tr><td>tica</td><td>o</td><td>x</td><td>x</td></tr>
-<tr><td>rmsd</td><td>o</td><td>x</td><td>x</td></tr>
-<tr><td>xyz</td><td>o</td><td>x</td><td>x</td></tr>
+</li>
+<li>This command supports parallel processing.</li>
+</ul>
+<p>Currently implemented analysis tools and the shape of the output data in <code>.npy</code> files.</p>
+<div class="table-wrapper"><table><thead><tr><th>feature</th><th>mdtraj</th><th>gmx</th><th>cpptraj</th><th>shape of <code>.npy</code></th></tr></thead><tbody>
+<tr><td>comdist</td><td>o</td><td>x</td><td>x</td><td>(n_frames,)</td></tr>
+<tr><td>comvec</td><td>o</td><td>x</td><td>x</td><td>(n_frames, 3)</td></tr>
+<tr><td>rmsd</td><td>o</td><td>x</td><td>x</td><td>(n_frames,)</td></tr>
+<tr><td>xyz</td><td>o</td><td>x</td><td>x</td><td>(n_frames, n_atoms, 3)</td></tr>
 </tbody></table>
 </div>
                     </main>

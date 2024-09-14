@@ -192,11 +192,11 @@ for 1 trial)</li>
 <pre><code class="language-shell">pacs fit traj mdtraj -tf ./trial001/cycle001/replica001/prd.xtc -top ./inputs/input.gro -r ./inputs/input.gro -ts "backbone" -rs "backbone"
 </code></pre>
 <h4 id="for-single-trial"><a class="header" href="#for-single-trial">for single trial</a></h4>
-<pre><code class="language-shell">pacs fit trial mdtraj -t 1 -s ./trial001/cycle001/replica001/prd.pdb -r ./trial001/cycle001/replica001/prd.pdb -ts "protein" -rs "protein" -tf prd.xtc -p 10
+<pre><code class="language-shell">pacs fit trial mdtraj -t 1 -top ./trial001/cycle001/replica001/prd.pdb -r ./trial001/cycle001/replica001/prd.pdb -ts "protein" -rs "protein" -tf prd.xtc -p 10
 </code></pre>
 <h3 id="arguments"><a class="header" href="#arguments">Arguments</a></h3>
 <h4 id="for-single-trajectory-1"><a class="header" href="#for-single-trajectory-1">for single trajectory</a></h4>
-<pre><code class="language-plaintext">usage: pacs fit mdtraj [-h] [-tf] [-top] [-r] [-ts] [-rs] [-p] [-o]
+<pre><code class="language-plaintext">usage: pacs fit traj mdtraj [-h] [-tf] [-top] [-r] [-ts] [-rs] [-p] [-o]
 </code></pre>
 <ul>
 <li><code>-tf, --trj_file</code> (str):
@@ -206,7 +206,7 @@ for 1 trial)</li>
 </li>
 <li><code>-top, --topology</code> (str):
 <ul>
-<li>topology file path for loading trajectory (e.g. <code>-s trial001/cycle000/replica001/prd.pdb</code>)</li>
+<li>topology file path for loading trajectory (e.g. <code>-top trial001/cycle000/replica001/prd.pdb</code>)</li>
 </ul>
 </li>
 <li><code>-r, --ref_structure</code> (str):
@@ -253,7 +253,7 @@ for 1 trial)</li>
 </li>
 <li><code>-top, --topology</code> (str):
 <ul>
-<li>topology file path for loading trajectory (e.g. <code>-s trial001/cycle000/replica001/prd.pdb</code>)</li>
+<li>topology file path for loading trajectory (e.g. <code>-top trial001/cycle000/replica001/prd.pdb</code>)</li>
 </ul>
 </li>
 <li><code>-r, --ref_structure</code> (str):

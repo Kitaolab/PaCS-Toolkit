@@ -196,25 +196,24 @@
 </ul>
 <h2 id="requirements"><a class="header" href="#requirements">Requirements</a></h2>
 <ul>
-<li><a href="https://www.python.org/">Python</a> &gt;= 3.7</li>
-<li>PaCS-ToolKit currently supports 3 simulator
+<li><a href="https://www.python.org/">Python</a> &gt;= 3.7 (but python &gt;= 3.8 is recommended because of deeptime)</li>
+<li>PaCS-Toolkit currently supports 3 simulator
 <ul>
-<li><a href="https://www.gromacs.org/">Gromacs</a></li>
-<li><a href="https://ambermd.org/index.php">Amber</a></li>
-<li><a href="https://www.ks.uiuc.edu/Research/namd/">Namd</a></li>
+<li><a href="https://www.gromacs.org/">Gromacs</a> &gt;= 2022.2 tested</li>
+<li><a href="https://ambermd.org/index.php">Amber</a> &gt;= 2023 tested</li>
+<li><a href="https://www.ks.uiuc.edu/Research/namd/">Namd</a> &gt;= 2021-02-20 tested</li>
 </ul>
 </li>
 </ul>
 <h2 id="1-install-by-pip"><a class="header" href="#1-install-by-pip">1. Install by pip</a></h2>
 <h3 id="11-install-by-conda-and-pip"><a class="header" href="#11-install-by-conda-and-pip">1.1 Install by conda and pip</a></h3>
-<pre><code class="language-shell">conda create -n pacsmd "python&gt;=3.7" -y
+<pre><code class="language-shell">conda create -n pacsmd "python&gt;=3.8" -y
 conda activate pacsmd
 </code></pre>
 <ul>
 <li>if using whole pacstk function</li>
 </ul>
 <pre><code class="language-shell">pip install "pacs[all] @ git+https://github.com/Kitaolab/PaCS-Toolkit.git"
-pip install pyemma
 </code></pre>
 <ul>
 <li>elif using "pacs mdrun" and analyzer == "mdtraj"</li>
@@ -227,10 +226,13 @@ pip install pyemma
 <pre><code class="language-shell">pip install "pacs @ git+https://github.com/Kitaolab/PaCS-Toolkit.git"
 </code></pre>
 <ul>
-<li>elif performing MSM</li>
+<li>elif performing MSM
+<ul>
+<li>python &gt;= 3.8 is recommended because of deeptime</li>
+</ul>
+</li>
 </ul>
 <pre><code class="language-shell">pip install "pacs[msm] @ git+https://github.com/Kitaolab/PaCS-Toolkit.git"
-pip install pyemma
 </code></pre>
 <h3 id="12-install-by-pip"><a class="header" href="#12-install-by-pip">1.2. Install by pip</a></h3>
 <ul>
@@ -249,10 +251,13 @@ pip install pyemma
 <pre><code class="language-shell">pip install "pacs @ git+https://github.com/Kitaolab/PaCS-Toolkit.git"
 </code></pre>
 <ul>
-<li>elif performing MSM</li>
+<li>elif performing MSM
+<ul>
+<li>python &gt;= 3.8 is recommended because of deeptime</li>
+</ul>
+</li>
 </ul>
 <pre><code class="language-shell">pip install "pacs[msm] @ git+https://github.com/Kitaolab/PaCS-Toolkit.git"
-pip install pyemma
 </code></pre>
 <h2 id="2-get-source-code-from-github"><a class="header" href="#2-get-source-code-from-github">2. Get source code from github</a></h2>
 <ul>
@@ -270,18 +275,17 @@ tar -xvzf ${version}.tar.gz
 cd pacsmd-${version}
 </code></pre>
 <h3 id="21-install-by-conda-and-pip-locally"><a class="header" href="#21-install-by-conda-and-pip-locally">2.1. Install by conda and pip locally</a></h3>
-<pre><code class="language-shell">conda create -n pacsmd "python&gt;=3.7" -y
+<pre><code class="language-shell">conda create -n pacsmd "python&gt;=3.8" -y
 conda activate pacsmd
 </code></pre>
 <ul>
 <li>if using whole pacstk function
 <ul>
-<li>pyemma does not recommend pip-install</li>
+<li>python &gt;= 3.8 is recommended because of deeptime</li>
 </ul>
 </li>
 </ul>
 <pre><code class="language-shell">pip install -e ".[all]"
-conda install -c conda-forge pyemma
 </code></pre>
 <ul>
 <li>elif using "pacs mdrun" and analyzer == "mdtraj"</li>
@@ -299,25 +303,19 @@ conda install -c conda-forge pyemma
 <pre><code class="language-shell">pip install -e "."
 </code></pre>
 <ul>
-<li>elif performing MSM
-<ul>
-<li>pyemma does not recommend pip-install</li>
-</ul>
-</li>
+<li>elif performing MSM</li>
 </ul>
 <pre><code>pip install -e ".[msm]"
-conda install -c conda-forge pyemma
 </code></pre>
 <h3 id="22-install-by-pip-locally"><a class="header" href="#22-install-by-pip-locally">2.2. Install by pip locally</a></h3>
 <ul>
 <li>if using whole pacstk function
 <ul>
-<li>pyemma does not work, conda is recommend</li>
+<li>python &gt;= 3.8 is recommended because of deeptime</li>
 </ul>
 </li>
 </ul>
 <pre><code class="language-shell">pip install -e ".[all]"
-pip install pyemma
 </code></pre>
 <ul>
 <li>elif using "pacs mdrun" and analyzer == "mdtraj"</li>
@@ -337,12 +335,11 @@ pip install pyemma
 <ul>
 <li>elif performing MSM
 <ul>
-<li>sometimes pyemma does not work, conda is recommend</li>
+<li>python &gt;= 3.8 is recommended because of deeptime</li>
 </ul>
 </li>
 </ul>
 <pre><code class="language-shell">pip install -e ".[msm]"
-pip install pyemma
 </code></pre>
 
                     </main>
