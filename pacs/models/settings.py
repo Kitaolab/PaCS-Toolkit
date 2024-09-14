@@ -39,6 +39,7 @@ class MDsettings:
         selection2 (str): selection for evaluation type
         selection3 (str): selection for evaluation type
         selection4 (str): selection for evaluation type
+        nojump (bool): whether to execute nojump treatment (valid only for gmx)
     """
 
     # basic
@@ -47,7 +48,7 @@ class MDsettings:
     n_replica: int = 1
     n_parallel: int = 1
     centering: bool = True
-    centering_selection: str = "protein"
+    centering_selection: str = None
     working_dir: Path = Path("./.")
 
     # simulator
@@ -86,6 +87,9 @@ class MDsettings:
 
     # rmfile option
     rmfile: bool = False
+
+    # nojump option
+    nojump: bool = False
 
     def each_replica(
         self, _trial: int = None, _cycle: int = None, _replica: int = None
@@ -158,7 +162,7 @@ class MDsettings:
             LOGGER.error(f"trial number {self.trial} is out of range 1..999")
             exit(1)
         if self.max_cycle < 0 or self.max_cycle > 999:
-            LOGGER.error(f"cycle number {self.cycle} is out of range 1..999")
+            LOGGER.error(f"cycle number {self.max_cycle} is out of range 1..999")
             exit(1)
         if self.n_replica < 0 or self.n_replica > 999:
             LOGGER.error(f"n_replica number {self.replica} is out of range 1..999")
@@ -206,12 +210,19 @@ class MDsettings:
             LOGGER.error(f"{self.type} is not supported")
             exit(1)
 
+        # nojump
+        self.nojump = self.check_bool(self.nojump)
+        if self.analyzer != "gromacs" or self.simulator != "gromacs":
+            LOGGER.warn(
+                '"nojump = True" is valid when simulator and analyzer are both "gromacs"'
+            )
+
         # change centering_selection to match analyzer
-        if self.analyzer == "mdtraj":
+        if self.analyzer == "mdtraj" and self.centering_selection is None:
             self.centering_selection = "protein"
-        if self.analyzer == "cpptraj":
+        if self.analyzer == "cpptraj" and self.centering_selection is None:
             self.centering_selection = "@CA,C,O,N,H"
-        if self.analyzer == "gromacs":
+        if self.analyzer == "gromacs" and self.centering_selection is None:
             self.centering_selection = "Protein"
 
         # threshold check

@@ -35,8 +35,8 @@ analyzer = "gromacs"                                # Trajectory tool used to ca
 reference = "./inputs/ref.pdb"                      # Structure for comparison
 selection1 = "Backbone"                             # Selection string for specified group in trajectroies (least squares fit)
 selection2 = "Backbone"                             # Selection string for specified group in trajectories (RMSD calculation)
-selection3 = "Backbone"                             # Selection string for specified group in reference (least squares fit)
-selection4 = "Backbone"                             # Selection string for specified group in reference (RMSD calculation)
+#selection3 = "Backbone"                             # Selection string for specified group in reference (least squares fit)
+#selection4 = "Backbone"                             # Selection string for specified group in reference (RMSD calculation)
 
 ## postprocess
 rmmol = true                                        # Whether rmmol is executed after each cycle
@@ -44,3 +44,4 @@ keep_selection = "not_Water"                        # Molecular name or index gr
 rmfile = true                                       # Whether rmfile is executed after trial
 
 cmd_gmx = "gmx"                                     # cmd_gmx for analyze (This command is necessary to specify on fugaku)
+nojump = true                                       # whether to execute nojump treatment only for gmx

@@ -17,19 +17,19 @@ pacs fit traj mdtraj -tf ./trial001/cycle001/replica001/prd.xtc -top ./inputs/in
 
 #### for single trial
 ```shell
-pacs fit trial mdtraj -t 1 -s ./trial001/cycle001/replica001/prd.pdb -r ./trial001/cycle001/replica001/prd.pdb -ts "protein" -rs "protein" -tf prd.xtc -p 10
+pacs fit trial mdtraj -t 1 -top ./trial001/cycle001/replica001/prd.pdb -r ./trial001/cycle001/replica001/prd.pdb -ts "protein" -rs "protein" -tf prd.xtc -p 10
 ```
 
 ### Arguments
 
 #### for single trajectory
 ```plaintext
-usage: pacs fit mdtraj [-h] [-tf] [-top] [-r] [-ts] [-rs] [-p] [-o]
+usage: pacs fit traj mdtraj [-h] [-tf] [-top] [-r] [-ts] [-rs] [-p] [-o]
 ```
 - `-tf, --trj_file` (str): 
     - file name of the trajectory to be fitted (e.g. `-tf prd.xtc`)
 - `-top, --topology` (str): 
-    - topology file path for loading trajectory (e.g. `-s trial001/cycle000/replica001/prd.pdb`)
+    - topology file path for loading trajectory (e.g. `-top trial001/cycle000/replica001/prd.pdb`)
 - `-r, --ref_structure` (str): 
     - reference structure file path for fitting reference (e.g. `-r trial001/cycle000/replica001/prd.pdb`)
 - `-ts, --trj_selection` (str): 
@@ -53,7 +53,7 @@ usage: pacs fit trial mdtraj [-h] [-t] [-tf] [-top] [-r] [-ts] [-rs] [-p] [-o]
 - `-tf, --trj_file` (str): 
     - file name of the trajectory to be fitted (e.g. `-tf prd.xtc`)
 - `-top, --topology` (str): 
-    - topology file path for loading trajectory (e.g. `-s trial001/cycle000/replica001/prd.pdb`)
+    - topology file path for loading trajectory (e.g. `-top trial001/cycle000/replica001/prd.pdb`)
 - `-r, --ref_structure` (str): 
     - reference structure file path for fitting reference (e.g. `-r trial001/cycle000/replica001/prd.pdb`)
 - `-ts, --trj_selection` (str): 

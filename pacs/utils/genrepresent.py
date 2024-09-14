@@ -57,7 +57,7 @@ def genrepresent_mdtraj(settings: MDsettings) -> None:
             top=settings.topology,
         )
 
-        extracted_traj = traj[: last_frame + 1]
+        extracted_traj = traj[1 : last_frame + 1]
         trajs.append(extracted_traj)
 
     # concatenate the repr trajectory from all cycles
@@ -98,13 +98,18 @@ def genrepresent_gmx(settings: MDsettings) -> None:
         rep_dir = Path(settings.each_replica(_cycle=cycle, _replica=selected_replica))
         trj = f"{rep_dir}/{settings.trajectory}"
         top = settings.topology
+        # extract trajectory from frame 0 to last_frame,
+        # but the first frame is truncated when performing trjcat
+        # but only for the first cycle, the first frame is not truncated,
+        # so not include the first frame
+        first_frame = 1 if cycle == 0 else 0
         cmd_trjconv = f"echo System \
             | {settings.cmd_gmx} trjconv \
             -f {trj} \
             -s {top} \
             -o {repr_dir}/repr_cycle{cycle:03}{ext} \
-            -b 0 -e {frame_time_dict[last_frame]} \
-            -pbc mol \
+            -b {frame_time_dict[first_frame]} \
+            -e {frame_time_dict[last_frame]} \
             1> {repr_dir}/{cycle}_trjconv.log 2>&1"  # NOQA: E221
         res_trjconv = subprocess.run(cmd_trjconv, shell=True)
         if res_trjconv.returncode != 0:
@@ -211,8 +216,11 @@ def genrepresent_cpptraj(settings: MDsettings) -> None:
 def load_frame_to_time(settings: MDsettings) -> Dict[int, float]:
     # Read correspondence between frame and time from file
     dir_0_1 = settings.each_replica(_cycle=0, _replica=1)
+    # load frame to time
+    # (no need to do "skiprows=1"
+    # because it is recognized as a commment line by default)
     frame_time_array = np.loadtxt(
-        f"{dir_0_1}/frame_time.tsv", delimiter="\t", skiprows=1
+        f"{dir_0_1}/frame_time.tsv", comments="#", delimiter="\t", skiprows=0
     )
     frame_time_dict: Dict[int, float] = {}
     for frame, time in frame_time_array:

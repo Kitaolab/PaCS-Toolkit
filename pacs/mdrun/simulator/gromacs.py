@@ -15,7 +15,7 @@ class GROMACS(SuperSimulator):
     def run_md(self, settings: MDsettings, cycle: int, replica: int) -> None:
         dir = settings.each_replica(_cycle=cycle, _replica=replica)
         self.run_grompp(settings, dir)
-        cmd_mdrun = f"{settings.cmd_mpi} {settings.cmd_serial} \
+        cmd_mdrun = f"exec {settings.cmd_mpi} {settings.cmd_serial} \
                 -deffnm {dir}/prd 1> {dir}/mdrun.log 2>&1"  # NOQA: E221
 
         # Depending on the supercomputer environment, MPI-related hangs may occur in rare cases.
@@ -44,7 +44,7 @@ class GROMACS(SuperSimulator):
             exit(1)
 
     def run_grompp(self, settings: MDsettings, dir: str) -> None:
-        cmd_grompp = f"{settings.cmd_gmx} grompp \
+        cmd_grompp = f"exec {settings.cmd_gmx} grompp \
                     -f {settings.mdconf} \
                     -o {dir}/prd.tpr \
                     -p {settings.topology} \
@@ -81,7 +81,7 @@ class GROMACS(SuperSimulator):
             p.close()
 
         groupdirtxt = " ".join(groupdir)
-        cmd_mdrun = f"{settings.cmd_mpi} {settings.cmd_parallel} \
+        cmd_mdrun = f"exec {settings.cmd_mpi} {settings.cmd_parallel} \
                 -multidir {groupdirtxt} \
                 -deffnm prd \
                 1> {dir}/mdrun.log 2>&1"  # NOQA: E221

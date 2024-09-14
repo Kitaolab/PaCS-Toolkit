@@ -27,7 +27,7 @@ settings = parser.parse()
 
 LOGGER = generate_logger(__name__)
 
-LOGGER.info(f"pacsmd version {__version__}")
+LOGGER.info(f"PaCS-Toolkit Version: {__version__}")
 
 
 def prepare_md(

@@ -4,6 +4,7 @@ from pathlib import Path
 # import pacs.utils.genrepresent as genrepresent
 import pacs.utils.rmfile as rmfile
 import pacs.utils.rmmol as rmmol
+from pacs._version import __version__
 from pacs.mdrun.analyzer.superAnalyzer import SuperAnalyzer
 from pacs.mdrun.exporter.superExporter import SuperExporter
 from pacs.mdrun.simulator.superSimulator import SuperSimulator
@@ -79,6 +80,21 @@ class Cycle:
             exit(1)
         tmp = self.settings.n_replica
         self.settings.n_replica = 1
+        # create version file of pacstk
+        version_file = f"{self.settings.each_trial()}/pacstk.version"
+        if Path(version_file).exists():
+            with open(version_file) as f:
+                line = f.readline().strip()
+                if __version__ != line:
+                    LOGGER.error("PaCS-Toolkit version error")
+                    LOGGER.error(
+                        f"Version used in {self.settings.each_trial()} is {line},"
+                    )
+                    LOGGER.error(f"But you're using PaCS-Toolkit {__version__}")
+                    exit(1)
+        else:
+            with open(version_file, "w") as f:
+                f.write(f"{__version__}")
         self.run_md()
         self.calculate_cv()
         self.settings.n_replica = tmp

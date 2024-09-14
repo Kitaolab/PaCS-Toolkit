@@ -26,7 +26,7 @@ git clone https://github.com/Kitaolab/PaCS-Toolkit.git
 pip install -e ".[mdtraj]"
 
 # Or install by conda and pip
-conda create -n pacsmd "python>=3.7" -y
+conda create -n pacsmd "python>=3.8" -y
 conda activate pacsmd
 pip install -e ".[mdtraj]"
 ```
@@ -140,13 +140,13 @@ $ pacs fit trial mdtraj -t 1 -tf prd_rmmol.xtc -top rmmol_top.pdb -r ref.gro -ts
 - So if you want to use other specific CVs, you need to write a code by yourself.
 
 ~~~shell
-$ pacs genfeature comdist mdtraj -t 1 -tf prd.xtc -top inputs/example_gromacs/input.gro -s1 "residue 1" -s2 "residue 9" 
+$ pacs genfeature comdist mdtraj -t 1 -tf prd.xtc -top inputs/example_gromacs/input.gro -s1 "residue 1" -s2 "residue 9"
 $ ls
 comdist-CV/
 ~~~
 
 
 ## Step7: Building MSM and predicting free energy
-- After extracting CVs, various analyses can be performed on them. 
+- After extracting CVs, various analyses can be performed on them.
 - PaCS-MD is especially compatible with analyses using MSM.
 

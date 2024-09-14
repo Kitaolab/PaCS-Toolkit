@@ -18,7 +18,7 @@ pacs rmmol mdtraj -t 1 -k "not water" -e .xtc -m trial001/cycle000/replica001/pr
 
 #### gromacs
 ```shell
-pacs rmmol gmx -t 1 -k "not_water" -e .xtc -n index.ndx -g gmx 
+pacs rmmol gmx -t 1 -k "not_water" -e .xtc -n index.ndx -g gmx --nojump
 ```
 
 #### cpptraj
@@ -56,6 +56,10 @@ usage: pacs rmmol gmx [-h] [-t] [-k] [-n] [-g] [-e]
     - index file for gromacs (e.g. `-n index.ndx`)
 - `-g, --cmd_gmx` (str): 
     - gromacs command prefix (e.g. `-g gmx`)
+- `--nojump` (bool):
+    - whether to execute `-pbc nojump` treatment for the trajectory (e.g. `--nojump`) 
+    - If your PaCS-MD trajectory was generated with `nojump=true`, it is strongly strongly recommended to use this options as well 
+    - Also refer to the `mdrun/inputfile` page for more details.
 
   
 #### cpptraj

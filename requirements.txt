@@ -1,7 +1,10 @@
-mdtraj>=1.9.9
+tomli>=2.0.1
+mdtraj==1.9.9
 scipy>=1.7.3
 scikit-learn>=1.0.2
 matplotlib>=3.5.3
+numpy<2.0.0
 pandas>=1.1.5
+deeptime==0.4.4
 # pyemma>=2.5.12
 ipykernel>=6.16.2

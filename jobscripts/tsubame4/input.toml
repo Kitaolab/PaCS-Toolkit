@@ -1,26 +1,29 @@
-# PaCS-MD sample jobscript for IMS
+# PaCS-MD sample jobscript for tsubame4.0
 
 ### This script is just for reference
 ### You need to modify accordingly
 
-# total_core = 10 x 64 = 640
-# OMP = 1
-# MPI = 640
-# core_per_replica = 640 / 10 = 64 (cycle>=1)
+# total_core = 48
+# Parallel run of gmx_mpi over multipe node failed for some reasons as of Sep. 2024.
+# So, this example is to run on a single node and n_parallel=1
+# OMP = 48
+# MPI = None
+# core_per_replica = 48 / 1 = 48
 
 ## basic
-max_cycle = 200                                     # Maximum number of cycles to run. (ex. 1, ..., 123, ..., 999)
+max_cycle = 10                                      # Maximum number of cycles to run. (ex. 1, ..., 123, ..., 999)
 n_replica = 30                                      # Number of replica. (ex. 1, ..., 123, ..., 999)
-n_parallel = 10                                     # Number of replica which are calculated at a time
+n_parallel = 1                                      # Number of replica which are calculated at a time
 centering = true                                    # Whether to move the molecule to the center
 centering_selection = "protein"                     # Name of molecule to move in the center
 working_dir = "./."                                 # Directory where pacsmd will run
 
 ## simulator
 simulator = "gromacs"                               # Simulator used inside PaCS-MD
-cmd_mpi = "mpirun -np 640 -mca coll_hcoll_enable 0" # Commands for MPI such as mpirun, blank is OK
-cmd_serial = "gmx_mpi mdrun -ntomp 1"               # Commands to run the simulator serially
-cmd_parallel = "gmx_mpi mdrun -ntomp 1"             # Commands to run the simulator parallelly
+cmd_mpi = ""                                        # Commands for MPI such as mpirun, blank is OK
+cmd_serial = "gmx_mpi mdrun"                        # Commands to run the simulator serially
+cmd_parallel = "gmx_mpi mdrun"
+                                                    # Commands to run the simulator parallelly
 structure = "./inputs/input.gro"                    # Structural file such as gro, pdb, rst7, etc.
 topology = "./inputs/topol.top"                     # Topology file such as top, parm7, psf, etc.
 mdconf = "./inputs/parameter.mdp"                   # Parameter file such as mdp, mdin, namd, etc.
@@ -28,15 +31,12 @@ index_file = "./inputs/index.ndx"                   # Gromacs index file
 trajectory_extension = ".xtc"                       # Trajectory file extension. ("." is necessary)
 
 ## analyzer
-type = "target"                                     # Evaluation type
-threshold = 0.01                                    # CV threshold used to decide whether to terminate the calculation (in units of nm)
+type = "dissociation"                               # Evaluation type
+threshold = 10                                      # CV threshold used to decide whether to terminate the calculation (in units of nm)
 skip_frame = 1                                      # How many frames to skip when ranking CVs
 analyzer = "mdtraj"                                 # Trajectory tool used to calculate the evaluation type
-reference = "./inputs/ref.pdb"                      # Structure for comparison
-selection1 = "backbone"                             # Selection string for specified group in trajectroies (least squares fit)
-selection2 = "backbone"                             # Selection string for specified group in trajectories (RMSD calculation)
-selection3 = "backbone"                             # Selection string for specified group in reference (least squares fit)
-selection4 = "backbone"                             # Selection string for specified group in reference (RMSD calculation)
+selection1 = "protein and name CA"                  # Selection string for specified group in trajectories
+selection2 = "resname LIG"                          # Selection string for specified group in trajectories
 
 ## postprocess
 rmmol = true                                        # Whether rmmol is executed after each cycle
@@ -45,3 +45,7 @@ rmfile = true                                       # Whether rmfile is executed
 
 # not valid for analyzer=mdtraj
 # nojump = true                                       # whether to execute nojump treatment only for gmx
+
+# Simulation speed measured by this script and the corresponding .toml
+# System of 300,000 atoms
+# - 100 ns/day

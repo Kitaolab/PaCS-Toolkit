@@ -11,23 +11,22 @@
     - [2.2. Install by pip locally](#22-install-by-pip-locally)
 
 ## Requirements
-- [Python](https://www.python.org/) >= 3.7
-- PaCS-ToolKit currently supports 3 simulator
-  - [Gromacs](https://www.gromacs.org/)
-  - [Amber](https://ambermd.org/index.php)
-  - [Namd](https://www.ks.uiuc.edu/Research/namd/)
+- [Python](https://www.python.org/) >= 3.7 (but python >= 3.8 is recommended because of deeptime)
+- PaCS-Toolkit currently supports 3 simulator
+  - [Gromacs](https://www.gromacs.org/) >= 2022.2 tested
+  - [Amber](https://ambermd.org/index.php) >= 2023 tested
+  - [Namd](https://www.ks.uiuc.edu/Research/namd/) >= 2021-02-20 tested
 
 ## 1. Install by pip
 ### 1.1 Install by conda and pip
 ~~~shell
-conda create -n pacsmd "python>=3.7" -y
+conda create -n pacsmd "python>=3.8" -y
 conda activate pacsmd
 ~~~
 
 - if using whole pacstk function
 ~~~shell
 pip install "pacs[all] @ git+https://github.com/Kitaolab/PaCS-Toolkit.git"
-pip install pyemma
 ~~~
 
 - elif using "pacs mdrun" and analyzer == "mdtraj"
@@ -41,9 +40,9 @@ pip install "pacs @ git+https://github.com/Kitaolab/PaCS-Toolkit.git"
 ~~~
 
 - elif performing MSM
+  - python >= 3.8 is recommended because of deeptime
 ~~~shell
 pip install "pacs[msm] @ git+https://github.com/Kitaolab/PaCS-Toolkit.git"
-pip install pyemma
 ~~~
 
 ### 1.2. Install by pip
@@ -63,9 +62,9 @@ pip install "pacs @ git+https://github.com/Kitaolab/PaCS-Toolkit.git"
 ~~~
 
 - elif performing MSM
+  - python >= 3.8 is recommended because of deeptime
 ~~~shell
 pip install "pacs[msm] @ git+https://github.com/Kitaolab/PaCS-Toolkit.git"
-pip install pyemma
 ~~~
 
 
@@ -87,15 +86,14 @@ cd pacsmd-${version}
 
 ### 2.1. Install by conda and pip locally
 ~~~shell
-conda create -n pacsmd "python>=3.7" -y
+conda create -n pacsmd "python>=3.8" -y
 conda activate pacsmd
 ~~~
 
 - if using whole pacstk function
-  -  pyemma does not recommend pip-install
+  - python >= 3.8 is recommended because of deeptime
 ~~~shell
 pip install -e ".[all]"
-conda install -c conda-forge pyemma
 ~~~
 
 - elif using "pacs mdrun" and analyzer == "mdtraj"
@@ -114,18 +112,15 @@ pip install -e "."
 ~~~
 
 - elif performing MSM
-  - pyemma does not recommend pip-install
 ~~~
 pip install -e ".[msm]"
-conda install -c conda-forge pyemma
 ~~~
 
 ### 2.2. Install by pip locally
 - if using whole pacstk function
-  - pyemma does not work, conda is recommend
+  - python >= 3.8 is recommended because of deeptime
 ~~~shell
 pip install -e ".[all]"
-pip install pyemma
 ~~~
 
 - elif using "pacs mdrun" and analyzer == "mdtraj"
@@ -144,8 +139,7 @@ pip install -e "."
 ~~~
 
 - elif performing MSM
-  - sometimes pyemma does not work, conda is recommend
+  - python >= 3.8 is recommended because of deeptime
 ~~~shell
 pip install -e ".[msm]"
-pip install pyemma
 ~~~
