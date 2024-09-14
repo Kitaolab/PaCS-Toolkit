@@ -88,7 +88,7 @@ def make_top_gmx(settings: MDsettings) -> None:
     if res_convert_gro.returncode != 0:
         LOGGER.error("error occurred at trjconv command")
         exit(1)
-    
+
     # create a new topology file
     cmd_convert_tpr = f"echo {settings.keep_selection} \
             | {settings.cmd_gmx} convert-tpr \
@@ -231,7 +231,7 @@ def rmmol_replica_gmx(
     if res_trjconv.returncode != 0:
         LOGGER.error("error occurred at trjconv command")
         exit(1)
-    
+
     # remove previous trajectory
     if not last_cycle:
         res_rm = subprocess.run(f"rm {dir}/prd{ext}", shell=True)
@@ -290,10 +290,14 @@ def rmmol_log_add_info(settings: MDsettings) -> None:
         LOGGER.error("analyze tool is not specified")
         exit(1)
 
+
 def rmmol_log_add_info_gmx(settings: MDsettings) -> None:
     LOGGER.info("prd.tpr files are probably no longer needed")
     LOGGER.info("it is recommended to remove prd.tpr files to save disk space")
-    LOGGER.info("you can manually regenerate the prd.tpr files from input.gro files even if you need them later")
+    LOGGER.info(
+        "you can manually regenerate the prd.tpr files from input.gro files \
+        even if you need them later"
+    )
 
 
 def rmmol_all(settings: MDsettings) -> None:
@@ -301,4 +305,3 @@ def rmmol_all(settings: MDsettings) -> None:
     for cycle in range(max_cycle + 1):
         rmmol(settings, cycle, cycle == max_cycle)
     LOGGER.info("rmmol has been finished successfully")
-

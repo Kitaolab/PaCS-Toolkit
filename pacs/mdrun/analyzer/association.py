@@ -67,7 +67,7 @@ class Association(SuperAnalyzer):
             pbc_option = "-pbc nojump"
         else:
             pbc_option = "-pbc mol -ur compact"
-        
+
         cmd_image = f"echo 'System' \
                 | {settings.cmd_gmx} trjconv \
                 -f {dir}/prd{extension} \

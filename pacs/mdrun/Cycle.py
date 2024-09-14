@@ -4,12 +4,12 @@ from pathlib import Path
 # import pacs.utils.genrepresent as genrepresent
 import pacs.utils.rmfile as rmfile
 import pacs.utils.rmmol as rmmol
+from pacs._version import __version__
 from pacs.mdrun.analyzer.superAnalyzer import SuperAnalyzer
 from pacs.mdrun.exporter.superExporter import SuperExporter
 from pacs.mdrun.simulator.superSimulator import SuperSimulator
 from pacs.models.settings import MDsettings
 from pacs.utils.logger import close_logger, generate_logger
-from pacs._version import __version__
 
 LOGGER = generate_logger(__name__)
 
@@ -87,7 +87,9 @@ class Cycle:
                 line = f.readline().strip()
                 if __version__ != line:
                     LOGGER.error("PaCS-Toolkit version error")
-                    LOGGER.error(f"Version used in {self.settings.each_trial()} is {line},")
+                    LOGGER.error(
+                        f"Version used in {self.settings.each_trial()} is {line},"
+                    )
                     LOGGER.error(f"But you're using PaCS-Toolkit {__version__}")
                     exit(1)
         else:

@@ -53,7 +53,7 @@ def rmfile(settings: MDsettings, cycle: int) -> None:
 
             # .tpr
             # keep .tpr files if rmmol=false in mdrun,  in case you want to do rmmol afterward
-            if cycle != 0 and settings.rmmol == True:
+            if cycle != 0 and settings.rmmol:
                 run_rm(f"{dir}/prd.tpr")
 
             # '#backup#': use -f

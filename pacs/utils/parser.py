@@ -1,10 +1,10 @@
 import argparse
-import tomli
 import re
 import sys
 from collections import defaultdict
 from pathlib import Path
 
+import tomli
 from pacs._version import __version__
 from pacs.models.settings import MDsettings
 from pacs.utils.fit import fit, fit_trial
@@ -1086,7 +1086,9 @@ class Parser:
                 line = f.readline().strip()
                 if __version__ != line:
                     LOGGER.error("PaCS-Toolkit version error")
-                    LOGGER.error(f"Version used in {self.settings.each_trial()} is {line},")
+                    LOGGER.error(
+                        f"Version used in {self.settings.each_trial()} is {line},"
+                    )
                     LOGGER.error(f"But you're using PaCS-Toolkit {__version__}")
                     exit(1)
         else:

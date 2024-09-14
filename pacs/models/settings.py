@@ -198,7 +198,6 @@ class MDsettings:
             LOGGER.error(f"{self.analyzer} is not supported")
             exit(1)
 
-
         if self.type not in [
             "target",
             "association",
@@ -214,7 +213,9 @@ class MDsettings:
         # nojump
         self.nojump = self.check_bool(self.nojump)
         if self.analyzer != "gromacs" or self.simulator != "gromacs":
-            LOGGER.warn("\"nojump = True\" is valid when simulator and analyzer are both \"gromacs\"")
+            LOGGER.warn(
+                '"nojump = True" is valid when simulator and analyzer are both "gromacs"'
+            )
 
         # change centering_selection to match analyzer
         if self.analyzer == "mdtraj" and self.centering_selection is None:

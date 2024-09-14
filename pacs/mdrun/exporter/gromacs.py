@@ -104,7 +104,7 @@ class eGromacs(SuperExporter):
         else:
             centering_option = ""
             args_to_trjconv = "System"
-        
+
         # treatment for nojump option
         if settings.nojump is True:
             pbc_option = "-pbc nojump"
@@ -146,7 +146,7 @@ class eGromacs(SuperExporter):
             LOGGER.error("error occurred at extract command")
             LOGGER.error(f"see {from_dir}/extract.log")
             exit(1)
-        
+
         # remove the intermediate trajectory
         res_rm = subprocess.run(f"rm {from_dir}/prd_image{extension}", shell=True)
         if res_rm.returncode != 0:
