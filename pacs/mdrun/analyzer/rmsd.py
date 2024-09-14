@@ -103,6 +103,7 @@ class RMSD(SuperAnalyzer):
                 -o {dir}/rms.xvg \
                 -n {ndx} \
                 -pbc no \
+                -nomw \
                 -xvg none 1> {dir}/rms.log 2>&1"  # NOQA: E221
         res_rms = subprocess.run(cmd_rms, shell=True)
         if res_rms.returncode != 0:
