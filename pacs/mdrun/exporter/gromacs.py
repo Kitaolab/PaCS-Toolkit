@@ -149,7 +149,9 @@ class eGromacs(SuperExporter):
             exit(1)
 
         # remove the intermediate trajectory
-        res_rm = subprocess.run(f"rm {out_dir}/prd_image_prev_cycle{extension}", shell=True)
+        res_rm = subprocess.run(
+            f"rm {out_dir}/prd_image_prev_cycle{extension}", shell=True
+        )
         if res_rm.returncode != 0:
             LOGGER.error("error occurred at rm command")
             exit(1)
