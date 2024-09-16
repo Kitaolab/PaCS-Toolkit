@@ -113,10 +113,11 @@ class eGromacs(SuperExporter):
 
         # First convert trj with -pbc option, and then extract with -b, -e options
         # If we do the both at the same time, the -pbc nojump does not work properly
+        # Output the prd_image_prev_cycle to the next cycle to avoid overwrapping.
         cmd_trjconv = f"echo {args_to_trjconv} \
                 | {settings.cmd_gmx} trjconv \
                 -f {from_dir}/prd{extension} \
-                -o {from_dir}/prd_image{extension} \
+                -o {out_dir}/prd_image_prev_cycle{extension} \
                 -s {from_dir}/prd.tpr \
                 -n {settings.index_file} \
                 {pbc_option} \
@@ -132,7 +133,7 @@ class eGromacs(SuperExporter):
 
         cmd_extract = f"echo System \
                 | {settings.cmd_gmx} trjconv \
-                -f {from_dir}/prd_image{extension} \
+                -f {out_dir}/prd_image_prev_cycle{extension} \
                 -o {out_dir}/input{settings.structure_extension} \
                 -s {from_dir}/prd.tpr \
                 -b {results[replica_rank].frame} \
@@ -148,7 +149,7 @@ class eGromacs(SuperExporter):
             exit(1)
 
         # remove the intermediate trajectory
-        res_rm = subprocess.run(f"rm {from_dir}/prd_image{extension}", shell=True)
+        res_rm = subprocess.run(f"rm {out_dir}/prd_image_prev_cycle{extension}", shell=True)
         if res_rm.returncode != 0:
             LOGGER.error("error occurred at rm command")
             exit(1)
