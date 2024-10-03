@@ -12,9 +12,9 @@ LOGGER = generate_logger(__name__)
 
 
 class GROMACS(SuperSimulator):
-    def run_md(self, settings: MDsettings, cycle: int, replica: int) -> None:
-        dir = settings.each_replica(_cycle=cycle, _replica=replica)
-        self.run_grompp(settings, dir)
+    def run_md(self, settings: MDsettings, cycle: int, direction:str, replica: int) -> None:
+        dir = settings.each_replica(_cycle=cycle, _direction=direction, _replica=replica)
+        self.run_grompp(settings, dir, direction)
         cmd_mdrun = f"exec {settings.cmd_mpi} {settings.cmd_serial} \
                 -deffnm {dir}/prd 1> {dir}/mdrun.log 2>&1"  # NOQA: E221
 
@@ -43,15 +43,29 @@ class GROMACS(SuperSimulator):
             LOGGER.error(f"see {dir}/mdrun.log and {dir}/prd.log")
             exit(1)
 
-    def run_grompp(self, settings: MDsettings, dir: str) -> None:
-        cmd_grompp = f"exec {settings.cmd_gmx} grompp \
-                    -f {settings.mdconf} \
-                    -o {dir}/prd.tpr \
-                    -p {settings.topology} \
-                    -c {dir}/input.gro \
-                    -n {settings.index_file} \
-                    -po {dir}/mdout.mdp \
-                    -maxwarn 10 1> {dir}/grompp.log 2>&1"  # NOQA: E221
+    def run_grompp(self, settings: MDsettings, dir: str, direction: str) -> None:
+        if direction == "fore":
+            cmd_grompp = f"exec {settings.cmd_gmx} grompp \
+                        -f {settings.mdconf_fore} \
+                        -o {dir}/prd.tpr \
+                        -p {settings.topology_fore} \
+                        -c {dir}/input.gro \
+                        -n {settings.index_file_fore} \
+                        -po {dir}/mdout.mdp \
+                        -maxwarn 10 1> {dir}/grompp.log 2>&1"  # NOQA: E221
+        elif direction == "back":
+            cmd_grompp = f"exec {settings.cmd_gmx} grompp \
+                        -f {settings.mdconf_back} \
+                        -o {dir}/prd.tpr \
+                        -p {settings.topology_back} \
+                        -c {dir}/input.gro \
+                        -n {settings.index_file_back} \
+                        -po {dir}/mdout.mdp \
+                        -maxwarn 10 1> {dir}/grompp.log 2>&1"
+        else:
+            LOGGER.error("direction must be fore or back")
+            exit(1)
+        
         res_grompp = subprocess.run(cmd_grompp, shell=True)
         if res_grompp.returncode != 0:
             LOGGER.error("error occurred at grompp command")
@@ -59,10 +73,10 @@ class GROMACS(SuperSimulator):
             exit(1)
 
     def run_MPI(
-        self, settings: MDsettings, cycle: int, groupreplica: List[int]
+        self, settings: MDsettings, cycle: int, direction: str, groupreplica: List[int]
     ) -> None:
         groupdir = [
-            settings.each_replica(_cycle=cycle, _replica=replica)
+            settings.each_replica(_cycle=cycle, _direction=direction, _replica=replica)
             for replica in groupreplica
         ]
 
