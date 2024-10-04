@@ -28,7 +28,7 @@ class SuperSimulator(metaclass=ABCMeta):
 
     def run_parallel_one_way(self, settings: MDsettings, cycle: int, direction: str) -> None:
         if settings.n_parallel == 1 or cycle == 0:
-            self.run_serial(settings, cycle, direction)
+            self.run_serial(settings, cycle)
             return
 
         if settings.cmd_mpi != "":
@@ -126,7 +126,7 @@ class SuperSimulator(metaclass=ABCMeta):
             ]:
                 groupreplica.append(replica)
             if len(groupreplica) != n_parallel:
-                self.run_serial(settings, cycle, direction)
+                self.run_serial(settings, cycle)
             else:
                 self.run_MPI(settings, cycle, direction, groupreplica)
                 for replica in groupreplica:

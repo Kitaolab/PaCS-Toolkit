@@ -2,6 +2,7 @@ import dataclasses
 import re
 from pathlib import Path
 
+import numpy as np
 from pacs.utils.logger import generate_logger
 
 LOGGER = generate_logger(__name__)
@@ -80,7 +81,8 @@ class MDsettings:
 
     # hidden option
     cmd_gmx: str = None
-    top_mdtraj: str = None
+    top_mdtraj_fore: str = None
+    top_mdtraj_back: str = None
     structure_extension: str = None
 
     # genrepresent option
@@ -104,8 +106,6 @@ class MDsettings:
             _trial = self.trial
         if _cycle is None:
             _cycle = self.max_cycle
-        if _direction is None:
-            _direction = self.direction
         if _replica is None:
             _replica = self.n_replica
         if _direction not in ["fore", "back"]:
@@ -120,8 +120,6 @@ class MDsettings:
             _trial = self.trial
         if _cycle is None:
             _cycle = self.cycle
-        if _direction is None:
-            _direction = self.direction
         if _direction not in ["fore", "back"]:
             LOGGER.error(f"direction={_direction} is given.")
             exit(1)
@@ -142,9 +140,9 @@ class MDsettings:
     def log_file(self) -> str:
         return f"{self.working_dir}/trial{self.trial:03}.log"
 
-    def rmmol_top(self, direction: str) -> None:
-        c0r1_dir = self.each_replica(_cycle=0, _direction=direction, _replica=1)
-        self.top_mdtraj = f"{c0r1_dir}/rmmol_top.pdb"
+    # def rmmol_top(self, direction: str) -> None:
+    #     c0r1_dir = self.each_replica(_cycle=0, _direction=direction, _replica=1)
+    #     self.top_mdtraj = f"{c0r1_dir}/rmmol_top.pdb"
 
     def check_bool(self, value: str) -> bool:
         if isinstance(value, str):
@@ -277,7 +275,7 @@ class MDsettings:
             )
 
         # Check if indexfile is set when gromacs
-        if self.simulator == "gromacs" and self.index_file is None:
+        if self.simulator == "gromacs" and (self.index_file_fore is None or self.index_file_back is None):
             LOGGER.error("index file is required for gromacs")
             exit(1)
 
@@ -387,16 +385,23 @@ class MDsettings:
             ".gsd",
         ]
         # Retrieve the topology file from the input
-        top_mdtraj = next(
-            (
-                v
-                for v in vars(self).values()
-                if hasattr(v, "as_posix") and v.suffix in top_extension
-            ),
-            None,
-        )
-        if top_mdtraj is not None:
-            self.top_mdtraj = top_mdtraj
+        # top_mdtraj = next(
+        #     (
+        #         v
+        #         for v in vars(self).values()
+        #         if hasattr(v, "as_posix") and v.suffix in top_extension
+        #     ),
+        #     None,
+        # )
+        top_mdtraj_fore = Path(self.structure_fore)
+        top_mdtraj_back = Path(self.structure_back)
+        if top_mdtraj_fore is not None:
+            self.top_mdtraj_fore = top_mdtraj_fore
+        else:
+            LOGGER.error("a topology file required to read the trajectory is missing.")
+            exit(1)
+        if top_mdtraj_back is not None:
+            self.top_mdtraj_back = top_mdtraj_back
         else:
             LOGGER.error("a topology file required to read the trajectory is missing.")
             exit(1)
@@ -465,3 +470,46 @@ class Snapshot:
 
     def __lt__(self, other) -> bool:
         return self.cv < other.cv
+
+
+class ScoresInOnePair:
+    """
+    Information of CV in a pair of (fore_replica, back_replica)
+    """
+    def __init__(self, cycle: int, fore_replica: int, back_replica: int, cv_data: np.ndarray) -> None:
+        self.cycle: int = cycle
+        self.fore_replica: int = fore_replica
+        self.back_replica: int = back_replica
+        self.cv_data: np.ndarray = cv_data[:]
+        self.n_frames_fore: int = self.cv_data.shape[0]
+        self.n_frames_back: int = self.cv_data.shape[1]
+
+    
+class ScoresInCycle:
+    """
+    Information of evaluation scores in a cycle
+
+    """
+    def __init__(self, cycle: int, n_replicas: int, n_frames_fore: int, n_frames_back: int) -> None:
+        self.cycle: int = cycle
+        self.n_replicas: int = n_replicas
+        self.n_frames_fore: int = n_frames_fore
+        self.n_frames_back: int = n_frames_back
+        self.cv_data: np.ndarray = np.zeros((n_replicas, n_replicas, n_frames_fore, n_frames_back))
+
+    def add(self, scores_in_one_pair: ScoresInOnePair) -> None:
+        # check shape
+        fore_replica = scores_in_one_pair.fore_replica
+        back_replica = scores_in_one_pair.back_replica
+        n_frames_fore = scores_in_one_pair.n_frames_fore
+        n_frames_back = scores_in_one_pair.n_frames_back
+        if n_frames_fore != self.n_frames_fore:
+            raise ValueError(f"n_frames_fore is different: {n_frames_fore} != {self.n_frames_fore}")
+        if  n_frames_back != self.n_frames_back:
+            raise ValueError(f"n_frames_back is different: {n_frames_back} != {self.n_frames_back}")
+        
+        # add data
+        self.cv_data[scores_in_one_pair.fore_replica-1, scores_in_one_pair.back_replica-1, :, :] = scores_in_one_pair.cv_data
+    
+    def save(self, path: str) -> None:
+        np.save(path, self.cv_data)

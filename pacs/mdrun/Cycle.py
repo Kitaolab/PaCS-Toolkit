@@ -130,6 +130,10 @@ class Cycle:
             self.prepare_next_direction(cycle=cycle, direction=direction, replica=replica)
     
     def prepare_next_direction(self, cycle: int, direction: str, replica: int) -> None:
+        def make_dir(path: Path) -> None:
+            if not path.exists():
+                path.mkdir(parents=True)
+                
         next_direction_dir = Path(
             f"{self.settings.each_direction(_cycle=cycle + 1, _direction=direction)}"
         )

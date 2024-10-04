@@ -23,10 +23,14 @@ class SuperExporter(metaclass=ABCMeta):
         pass
 
     def export(self, settings: MDsettings, cycle: int) -> None:
+        self.export_one_way(settings, cycle, "fore")
+        self.export_one_way(settings, cycle, "back")
+
+    def export_one_way(self, settings: MDsettings, cycle: int, direction: str) -> None:
         pattern1 = r"replica (\d+) frame (\d+) cv \[([-\d.\s]+)\]"
         pattern2 = r"replica (\d+) frame (\d+) cv ([-\d.]+)"
         results = []
-        dir = settings.each_cycle(_cycle=cycle)
+        dir = settings.each_direction(_cycle=cycle, _direction=direction)
         with open(f"{dir}/summary/cv_ranked.log", "r") as f:
             for line in f:
                 match1 = re.search(pattern1, line)

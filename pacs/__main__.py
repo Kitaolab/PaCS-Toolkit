@@ -1,11 +1,12 @@
 from typing import Tuple
 
 from ._version import __version__
-from .mdrun.analyzer.a_d import A_D
-from .mdrun.analyzer.association import Association
-from .mdrun.analyzer.dissociation import Dissociation
-from .mdrun.analyzer.ee import EdgeExpansion
-from .mdrun.analyzer.rmsd import RMSD
+# from .mdrun.analyzer.a_d import A_D
+# from .mdrun.analyzer.association import Association
+# from .mdrun.analyzer.dissociation import Dissociation
+# from .mdrun.analyzer.ee import EdgeExpansion
+# from .mdrun.analyzer.rmsd import RMSD
+from .mdrun.analyzer.bd_rmsd import BD_RMSD
 from .mdrun.analyzer.superAnalyzer import SuperAnalyzer
 from .mdrun.analyzer.target import Target
 from .mdrun.analyzer.template import Template
@@ -40,13 +41,14 @@ def prepare_md(
     }.get(settings.simulator)
 
     analyzer: SuperAnalyzer = {
-        "target": Target(),
-        "dissociation": Dissociation(),
-        "association": Association(),
-        "rmsd": RMSD(),
-        "ee": EdgeExpansion(),
-        "a_d": A_D(),
-        "template": Template(),
+        "bd_rmsd": BD_RMSD(),
+        # "target": Target(),
+        # "dissociation": Dissociation(),
+        # "association": Association(),
+        # "rmsd": RMSD(),
+        # "ee": EdgeExpansion(),
+        # "a_d": A_D(),
+        # "template": Template(),
     }.get(settings.type)
 
     exporter: SuperExporter = {
