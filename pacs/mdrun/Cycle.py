@@ -148,11 +148,21 @@ class Cycle:
         fn = f"{self.settings.each_cycle(_cycle=self.cycle)}/summary/progress.log"
         if not Path(fn).exists():
             return True
+        
+        export_needed = True
+        rmmol_needed = self.settings.rmmol
+        rmfile_needed = self.settings.rmfile
+
         with open(fn, "r") as f:
-            a = f.readlines()
-            if len(a) == 0:
-                return True
-            return "export to" not in a[-1]
+            for line in f:
+                if "export to" in line:
+                    export_needed = False
+                if "reduced" in line:
+                    rmmol_needed = False
+                if "rmfile" in line:
+                    rmfile_needed = False
+
+        return any([export_needed, rmmol_needed, rmfile_needed])
 
     # def genrepresent(self) -> None:
     #     genrepresent.genrepresent(self.settings)

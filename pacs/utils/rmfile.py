@@ -99,7 +99,13 @@ def rmfile(settings: MDsettings, cycle: int) -> None:
             continue
 
     LOGGER.info(f"rmfile completed successfully in cycle{cycle:03}")
+    record_finished(settings, cycle)
 
+def record_finished(settings: MDsettings, cycle: int) -> None:
+    dir = settings.each_cycle(_cycle=cycle)
+    logger = generate_logger(f"{cycle}", f"{dir}/summary/progress.log")
+    logger.info(f"rmfile completed successfully in cycle{cycle:03}")
+    close_logger(logger)
 
 def rmfile_all(settings: MDsettings) -> None:
     max_cycle = detect_n_cycle(settings)

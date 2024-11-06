@@ -171,6 +171,7 @@ def rmmol(settings: MDsettings, cycle: int, last_cycle: bool) -> None:
             p.close()
 
     LOGGER.info(f"trajectory files in cycle{cycle:03} have been reduced")
+    record_finished(settings, cycle)
 
 
 def rmmol_replica_mdtraj(
@@ -291,12 +292,19 @@ def rmmol_log_add_info(settings: MDsettings) -> None:
         exit(1)
 
 
+def record_finished(settings: MDsettings, cycle: int) -> None:
+    dir = settings.each_cycle(_cycle=cycle)
+    logger = generate_logger(f"{cycle}", f"{dir}/summary/progress.log")
+    logger.info(f"trajectory files in cycle{cycle:03} have been reduced")
+    close_logger(logger)
+
+
 def rmmol_log_add_info_gmx(settings: MDsettings) -> None:
-    LOGGER.info("prd.tpr files are probably no longer needed")
-    LOGGER.info("it is recommended to remove prd.tpr files to save disk space")
+    LOGGER.info("The 'prd.tpr' files are probably no longer needed.")
+    LOGGER.info("It is recommended to remove 'prd.tpr' files to save disk space.")
     LOGGER.info(
-        "you can manually regenerate the prd.tpr files from input.gro files \
-        even if you need them later"
+        "If needed later, you can manually regenerate the 'prd.tpr' files from "
+        "the 'input.gro' files."
     )
 
 
