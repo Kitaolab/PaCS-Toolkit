@@ -149,9 +149,9 @@ class Cycle:
         if not Path(fn).exists():
             return True
 
-        export_needed = True
-        rmmol_needed = self.settings.rmmol
-        rmfile_needed = self.settings.rmfile
+        export_needed: bool = True
+        rmmol_needed : bool = self.settings.rmmol
+        rmfile_needed: bool = self.settings.rmfile
 
         with open(fn, "r") as f:
             for line in f:
