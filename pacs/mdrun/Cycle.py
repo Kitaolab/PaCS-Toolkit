@@ -148,7 +148,7 @@ class Cycle:
         fn = f"{self.settings.each_cycle(_cycle=self.cycle)}/summary/progress.log"
         if not Path(fn).exists():
             return True
-        
+
         export_needed = True
         rmmol_needed = self.settings.rmmol
         rmfile_needed = self.settings.rmfile

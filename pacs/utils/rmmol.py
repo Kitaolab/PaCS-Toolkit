@@ -3,7 +3,7 @@ import subprocess
 from pathlib import Path
 
 from pacs.models.settings import MDsettings
-from pacs.utils.logger import generate_logger
+from pacs.utils.logger import close_logger, generate_logger
 
 LOGGER = generate_logger(__name__)
 
@@ -294,7 +294,7 @@ def rmmol_log_add_info(settings: MDsettings) -> None:
 
 def record_finished(settings: MDsettings, cycle: int) -> None:
     dir = settings.each_cycle(_cycle=cycle)
-    logger = generate_logger(f"{cycle}", f"{dir}/summary/progress.log")
+    logger = generate_logger(f"{cycle}_rmmol", f"{dir}/summary/progress.log")
     logger.info(f"trajectory files in cycle{cycle:03} have been reduced")
     close_logger(logger)
 

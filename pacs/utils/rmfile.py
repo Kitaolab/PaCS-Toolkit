@@ -2,7 +2,7 @@ import subprocess
 from pathlib import Path
 
 from pacs.models.settings import MDsettings
-from pacs.utils.logger import generate_logger
+from pacs.utils.logger import close_logger, generate_logger
 
 LOGGER = generate_logger(__name__)
 
@@ -101,11 +101,13 @@ def rmfile(settings: MDsettings, cycle: int) -> None:
     LOGGER.info(f"rmfile completed successfully in cycle{cycle:03}")
     record_finished(settings, cycle)
 
+
 def record_finished(settings: MDsettings, cycle: int) -> None:
     dir = settings.each_cycle(_cycle=cycle)
-    logger = generate_logger(f"{cycle}", f"{dir}/summary/progress.log")
+    logger = generate_logger(f"{cycle}_rmfile", f"{dir}/summary/progress.log")
     logger.info(f"rmfile completed successfully in cycle{cycle:03}")
     close_logger(logger)
+
 
 def rmfile_all(settings: MDsettings) -> None:
     max_cycle = detect_n_cycle(settings)
