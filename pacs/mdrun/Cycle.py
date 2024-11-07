@@ -150,7 +150,7 @@ class Cycle:
             return True
 
         export_needed: bool = True
-        rmmol_needed : bool = self.settings.rmmol
+        rmmol_needed: bool = self.settings.rmmol
         rmfile_needed: bool = self.settings.rmfile
 
         with open(fn, "r") as f:
