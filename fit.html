@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="light" dir="ltr">
+<html lang="en" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 
 
         <!-- Custom HTML head -->
-        
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -31,7 +31,7 @@
         <!-- Custom theme stylesheets -->
 
     </head>
-    <body class="sidebar-visible no-js">
+    <body>
     <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
@@ -60,19 +60,16 @@
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            var body = document.querySelector('body');
-            body.classList.remove('no-js')
-            body.classList.add('js');
+            html.classList.add("js");
         </script>
 
         <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var body = document.querySelector('body');
             var sidebar = null;
             var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
@@ -82,45 +79,27 @@
                 sidebar = 'hidden';
             }
             sidebar_toggle.checked = sidebar === 'visible';
-            body.classList.remove('sidebar-visible');
-            body.classList.add("sidebar-" + sidebar);
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">PaCS-Toolkit User Guide</a></li><li class="chapter-item expanded "><a href="quickstart.html"><strong aria-hidden="true">1.</strong> Quick Start</a></li><li class="chapter-item expanded "><a href="install.html"><strong aria-hidden="true">2.</strong> Install</a></li><li class="chapter-item expanded "><a href="mdrun.html"><strong aria-hidden="true">3.</strong> mdrun</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="mdrun/overview.html"><strong aria-hidden="true">3.1.</strong> Overview</a></li><li class="chapter-item expanded "><a href="mdrun/basic.html"><strong aria-hidden="true">3.2.</strong> Basic</a></li><li class="chapter-item expanded "><a href="mdrun/simulator.html"><strong aria-hidden="true">3.3.</strong> Simulator</a></li><li class="chapter-item expanded "><a href="mdrun/analyzer.html"><strong aria-hidden="true">3.4.</strong> Analyzer</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="mdrun/analyzer/rmsd.html"><strong aria-hidden="true">3.4.1.</strong> rmsd</a></li><li class="chapter-item expanded "><a href="mdrun/analyzer/target.html"><strong aria-hidden="true">3.4.2.</strong> target</a></li><li class="chapter-item expanded "><a href="mdrun/analyzer/dissociation.html"><strong aria-hidden="true">3.4.3.</strong> dissociation</a></li><li class="chapter-item expanded "><a href="mdrun/analyzer/association.html"><strong aria-hidden="true">3.4.4.</strong> association</a></li><li class="chapter-item expanded "><a href="mdrun/analyzer/a_d.html"><strong aria-hidden="true">3.4.5.</strong> a_d</a></li><li class="chapter-item expanded "><a href="mdrun/analyzer/ee.html"><strong aria-hidden="true">3.4.6.</strong> ee</a></li><li class="chapter-item expanded "><a href="mdrun/analyzer/template.html"><strong aria-hidden="true">3.4.7.</strong> template</a></li></ol></li><li class="chapter-item expanded "><a href="mdrun/inputfile.html"><strong aria-hidden="true">3.5.</strong> Input file</a></li><li class="chapter-item expanded "><a href="mdrun/reference.html"><strong aria-hidden="true">3.6.</strong> Reference</a></li></ol></li><li class="chapter-item expanded "><a href="rmmol.html"><strong aria-hidden="true">4.</strong> rmmol</a></li><li class="chapter-item expanded "><a href="rmfile.html"><strong aria-hidden="true">5.</strong> rmfile</a></li><li class="chapter-item expanded "><a href="fit.html" class="active"><strong aria-hidden="true">6.</strong> fit</a></li><li class="chapter-item expanded "><a href="genrepresent.html"><strong aria-hidden="true">7.</strong> genrepresent</a></li><li class="chapter-item expanded "><a href="gencom.html"><strong aria-hidden="true">8.</strong> gencom</a></li><li class="chapter-item expanded "><a href="genfeature.html"><strong aria-hidden="true">9.</strong> genfeature</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="genfeature/comdist.html"><strong aria-hidden="true">9.1.</strong> comdist</a></li><li class="chapter-item expanded "><a href="genfeature/comvec.html"><strong aria-hidden="true">9.2.</strong> comvec</a></li><li class="chapter-item expanded "><a href="genfeature/rmsd.html"><strong aria-hidden="true">9.3.</strong> rmsd</a></li><li class="chapter-item expanded "><a href="genfeature/xyz.html"><strong aria-hidden="true">9.4.</strong> xyz</a></li></ol></li><li class="chapter-item expanded "><a href="FAQ.html"><strong aria-hidden="true">10.</strong> FAQ</a></li></ol>
-            </div>
+            <!-- populated by js -->
+            <div class="sidebar-scrollbox"></div>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
+        <script async src="toc.js"></script>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
