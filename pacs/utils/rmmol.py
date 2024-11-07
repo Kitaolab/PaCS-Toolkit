@@ -170,7 +170,7 @@ def rmmol(settings: MDsettings, cycle: int, last_cycle: bool) -> None:
         for p in processes:
             p.close()
 
-    LOGGER.info(f"trajectory files in cycle{cycle:03} have been reduced")
+    # LOGGER.info(f"trajectory files in cycle{cycle:03} have been reduced")
     record_finished(settings, cycle)
 
 

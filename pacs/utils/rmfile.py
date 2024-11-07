@@ -98,7 +98,7 @@ def rmfile(settings: MDsettings, cycle: int) -> None:
 
             continue
 
-    LOGGER.info(f"rmfile completed successfully in cycle{cycle:03}")
+    # LOGGER.info(f"rmfile completed successfully in cycle{cycle:03}")
     record_finished(settings, cycle)
 
 
