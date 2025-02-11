@@ -5,6 +5,7 @@ https://doi.org/10.1021/acs.jctc.7b00504
 """
 
 import subprocess
+import multiprocessing as mp
 from typing import List
 
 import numpy as np
@@ -17,17 +18,19 @@ LOGGER = generate_logger(__name__)
 
 class Dissociation(SuperAnalyzer):
     def calculate_cv(
-        self, settings: MDsettings, cycle: int, replica: int, send_rev
+        # self, settings: MDsettings, cycle: int, replica: int, send_rev
+        self, settings: MDsettings, cycle: int, replica: int, queue: mp.Queue
     ) -> List[float]:
         if settings.analyzer == "mdtraj":
             ret = self.cal_by_mdtraj(settings, cycle, replica)
         elif settings.analyzer == "gromacs":
+            # ret = self.cal_by_gmx(settings, cycle, replica)
             ret = self.cal_by_gmx(settings, cycle, replica)
         elif settings.analyzer == "cpptraj":
             ret = self.cal_by_cpptraj(settings, cycle, replica)
         else:
             raise NotImplementedError
-        send_rev.send(ret)
+        queue.put(ret)
         return ret
 
     def ranking(self, settings: MDsettings, CVs: List[Snapshot]) -> List[Snapshot]:
@@ -40,7 +43,7 @@ class Dissociation(SuperAnalyzer):
         return CVs[0].cv > settings.threshold
 
     def cal_by_mdtraj(
-        self, settings: MDsettings, cycle: int, replica: int
+        self, settings: MDsettings, cycle: int, replica: int,
     ) -> List[float]:
         import mdtraj as md
 
@@ -59,7 +62,7 @@ class Dissociation(SuperAnalyzer):
         dist = np.array([np.linalg.norm(com1[i] - com2[i]) for i in range(len(com1))])
         return dist
 
-    def cal_by_gmx(self, settings: MDsettings, cycle: int, replica: int) -> List[float]:
+    def cal_by_gmx(self, settings: MDsettings, cycle: int, replica: int,) -> List[float]:
         extension = settings.trajectory_extension
         grp1 = settings.selection1
         grp2 = settings.selection2
@@ -105,7 +108,7 @@ class Dissociation(SuperAnalyzer):
         cmd_rmfile = f"rm {dir}/prd_image{extension}"
         subprocess.run(cmd_rmfile, shell=True)
 
-        xyz_rep = np.loadtxt(f"{dir}/interCOM_xyz.xvg")
+        xyz_rep = np.loadtxt(f"{dir}/interCOM_xyz.xvg", dtype="float32")
         dist = np.linalg.norm(xyz_rep[:, [1, 2, 3]], axis=1)
         return dist
 

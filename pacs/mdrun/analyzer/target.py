@@ -5,6 +5,7 @@ https://doi.org/10.1063/1.4813023
 """
 
 import subprocess
+import multiprocessing as mp
 from typing import List
 
 import numpy as np
@@ -17,7 +18,7 @@ LOGGER = generate_logger(__name__)
 
 class Target(SuperAnalyzer):
     def calculate_cv(
-        self, settings: MDsettings, cycle: int, replica: int, send_rev
+        self, settings: MDsettings, cycle: int, replica: int, queue: mp.Queue
     ) -> List[float]:
         if settings.analyzer == "mdtraj":
             ret = self.cal_by_mdtraj(settings, cycle, replica)
@@ -27,7 +28,7 @@ class Target(SuperAnalyzer):
             ret = self.cal_by_cpptraj(settings, cycle, replica)
         else:
             raise NotImplementedError
-        send_rev.send(ret)
+        queue.put(ret)
         return ret
 
     def ranking(self, settings: MDsettings, CVs: List[Snapshot]) -> List[Snapshot]:

@@ -65,7 +65,8 @@ class SuperAnalyzer(metaclass=ABCMeta):
             LOGGER.info("analyzer was skipped")
             return results
 
-        pipe_list = []
+        queue = mp.Queue(maxsize=0)
+        cv_arr = []
         n_loop = (settings.n_replica + settings.n_parallel - 1) // settings.n_parallel
         replicas = [x + 1 for x in range(settings.n_replica)]
         for i in range(n_loop):
@@ -76,24 +77,30 @@ class SuperAnalyzer(metaclass=ABCMeta):
                     (i + 1) * settings.n_parallel, settings.n_replica
                 )
             ]:
-                get_rev, send_rev = mp.Pipe(False)
                 p = mp.Process(
-                    target=self.calculate_cv, args=(settings, cycle, replica, send_rev)
+                    target=self.calculate_cv, args=(settings, cycle, replica, queue)
                 )
                 job_list.append(p)
-                pipe_list.append(get_rev)
                 p.start()
+
+            for _  in range(len(job_list)):
+                cv_arr.append(queue.get())
+
             for proc in job_list:
                 proc.join()
+
             for proc in job_list:
                 if proc.exitcode != 0:
                     LOGGER.error("error occurred at child process")
                     exit(1)
+
             # Not necessary, but just in case.
             for proc in job_list:
                 proc.close()
-
-        cv_arr = [x.recv() for x in pipe_list]
+        
+        # just in case
+        queue.close()
+        queue.join_thread()
         assert len(cv_arr) == settings.n_replica
 
         cv_arr = np.array(cv_arr)

@@ -3,6 +3,7 @@ reference
 """
 
 import subprocess
+import multiprocessing as mp
 from typing import List
 
 import numpy as np
@@ -19,7 +20,7 @@ class A_D(SuperAnalyzer):
         self.bound_cnt = 0
 
     def calculate_cv(
-        self, settings: MDsettings, cycle: int, replica: int, send_rev
+        self, settings: MDsettings, cycle: int, replica: int, queue: mp.Queue
     ) -> List[float]:
         if settings.analyzer == "mdtraj":
             ret = self.cal_by_mdtraj(settings, cycle, replica)
@@ -29,7 +30,7 @@ class A_D(SuperAnalyzer):
             ret = self.cal_by_cpptraj(settings, cycle, replica)
         else:
             raise NotImplementedError
-        send_rev.send(ret)
+        queue.put(ret)
         return ret
 
     def ranking(self, settings: MDsettings, CVs: List[Snapshot]) -> List[Snapshot]:
