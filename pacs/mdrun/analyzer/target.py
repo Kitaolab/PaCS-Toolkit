@@ -4,8 +4,8 @@ Parallel cascade selection molecular dynamics (PaCS-MD) to generate conformation
 https://doi.org/10.1063/1.4813023
 """
 
-import subprocess
 import multiprocessing as mp
+import subprocess
 from typing import List
 
 import numpy as np

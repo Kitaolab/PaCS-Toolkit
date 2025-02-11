@@ -83,7 +83,7 @@ class SuperAnalyzer(metaclass=ABCMeta):
                 job_list.append(p)
                 p.start()
 
-            for _  in range(len(job_list)):
+            for _ in range(len(job_list)):
                 cv_arr.append(queue.get())
 
             for proc in job_list:
@@ -97,7 +97,7 @@ class SuperAnalyzer(metaclass=ABCMeta):
             # Not necessary, but just in case.
             for proc in job_list:
                 proc.close()
-        
+
         # just in case
         queue.close()
         queue.join_thread()

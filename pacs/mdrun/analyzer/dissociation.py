@@ -4,8 +4,8 @@ Protein-Ligand Dissociation Simulated by Parallel Cascade Selection Molecular Dy
 https://doi.org/10.1021/acs.jctc.7b00504
 """
 
-import subprocess
 import multiprocessing as mp
+import subprocess
 from typing import List
 
 import numpy as np
@@ -19,7 +19,11 @@ LOGGER = generate_logger(__name__)
 class Dissociation(SuperAnalyzer):
     def calculate_cv(
         # self, settings: MDsettings, cycle: int, replica: int, send_rev
-        self, settings: MDsettings, cycle: int, replica: int, queue: mp.Queue
+        self,
+        settings: MDsettings,
+        cycle: int,
+        replica: int,
+        queue: mp.Queue,
     ) -> List[float]:
         if settings.analyzer == "mdtraj":
             ret = self.cal_by_mdtraj(settings, cycle, replica)
@@ -43,7 +47,10 @@ class Dissociation(SuperAnalyzer):
         return CVs[0].cv > settings.threshold
 
     def cal_by_mdtraj(
-        self, settings: MDsettings, cycle: int, replica: int,
+        self,
+        settings: MDsettings,
+        cycle: int,
+        replica: int,
     ) -> List[float]:
         import mdtraj as md
 
@@ -62,7 +69,12 @@ class Dissociation(SuperAnalyzer):
         dist = np.array([np.linalg.norm(com1[i] - com2[i]) for i in range(len(com1))])
         return dist
 
-    def cal_by_gmx(self, settings: MDsettings, cycle: int, replica: int,) -> List[float]:
+    def cal_by_gmx(
+        self,
+        settings: MDsettings,
+        cycle: int,
+        replica: int,
+    ) -> List[float]:
         extension = settings.trajectory_extension
         grp1 = settings.selection1
         grp2 = settings.selection2

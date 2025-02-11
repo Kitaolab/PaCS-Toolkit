@@ -6,8 +6,8 @@ https://doi.org/10.1063/5.0004654
 """
 
 
-import pickle
 import multiprocessing as mp
+import pickle
 from typing import List
 
 import numpy as np

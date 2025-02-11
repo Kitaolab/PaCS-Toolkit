@@ -5,8 +5,8 @@ https://doi.org/10.1038/s41598-022-07792-2
 """
 
 
-import subprocess
 import multiprocessing as mp
+import subprocess
 from typing import List
 
 import numpy as np

@@ -2,8 +2,8 @@
 reference
 """
 
-import subprocess
 import multiprocessing as mp
+import subprocess
 from typing import List
 
 import numpy as np
