@@ -123,7 +123,7 @@ class A_D(SuperAnalyzer):
         cmd_rmfile = f"rm {dir}/prd_image{extension}"
         subprocess.run(cmd_rmfile, shell=True)
 
-        xyz_rep = np.loadtxt(f"{dir}/interCOM_xyz.xvg")
+        xyz_rep = np.loadtxt(f"{dir}/interCOM_xyz.xvg", dtype="float32")
         dist = np.linalg.norm(xyz_rep[:, [1, 2, 3]], axis=1)
         return dist
 
@@ -156,5 +156,5 @@ class A_D(SuperAnalyzer):
             LOGGER.error(f"see {dir}/distance.log for details")
             exit(1)
 
-        rmsd = np.loadtxt(f"{dir}/interCOM.xvg")[:, 1]
-        return rmsd
+        dists = np.loadtxt(f"{dir}/interCOM.xvg", dtype="float32")[:, 1]
+        return dists

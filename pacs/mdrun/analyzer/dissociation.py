@@ -153,5 +153,5 @@ class Dissociation(SuperAnalyzer):
             LOGGER.error(f"See {dir}/distance.log for details")
             exit(1)
 
-        rmsd = np.loadtxt(f"{dir}/interCOM.xvg")[:, 1]
-        return rmsd
+        dists = np.loadtxt(f"{dir}/interCOM.xvg", dtype="float32")[:, 1]
+        return dists

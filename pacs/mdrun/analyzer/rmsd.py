@@ -115,7 +115,7 @@ class RMSD(SuperAnalyzer):
         cmd_rmfile = f"rm {dir}/prd_image{extension}"
         subprocess.run(cmd_rmfile, shell=True)
 
-        rmsd_rep = np.loadtxt(f"{dir}/rms.xvg")[:, 1]
+        rmsd_rep = np.loadtxt(f"{dir}/rms.xvg", dtype="float32")[:, 1]
         return rmsd_rep
         # output of rms command will be tsv-like format
 
@@ -162,5 +162,5 @@ class RMSD(SuperAnalyzer):
             LOGGER.error(f"see {dir}/rms.log for details")
             exit(1)
 
-        rmsd = np.loadtxt(f"{dir}/rms.xvg")[:, 1]
+        rmsd = np.loadtxt(f"{dir}/rms.xvg", dtype="float32")[:, 1]
         return rmsd
