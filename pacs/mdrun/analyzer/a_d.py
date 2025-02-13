@@ -2,6 +2,7 @@
 reference
 """
 
+import multiprocessing as mp
 import subprocess
 from typing import List
 
@@ -19,7 +20,7 @@ class A_D(SuperAnalyzer):
         self.bound_cnt = 0
 
     def calculate_cv(
-        self, settings: MDsettings, cycle: int, replica: int, send_rev
+        self, settings: MDsettings, cycle: int, replica: int, queue: mp.Queue
     ) -> List[float]:
         if settings.analyzer == "mdtraj":
             ret = self.cal_by_mdtraj(settings, cycle, replica)
@@ -29,7 +30,7 @@ class A_D(SuperAnalyzer):
             ret = self.cal_by_cpptraj(settings, cycle, replica)
         else:
             raise NotImplementedError
-        send_rev.send(ret)
+        queue.put(ret)
         return ret
 
     def ranking(self, settings: MDsettings, CVs: List[Snapshot]) -> List[Snapshot]:
@@ -122,7 +123,7 @@ class A_D(SuperAnalyzer):
         cmd_rmfile = f"rm {dir}/prd_image{extension}"
         subprocess.run(cmd_rmfile, shell=True)
 
-        xyz_rep = np.loadtxt(f"{dir}/interCOM_xyz.xvg")
+        xyz_rep = np.loadtxt(f"{dir}/interCOM_xyz.xvg", dtype="float32")
         dist = np.linalg.norm(xyz_rep[:, [1, 2, 3]], axis=1)
         return dist
 
@@ -155,5 +156,5 @@ class A_D(SuperAnalyzer):
             LOGGER.error(f"see {dir}/distance.log for details")
             exit(1)
 
-        rmsd = np.loadtxt(f"{dir}/interCOM.xvg")[:, 1]
-        return rmsd
+        dists = np.loadtxt(f"{dir}/interCOM.xvg", dtype="float32")[:, 1]
+        return dists

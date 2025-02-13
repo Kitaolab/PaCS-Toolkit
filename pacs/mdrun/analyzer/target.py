@@ -4,6 +4,7 @@ Parallel cascade selection molecular dynamics (PaCS-MD) to generate conformation
 https://doi.org/10.1063/1.4813023
 """
 
+import multiprocessing as mp
 import subprocess
 from typing import List
 
@@ -17,7 +18,7 @@ LOGGER = generate_logger(__name__)
 
 class Target(SuperAnalyzer):
     def calculate_cv(
-        self, settings: MDsettings, cycle: int, replica: int, send_rev
+        self, settings: MDsettings, cycle: int, replica: int, queue: mp.Queue
     ) -> List[float]:
         if settings.analyzer == "mdtraj":
             ret = self.cal_by_mdtraj(settings, cycle, replica)
@@ -27,7 +28,7 @@ class Target(SuperAnalyzer):
             ret = self.cal_by_cpptraj(settings, cycle, replica)
         else:
             raise NotImplementedError
-        send_rev.send(ret)
+        queue.put(ret)
         return ret
 
     def ranking(self, settings: MDsettings, CVs: List[Snapshot]) -> List[Snapshot]:
@@ -112,7 +113,7 @@ class Target(SuperAnalyzer):
         cmd_rmfile = f"rm {dir}/prd_image{extension}"
         subprocess.run(cmd_rmfile, shell=True)
 
-        rmsd_rep = np.loadtxt(f"{dir}/rms.xvg")[:, 1]
+        rmsd_rep = np.loadtxt(f"{dir}/rms.xvg", dtype="float32")[:, 1]
         return rmsd_rep
         # output of rms command will be tsv-like format
 
@@ -163,5 +164,5 @@ class Target(SuperAnalyzer):
             LOGGER.error(f"see {dir}/rms.log for details")
             exit(1)
 
-        rmsd = np.loadtxt(f"{dir}/rms.xvg")[:, 1]
+        rmsd = np.loadtxt(f"{dir}/rms.xvg", dtype="float32")[:, 1]
         return rmsd

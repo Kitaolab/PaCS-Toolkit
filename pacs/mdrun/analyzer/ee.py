@@ -6,6 +6,7 @@ https://doi.org/10.1063/5.0004654
 """
 
 
+import multiprocessing as mp
 import pickle
 from typing import List
 
@@ -19,7 +20,7 @@ LOGGER = generate_logger(__name__)
 
 class EdgeExpansion(SuperAnalyzer):
     def calculate_cv(
-        self, settings: MDsettings, cycle: int, replica: int, send_rev
+        self, settings: MDsettings, cycle: int, replica: int, queue: mp.Queue
     ) -> List[float]:
         if settings.reference is None:
             settings.reference = f"{settings.each_replica(_cycle=0, _replica=1)}/prd{settings.trajectory_extension}"  # NOQA: B950
@@ -35,7 +36,7 @@ class EdgeExpansion(SuperAnalyzer):
             ret = self.cal_by_cpptraj(settings, cycle, replica)
         else:
             raise NotImplementedError
-        send_rev.send(ret)
+        queue.put(ret)
         return ret
 
     def ranking(self, settings: MDsettings, CVs: List[Snapshot]) -> List[Snapshot]:
