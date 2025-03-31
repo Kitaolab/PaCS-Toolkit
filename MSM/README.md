@@ -61,7 +61,7 @@ In this notebook, we use two types of Markov State Models (MSMs):
 
 ## Parameters
 Below is the list of parameters that need to be specified by the user.
-Sample parameters can be found at `MSM/parameter_sample.py`.
+Sample parameters can be found in a cell inside `distance_deeptime.ipynb`.
 
 
 - `n_trial_for_calc`: List[int], required
