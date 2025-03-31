@@ -1,0 +1,19 @@
+# input the following variables
+n_trial_for_calc      : List[int] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20] # list of indices of trials
+trial_root_directory  : str       = "/path/to/trial"                # directory path containing trial directories
+feature_1d_directory  : str       = "/path/to/comdist-genfeature"   # directory path containing comdist (created by pacs gengeature comdist)
+feature_3d_directory  : str       = "/path/to/comvec-genfeature"    # directory path containing comvec (created by pacs gengeature comvec)
+output_directory      : str       = "./out_distnb"                  # output directory path created by this notebook
+show_picture          : bool      = True                            # whether to show pictures in this notebook, select from [True, False]
+T                     : float     = 303.15                          # [K], temperature in your system
+dt                    : int       = 1                               # [ps], dt in your system
+n_clusters_for_try_1d : List[int] = [20, 30, 40, 50, 60, 70, 80]    # n_clusters list for plotting ITS
+lags_for_try_1d       : List[int] = [i for i in range(1, 51)]       # lag time(frame) list for plotting ITS
+n_clusters_for_try_3d : List[int] = [100, 200, 300, 400, 500]       # n_clusters list for plotting ITS
+lags_for_try_3d       : List[int] = [i for i in range(1, 51)]       # lag time(frame) list for plotting ITS
+cutoff                : float     = 6.5                             # [nm], cutoff for inter-COM distance to decide whether the replica is used for MSM.
+nbins                 : int       = 30                              # the number of bins when plotting.
+cmap                  : ListedColormap = mpl.cm.get_cmap('tab20')   # color map for plotting FEL of each trial
+do_volume_correction  : bool      = True                            # whether to perform volume correction, select from [True, False]
+num_of_ligand         : int       = 1                               # the number of ligands in your system
+box_size              : float     = 9.31680 * 9.31680 * 16.54044    # [nm^3], box size for volume ligand concentration used for koff calculation
