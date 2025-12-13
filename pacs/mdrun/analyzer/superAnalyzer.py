@@ -83,8 +83,14 @@ class SuperAnalyzer(metaclass=ABCMeta):
                 job_list.append(p)
                 p.start()
 
+            tmp = []
             for _ in range(len(job_list)):
                 cv_arr.append(queue.get())
+            
+            tmp.sort(key=lambda x: x[0])
+
+            for replica, ret in tmp:
+                cv_arr.append(ret)
 
             for proc in job_list:
                 proc.join()
