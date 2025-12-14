@@ -29,7 +29,7 @@ class RMSD(SuperAnalyzer):
             ret = self.cal_by_cpptraj(settings, cycle, replica)
         else:
             raise NotImplementedError
-        queue.put(ret)
+        queue.put((replica, ret))
         return ret
 
     def ranking(self, settings: MDsettings, CVs: List[Snapshot]) -> List[Snapshot]:
