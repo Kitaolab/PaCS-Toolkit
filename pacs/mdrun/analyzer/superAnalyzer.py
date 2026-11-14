@@ -18,7 +18,9 @@ class SuperAnalyzer(metaclass=ABCMeta):
     CVs: List[float] = None
 
     @abstractmethod
-    def calculate_cv(self, settings: MDsettings, cycle: int, replica: int, queue: mp.Queue) -> List[float]:
+    def calculate_cv(
+        self, settings: MDsettings, cycle: int, replica: int, queue: mp.Queue
+    ) -> List[float]:
         pass
 
     @abstractmethod
@@ -86,7 +88,7 @@ class SuperAnalyzer(metaclass=ABCMeta):
             tmp = []
             for _ in range(len(job_list)):
                 tmp.append(queue.get())
-            
+
             tmp.sort(key=lambda x: x[0])
 
             for replica, ret in tmp:
