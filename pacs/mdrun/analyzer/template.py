@@ -1,3 +1,4 @@
+import multiprocessing as mp
 from typing import List
 
 from pacs.mdrun.analyzer.superAnalyzer import SuperAnalyzer
@@ -9,13 +10,14 @@ LOGGER = generate_logger(__name__)
 
 class Template(SuperAnalyzer):
     def calculate_cv(
-        self, settings: MDsettings, cycle: int, replica: int, send_rev
-    ) -> None:
+        self, settings: MDsettings, cycle: int, replica: int, queue: mp.Queue
+    ) -> List[float]:
         """
         TODO
-        1. Read trajectory based on self.cycle
+        1. Read trajectory based on cycle and replica
         2. Calculate the value that suited the evaluation type.
-        3. send the values by send_rev.send(ret_arr)
+        3. send the values with the replica number: queue.put((replica, ret))
+           (SuperAnalyzer.analyze uses the replica number to keep the order)
         """
         pass
 

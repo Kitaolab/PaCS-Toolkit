@@ -68,31 +68,24 @@ class SuperAnalyzer(metaclass=ABCMeta):
             return results
 
         queue = mp.Queue(maxsize=0)
-        cv_arr = []
+        # one slot per replica: cv_arr[replica - 1] holds that replica's CVs,
+        # so the order does not depend on which process finishes first
+        cv_arr = [None] * settings.n_replica
         n_loop = (settings.n_replica + settings.n_parallel - 1) // settings.n_parallel
         replicas = [x + 1 for x in range(settings.n_replica)]
         for i in range(n_loop):
+            batch = replicas[i * settings.n_parallel : (i + 1) * settings.n_parallel]
             job_list = []
-            for replica in replicas[
-                i
-                * settings.n_parallel : min(
-                    (i + 1) * settings.n_parallel, settings.n_replica
-                )
-            ]:
+            for replica in batch:
                 p = mp.Process(
                     target=self.calculate_cv, args=(settings, cycle, replica, queue)
                 )
                 job_list.append(p)
                 p.start()
 
-            tmp = []
             for _ in range(len(job_list)):
-                tmp.append(queue.get())
-
-            tmp.sort(key=lambda x: x[0])
-
-            for replica, ret in tmp:
-                cv_arr.append(ret)
+                replica, ret = queue.get()
+                cv_arr[replica - 1] = ret
 
             for proc in job_list:
                 proc.join()
@@ -109,7 +102,10 @@ class SuperAnalyzer(metaclass=ABCMeta):
         # just in case
         queue.close()
         queue.join_thread()
-        assert len(cv_arr) == settings.n_replica
+        missing = [rep + 1 for rep, cv in enumerate(cv_arr) if cv is None]
+        if missing:
+            LOGGER.error(f"no CV was returned for replica(s) {missing}")
+            exit(1)
 
         cv_arr = np.array(cv_arr)
         if len(cv_arr.shape) == 2:
