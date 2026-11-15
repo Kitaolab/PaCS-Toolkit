@@ -102,6 +102,8 @@ class EdgeExpansion(SuperAnalyzer):
             f"{dir}/prd{settings.trajectory_extension}",
             top=settings.top_mdtraj,
         )
+        # PBC treatment (pbc_level), see SuperAnalyzer.pbc_by_mdtraj
+        self.pbc_by_mdtraj(settings, trj)
         trj.superpose(
             ref,
             0,

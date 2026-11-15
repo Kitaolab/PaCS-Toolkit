@@ -96,18 +96,32 @@ rmfile = true                     # Whether rmfile is executed after trial
 - **trajectory_extension: str, required**
   - Trajectory file extension. ("." is necessary)
 - **pbc_level: int, default=2**
-  - level of PBC treatment applied to `prd.xtc` before the CV calculation in `analyzer`
-  - **valid only when `analyzer` is gromacs**
+  - level of PBC treatment applied to the trajectory before the CV calculation in `analyzer`
+  - valid for all analyzers (gromacs, cpptraj, mdtraj)
   - `1`: no PBC treatment. The trajectory from the simulation is used directly (fastest, risky)
-  - `2`: `gmx trjconv -pbc mol` is applied to make molecules whole, and the analysis uses that `.xtc` (medium, risky)
-  - `3`: thorough treatment (slowest, safest). `centering_atom_for_PBC` is translated to the box center:
-    1. `gmx trjconv -center` (center group = `centering_atom_for_PBC`) → `tmp1.xtc`
-    2. `gmx trjconv -pbc atom` on `tmp1.xtc` → `tmp2.xtc`
-    3. `gmx trjconv -pbc mol` on `tmp2.xtc` → `tmp3.xtc`, which is used for the analysis
+  - `2`: (medium, risky)
+    - gromacs: `gmx trjconv -pbc mol` is applied to make molecules whole, and the analysis uses that `.xtc`
+    - cpptraj: `image`
+    - mdtraj: same as `-pbc mol`: molecules are made whole and the center of mass of each molecule is put in the box
+  - `3`: thorough treatment. `centering_atom_for_PBC` is translated to the box center (slowest, safest)
+    - gromacs:
+      1. `gmx trjconv -center` (center group = `centering_atom_for_PBC`) → `tmp1.xtc`
+      2. `gmx trjconv -pbc atom` on `tmp1.xtc` → `tmp2.xtc`
+      3. `gmx trjconv -pbc mol` on `tmp2.xtc` → `tmp3.xtc`, which is used for the analysis
+    - cpptraj: `center <centering_atom_for_PBC>` then `image`
+    - mdtraj: same procedure as gromacs, done in memory (`centering_atom_for_PBC` → box center, every atom into the box, then `-pbc mol`)
   - the intermediate files are removed after the analysis
-- **centering_atom_for_PBC: int, (required if `pbc_level=3`)**
-  - atom number (1-based, as in `.gro` / `.ndx`) used for `gmx trjconv -center` when `pbc_level=3`
-  - a group named `PaCS_PBC_center` containing only this atom is added to a copy of `index_file` (`pbc_center.ndx` in each replica directory)
+  - mdtraj: molecules are built from the topology bonds and residues, so the atoms of one residue (e.g. a ligand without bond information in `.pdb`/`.gro`) are always kept together. Only the molecules that contain `selection1`/`selection2` atoms are processed. The trajectory must contain box information when `pbc_level` is 2 or 3.
+- **centering_atom_for_PBC: int or str, (required if `pbc_level=3`)**
+  - the atom that is moved to the box center when `pbc_level=3`. **It must select exactly one atom**; otherwise PaCS-MD stops with an error before starting.
+  - int: atom number (1-based, as in `.gro` / `.ndx` / `.pdb`)
+    - gromacs: a group named `PaCS_PBC_center` containing only this atom is added to a copy of `index_file` (`pbc_center.ndx` in each replica directory)
+    - cpptraj: used as the mask `@<atom number>`
+    - mdtraj: atom number counted from 1 in the mdtraj topology (atom index + 1)
+  - str:
+    - gromacs: name of an index group in `index_file` that contains exactly one atom
+    - cpptraj: atom mask that selects exactly one atom (e.g. `":25@CA"`)
+    - mdtraj: selection that selects exactly one atom (e.g. `"resid 24 and name CA"`)
   - choose an atom that stays near the center of the system of interest (e.g. a CA atom in the core of the protein)
 
 </details>
@@ -122,7 +136,7 @@ topology = "/work/topol.top"            # Topology file such as top, parm7, psf,
 mdconf = "/work/parameter.mdp"          # Parameter file such as mdp, mdin, namd, etc.
 index_file = "/work/index.ndx"          # Gromacs index file
 trajectory_extension = ".xtc"           # Trajectory file extension. ("." is necessary)
-pbc_level = 3                           # 1: none, 2: -pbc mol, 3: -center/-pbc atom/-pbc mol (gmx analyzer only)
+pbc_level = 3                           # 1: none, 2: -pbc mol, 3: -center/-pbc atom/-pbc mol
 centering_atom_for_PBC = 1234           # atom number used for -center when pbc_level = 3
 ```
 
@@ -146,6 +160,9 @@ centering_atom_for_PBC = 1234           # atom number used for -center when pbc_
   - Parameter file such as mdp, mdin, namd, etc.
 - **trajectory_extension: str, required**
   - Trajectory file extension. ("." is necessary)
+- **pbc_level: int, default=2** / **centering_atom_for_PBC: int or str**
+  - PBC treatment before the CV calculation when `analyzer = "cpptraj"`: `1` none, `2` `image`, `3` `center <centering_atom_for_PBC>` then `image`
+  - see the Gromacs section above for details. `centering_atom_for_PBC` must select exactly one atom (atom number, or a cpptraj mask such as `":25@CA"`)
 
 </details>
 
@@ -158,6 +175,8 @@ structure = "/work/structure.rst7"      # Structural file such as gro, pdb, rst7
 topology = "/work/topology.parm7"       # Topology file such as top, parm7, psf, etc.
 mdconf = "/work/parameter.mdin"         # Parameter file such as mdp, mdin, namd, etc.
 trajectory_extension = ".nc"            # Trajectory file extension. ("." is necessary)
+pbc_level = 3                           # 1: none, 2: image, 3: center + image (cpptraj analyzer)
+centering_atom_for_PBC = ":25@CA"       # exactly one atom, used for center when pbc_level = 3
 ```
 
 

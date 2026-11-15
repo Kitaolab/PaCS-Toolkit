@@ -67,6 +67,8 @@ class A_D(SuperAnalyzer):
             f"{dir}/prd{settings.trajectory_extension}",
             top=settings.top_mdtraj,
         )
+        # PBC treatment (pbc_level), see SuperAnalyzer.pbc_by_mdtraj
+        self.pbc_by_mdtraj(settings, trj)
 
         com1 = md.compute_center_of_mass(
             trj.atom_slice(trj.topology.select(settings.selection1))
@@ -117,8 +119,8 @@ class A_D(SuperAnalyzer):
         cmd_cpptraj = [
             f"parm {settings.topology}",
             f"trajin {dir}/prd{settings.trajectory_extension}",
-            f"center {settings.centering_selection}",
-            "image",
+            # PBC treatment (pbc_level), see SuperAnalyzer.pbc_cmds_cpptraj
+            *self.pbc_cmds_cpptraj(settings),
             f"distance {settings.selection1} {settings.selection2} out {dir}/interCOM.xvg",
             "run",
             "quit",

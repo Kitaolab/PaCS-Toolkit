@@ -47,6 +47,8 @@ class Target(SuperAnalyzer):
             f"{dir}/prd{settings.trajectory_extension}",
             top=settings.top_mdtraj,
         )
+        # PBC treatment (pbc_level), see SuperAnalyzer.pbc_by_mdtraj
+        self.pbc_by_mdtraj(settings, trj)
         trj.superpose(
             ref,
             0,
@@ -122,8 +124,8 @@ class Target(SuperAnalyzer):
         cmd_cpptraj = [
             f"parm {settings.topology}",
             f"trajin {dir}/prd{settings.trajectory_extension}",
-            f"center {settings.centering_selection}",
-            "image",
+            # PBC treatment (pbc_level), see SuperAnalyzer.pbc_cmds_cpptraj
+            *self.pbc_cmds_cpptraj(settings),
             f"reference {settings.reference} [refstr]",
             f"rms fit ref [refstr] {settings.selection1}",
             f"rms cal ref [refstr] {settings.selection2} \

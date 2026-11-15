@@ -40,6 +40,7 @@ class SuperAnalyzer(metaclass=ABCMeta):
         pbc_level = 1 : no treatment, the raw trajectory is used
         pbc_level = 2 : -pbc mol                                   -> prd_image.xtc
         pbc_level = 3 : -center on centering_atom_for_PBC          -> tmp1.xtc
+                        (atom number, or index group name of 1 atom)
                         -pbc atom                                  -> tmp2.xtc
                         -pbc mol                                   -> tmp3.xtc
         """
@@ -72,12 +73,18 @@ class SuperAnalyzer(metaclass=ABCMeta):
             return out
 
         # pbc_level == 3
-        # add a group that holds only the centering atom to a copy of the index file
-        ndx = f"{dir}/pbc_center.ndx"
-        group = "PaCS_PBC_center"
-        with open(settings.index_file, "r") as f_in, open(ndx, "w") as f_out:
-            f_out.write(f_in.read().rstrip("\n") + "\n")
-            f_out.write(f"[ {group} ]\n{settings.centering_atom_for_PBC}\n")
+        if isinstance(settings.centering_atom_for_PBC, int):
+            # atom number: add a group that holds only this atom
+            # to a copy of the index file
+            ndx = f"{dir}/pbc_center.ndx"
+            group = "PaCS_PBC_center"
+            with open(settings.index_file, "r") as f_in, open(ndx, "w") as f_out:
+                f_out.write(f_in.read().rstrip("\n") + "\n")
+                f_out.write(f"[ {group} ]\n{settings.centering_atom_for_PBC}\n")
+        else:
+            # index group name (checked to contain exactly 1 atom in settings)
+            ndx = settings.index_file
+            group = settings.centering_atom_for_PBC
 
         tmp1, tmp2, tmp3 = (f"{dir}/tmp{i}.xtc" for i in (1, 2, 3))
         trjconv(f"{group} System", prd, tmp1, "-center", "pbc_center.log", ndx)
@@ -85,6 +92,57 @@ class SuperAnalyzer(metaclass=ABCMeta):
         trjconv("System", tmp2, tmp3, "-pbc mol", "pbc_mol.log", ndx)
         subprocess.run(f"rm -f {tmp1} {tmp2}", shell=True)
         return tmp3
+
+    def pbc_cmds_cpptraj(self, settings: MDsettings) -> List[str]:
+        """
+        cpptraj commands for PBC treatment before CV calculation.
+
+        pbc_level = 1 : no treatment
+        pbc_level = 2 : image
+        pbc_level = 3 : center <centering_atom_for_PBC>, then image
+        """
+        if settings.pbc_level == 1:
+            return []
+        if settings.pbc_level == 2:
+            return ["image"]
+        return [f"center {settings.centering_mask_cpptraj()}", "image"]
+
+    def pbc_by_mdtraj(self, settings: MDsettings, trj) -> None:
+        """
+        PBC treatment of an mdtraj trajectory in place before CV calculation.
+        Same procedure as gromacs (see pacs.utils.pbc_mdtraj):
+
+        pbc_level = 1 : no treatment
+        pbc_level = 2 : make molecules whole, molecule COM in the box (-pbc mol)
+        pbc_level = 3 : centering_atom_for_PBC -> box center (-center),
+                        every atom in the box (-pbc atom), then -pbc mol
+        Only molecules containing selection1/selection2 atoms are made whole.
+        """
+        from pacs.utils.pbc_mdtraj import treat_pbc
+
+        if settings.pbc_level == 1:
+            return
+        if trj.unitcell_vectors is None:
+            LOGGER.error(
+                f"pbc_level = {settings.pbc_level} requires box information, "
+                "but the trajectory has none. Use pbc_level = 1."
+            )
+            exit(1)
+
+        center_atom = None
+        if settings.pbc_level == 3:
+            center_atom = settings.centering_atom_index_mdtraj(trj.topology)
+
+        atom_indices = set()
+        for sel in [settings.selection1, settings.selection2]:
+            if sel is not None:
+                atom_indices.update(trj.topology.select(sel).tolist())
+        treat_pbc(
+            trj,
+            settings.pbc_level,
+            center_atom=center_atom,
+            atom_indices=atom_indices if atom_indices else None,
+        )
 
     def remove_pbc_traj(self, settings: MDsettings, dir: str, traj: str) -> None:
         # never remove the raw trajectory (pbc_level = 1)
