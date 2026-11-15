@@ -67,36 +67,18 @@ class Target(SuperAnalyzer):
         return rmsd
 
     def cal_by_gmx(self, settings: MDsettings, cycle: int, replica: int) -> None:
-        extension = settings.trajectory_extension
         selection1 = settings.selection1
         selection2 = settings.selection2
         ndx = settings.index_file
         ref = settings.reference
         dir = settings.each_replica(_cycle=cycle, _replica=replica)
 
-        # nojump treatment
-        if settings.nojump is True:
-            pbc_option = "-pbc nojump"
-        else:
-            pbc_option = "-pbc mol -ur compact"
-
-        cmd_image = f"echo 'System' \
-                | {settings.cmd_gmx} trjconv \
-                -f {dir}/prd{extension} \
-                -s {dir}/prd.tpr \
-                -o {dir}/prd_image{extension} \
-                {pbc_option} \
-                1> {dir}/image.log 2>&1"  # NOQA: E221
-
-        res_image = subprocess.run(cmd_image, shell=True)
-        if res_image.returncode != 0:
-            LOGGER.error("error occurred at image command")
-            LOGGER.error(f"see {dir}/image.log")
-            exit(1)
+        # PBC treatment (pbc_level), see SuperAnalyzer.pbc_by_gmx
+        traj = self.pbc_by_gmx(settings, dir)
 
         cmd_rms = f"echo {selection1} {selection2} \
                 | {settings.cmd_gmx} rms \
-                -f {dir}/prd_image{extension} \
+                -f {traj} \
                 -s {ref} \
                 -o {dir}/rms.xvg \
                 -n {ndx} \
@@ -110,8 +92,7 @@ class Target(SuperAnalyzer):
             LOGGER.error(f"see {dir}/rms.log")
             exit(1)
 
-        cmd_rmfile = f"rm {dir}/prd_image{extension}"
-        subprocess.run(cmd_rmfile, shell=True)
+        self.remove_pbc_traj(settings, dir, traj)
 
         rmsd_rep = np.loadtxt(f"{dir}/rms.xvg", dtype="float32")[:, 1]
         return rmsd_rep

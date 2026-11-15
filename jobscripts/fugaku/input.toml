@@ -44,4 +44,3 @@ keep_selection = "not_Water"                        # Molecular name or index gr
 rmfile = true                                       # Whether rmfile is executed after trial
 
 cmd_gmx = "gmx"                                     # cmd_gmx for analyze (This command is necessary to specify on fugaku)
-nojump = true                                       # whether to execute nojump treatment only for gmx

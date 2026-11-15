@@ -215,10 +215,7 @@ def rmmol_replica_gmx(
         return
 
     # create new trajectory without water
-    if settings.nojump is True:
-        pbc_option = "-pbc nojump"
-    else:
-        pbc_option = "-pbc mol -ur compact"
+    pbc_option = "-pbc mol -ur compact"
 
     cmd_trjconv = f"echo {settings.keep_selection} \
             | {settings.cmd_gmx} trjconv \

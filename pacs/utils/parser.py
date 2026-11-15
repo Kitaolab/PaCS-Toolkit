@@ -212,11 +212,6 @@ class Parser:
             choices=[".xtc", ".trr"],
             help="gromacs trajectory extension. (e.g. -e .xtc, -e .trr)",
         )
-        parser_rmmol_gmx.add_argument(
-            "--nojump",
-            action="store_true",
-            help="execute gromacs pbc nojump treatment",
-        )
 
         # rmmol cpptraj
         parser_rmmol_cpptraj = parser_rmmol_sub.add_parser(
@@ -899,7 +894,6 @@ class Parser:
                 dic["analyzer"] = "gromacs"
                 dic["cmd_gmx"] = args.cmd_gmx
                 dic["index_file"] = args.index_file
-                dic["nojump"] = args.nojump
             elif sys.argv[2] == "cpptraj":
                 dic["analyzer"] = "cpptraj"
                 dic["topology"] = args.topology

@@ -39,7 +39,13 @@ class MDsettings:
         selection2 (str): selection for evaluation type
         selection3 (str): selection for evaluation type
         selection4 (str): selection for evaluation type
-        nojump (bool): whether to execute nojump treatment (valid only for gmx)
+        pbc_level (int): level of PBC treatment before CV calculation (gmx only)
+            1: no PBC treatment (fastest, risky)
+            2: make molecules whole, trjconv -pbc mol (medium, risky)
+            3: center centering_atom_for_PBC in the box, then -pbc atom,
+               then -pbc mol (slowest, safest)
+        centering_atom_for_PBC (int): atom number (1-based, as in .gro/.ndx)
+            used for trjconv -center when pbc_level = 3
     """
 
     # basic
@@ -88,8 +94,9 @@ class MDsettings:
     # rmfile option
     rmfile: bool = False
 
-    # nojump option
-    nojump: bool = False
+    # PBC treatment option for gromacs analyzer
+    pbc_level: int = 2
+    centering_atom_for_PBC: int = None
 
     def each_replica(
         self, _trial: int = None, _cycle: int = None, _replica: int = None
@@ -210,11 +217,45 @@ class MDsettings:
             LOGGER.error(f"{self.type} is not supported")
             exit(1)
 
-        # nojump
-        self.nojump = self.check_bool(self.nojump)
-        if self.analyzer != "gromacs" or self.simulator != "gromacs":
-            LOGGER.warn(
-                '"nojump = True" is valid when simulator and analyzer are both "gromacs"'
+        # nojump (removed): replaced by pbc_level and centering_atom_for_PBC
+        if "nojump" in self.__dict__:
+            LOGGER.error(
+                '"nojump" option was removed. Please delete it from the input file '
+                "and use the new PBC options instead (valid for gromacs analyzer):\n"
+                "  pbc_level = 1  # no PBC treatment (fastest, risky)\n"
+                "  pbc_level = 2  # trjconv -pbc mol, default (medium, risky)\n"
+                "  pbc_level = 3  # -center -> -pbc atom -> -pbc mol (slowest, safest)\n"
+                "  centering_atom_for_PBC = <atom number>  # required for pbc_level = 3"
+            )
+            exit(1)
+
+        # PBC treatment level
+        try:
+            self.pbc_level = int(self.pbc_level)
+        except (TypeError, ValueError):
+            LOGGER.error(f"pbc_level must be 1, 2 or 3 (got {self.pbc_level})")
+            exit(1)
+        if self.pbc_level not in [1, 2, 3]:
+            LOGGER.error(f"pbc_level must be 1, 2 or 3 (got {self.pbc_level})")
+            exit(1)
+        if self.pbc_level == 3 and self.analyzer == "gromacs":
+            try:
+                self.centering_atom_for_PBC = int(self.centering_atom_for_PBC)
+            except (TypeError, ValueError):
+                LOGGER.error(
+                    "centering_atom_for_PBC (atom number) is required "
+                    "when pbc_level = 3"
+                )
+                exit(1)
+            if self.centering_atom_for_PBC < 1:
+                LOGGER.error("centering_atom_for_PBC must be >= 1 (1-based)")
+                exit(1)
+        if self.analyzer != "gromacs" and (
+            self.pbc_level != 2 or self.centering_atom_for_PBC is not None
+        ):
+            LOGGER.warning(
+                "pbc_level and centering_atom_for_PBC are valid only "
+                'when analyzer is "gromacs"'
             )
 
         # change centering_selection to match analyzer

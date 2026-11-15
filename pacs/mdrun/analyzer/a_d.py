@@ -78,34 +78,16 @@ class A_D(SuperAnalyzer):
         return dist
 
     def cal_by_gmx(self, settings: MDsettings, cycle: int, replica: int) -> List[float]:
-        extension = settings.trajectory_extension
         grp1 = settings.selection1
         grp2 = settings.selection2
 
         dir = settings.each_replica(_cycle=cycle, _replica=replica)
 
-        # nojump treatment
-        if settings.nojump is True:
-            pbc_option = "-pbc nojump"
-        else:
-            pbc_option = "-pbc mol -ur compact"
-
-        cmd_image = f"echo 'System' \
-                | {settings.cmd_gmx} trjconv \
-                -f {dir}/prd{extension} \
-                -s {dir}/prd.tpr \
-                -o {dir}/prd_image{extension} \
-                {pbc_option} \
-                1> {dir}/image.log 2>&1"  # NOQA: E221
-
-        res_image = subprocess.run(cmd_image, shell=True)
-        if res_image.returncode != 0:
-            LOGGER.error("error occured at image command")
-            LOGGER.error(f"see {dir}/image.log")
-            exit(1)
+        # PBC treatment (pbc_level), see SuperAnalyzer.pbc_by_gmx
+        traj = self.pbc_by_gmx(settings, dir)
 
         cmd_dist = f"{settings.cmd_gmx} distance \
-                -f {dir}/prd_image{extension} \
+                -f {traj} \
                 -s {dir}/prd.tpr \
                 -n {settings.index_file} \
                 -oxyz {dir}/interCOM_xyz.xvg \
@@ -120,8 +102,7 @@ class A_D(SuperAnalyzer):
             LOGGER.error(f"see {dir}/distance.log")
             exit(1)
 
-        cmd_rmfile = f"rm {dir}/prd_image{extension}"
-        subprocess.run(cmd_rmfile, shell=True)
+        self.remove_pbc_traj(settings, dir, traj)
 
         xyz_rep = np.loadtxt(f"{dir}/interCOM_xyz.xvg", dtype="float32")
         dist = np.linalg.norm(xyz_rep[:, [1, 2, 3]], axis=1)

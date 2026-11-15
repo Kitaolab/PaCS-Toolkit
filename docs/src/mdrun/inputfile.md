@@ -95,16 +95,20 @@ rmfile = true                     # Whether rmfile is executed after trial
   - Gromacs index file
 - **trajectory_extension: str, required**
   - Trajectory file extension. ("." is necessary)
-- **nojump: bool, default=false**
-  - whether to execute `-pbc nojump` treatment for the selection feature calculation in `analayzer`, snapshot extraction in `exporter` and performing rmmol
-  - **valid only when `analyzer` is also gromacs**
-  - If `true`, molecules are allowed to get out of the simulation box in order to avoid the error in MSM due to the jumping of break of the molecule over pbc box.
-  - If `false`, molecules are just made whole by `-pbc mol` and can warp across the pbc box.
-  - Be noted that the output `prd.xtc` files are not processed with these `-pbc` options. (only `prd_rmmol.xtc` files are processed)
-  - This option is recommended to use when a/dissociation and a_d pacsmd is performed using gromacs as simulator and analyzer
-  - `nojump=true` can lead too large coordinate value to cause overflow or loss-of-significane problem. It will not happpen in most cases, but be carefull if your ligand is very small and simulation box is very large.
-  - When this options is applied, analyzer can consider the distance even if ligand exceeds simulation box
-  - This option is not present in example input in the [sample input repository](https://github.com/Kitaolab/PaCS-Toolkit-example/tree/main) since this option was added in version 1.1.0
+- **pbc_level: int, default=2**
+  - level of PBC treatment applied to `prd.xtc` before the CV calculation in `analyzer`
+  - **valid only when `analyzer` is gromacs**
+  - `1`: no PBC treatment. The trajectory from the simulation is used directly (fastest, risky)
+  - `2`: `gmx trjconv -pbc mol` is applied to make molecules whole, and the analysis uses that `.xtc` (medium, risky)
+  - `3`: thorough treatment (slowest, safest). `centering_atom_for_PBC` is translated to the box center:
+    1. `gmx trjconv -center` (center group = `centering_atom_for_PBC`) → `tmp1.xtc`
+    2. `gmx trjconv -pbc atom` on `tmp1.xtc` → `tmp2.xtc`
+    3. `gmx trjconv -pbc mol` on `tmp2.xtc` → `tmp3.xtc`, which is used for the analysis
+  - the intermediate files are removed after the analysis
+- **centering_atom_for_PBC: int, (required if `pbc_level=3`)**
+  - atom number (1-based, as in `.gro` / `.ndx`) used for `gmx trjconv -center` when `pbc_level=3`
+  - a group named `PaCS_PBC_center` containing only this atom is added to a copy of `index_file` (`pbc_center.ndx` in each replica directory)
+  - choose an atom that stays near the center of the system of interest (e.g. a CA atom in the core of the protein)
 
 </details>
 
@@ -118,7 +122,8 @@ topology = "/work/topol.top"            # Topology file such as top, parm7, psf,
 mdconf = "/work/parameter.mdp"          # Parameter file such as mdp, mdin, namd, etc.
 index_file = "/work/index.ndx"          # Gromacs index file
 trajectory_extension = ".xtc"           # Trajectory file extension. ("." is necessary)
-nojump = true                           # whether to execute nojump treatment only for gmx
+pbc_level = 3                           # 1: none, 2: -pbc mol, 3: -center/-pbc atom/-pbc mol (gmx analyzer only)
+centering_atom_for_PBC = 1234           # atom number used for -center when pbc_level = 3
 ```
 
 

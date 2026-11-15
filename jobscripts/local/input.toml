@@ -42,4 +42,5 @@ keep_selection = "not resname OPC"                  # Molecular name or index gr
 rmfile = true                                       # Whether rmfile is executed after trial
 
 # not valid for analyzer=mdtraj
-# nojump = true                                       # whether to execute nojump treatment only for gmx
+# pbc_level = 3                                       # 1: none, 2: -pbc mol, 3: -center/-pbc atom/-pbc mol
+# centering_atom_for_PBC = 1234                       # atom number used for -center when pbc_level = 3

@@ -105,14 +105,9 @@ class eGromacs(SuperExporter):
             centering_option = ""
             args_to_trjconv = "System"
 
-        # treatment for nojump option
-        if settings.nojump is True:
-            pbc_option = "-pbc nojump"
-        else:
-            pbc_option = "-pbc whole"
+        pbc_option = "-pbc whole"
 
         # First convert trj with -pbc option, and then extract with -b, -e options
-        # If we do the both at the same time, the -pbc nojump does not work properly
         # Output the prd_image_prev_cycle to the next cycle to avoid overwrapping.
         cmd_trjconv = f"echo {args_to_trjconv} \
                 | {settings.cmd_gmx} trjconv \
